@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ankar · Recruiter Screen Rubric</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      /* Layout */
+      --bg: #1A1A1A;
+      --surface: #222222;
+      --surface-2: #2A2A2A;
+      --surface-3: #1E1E1E;
+      --surface-deep: #171717;
+      --border: #333333;
+      --border-light: #3A3A3A;
+      --border-inner: #2A2A2A;
+      --border-inner2: #2E2E2E;
+      --divider: #272727;
+      --header-bg: rgba(26,26,26,0.95);
+      /* Text */
+      --text: #FFFFFF;
+      --text-secondary: #DEDEDE;
+      --text-dim: #BBBBBB;
+      --text-dimmer: #AAAAAA;
+      --text-faint: #999999;
+      --text-muted: #888888;
+      --text-footer: #666666;
+      /* Accents */
+      --blue: #3958A7;
+      --blue-light: #5B7ED4;
+      --blue-tint: #7BAAF5;
+      --rose: #DA5077;
+      /* Tags */
+      --tag-bg: #2A2A2A;
+      --tag-border: #333333;
+      --tag-text: #999999;
+      /* Level toggle */
+      --toggle-active-bg: #FFFFFF;
+      --toggle-active-text: #0E0E0E;
+      --toggle-inactive-text: #666666;
+      /* Score empty state */
+      --score-empty-bg: #1E1E1E;
+      --score-empty-border: #2A2A2A;
+      /* Score colours */
+      --s4-bg: rgba(34,155,85,0.18);
+      --s4-border: #229955;
+      --s4-text: #5CC98A;
+      --s3-bg: rgba(57,88,167,0.09);
+      --s3-border: #4A6BC9;
+      --s3-text: #6898E8;
+      --s2-bg: rgba(184,130,40,0.18);
+      --s2-border: #B87C28;
+      --s2-text: #D4983C;
+      --s1-bg: rgba(218,80,119,0.18);
+      --s1-border: #DA5077;
+      --s1-text: #F07A99;
+      --sna-bg: rgba(255,255,255,0.04);
+      --sna-border: #444444;
+      --sna-text: #777777;
+    }
+    html[data-theme="light"] {
+      --bg: #F4F4F4;
+      --surface: #FFFFFF;
+      --surface-2: #EFEFEF;
+      --surface-3: #E8E8E8;
+      --surface-deep: #E2E2E2;
+      --border: #E0E0E0;
+      --border-light: #D0D0D0;
+      --border-inner: #DEDEDE;
+      --border-inner2: #E8E8E8;
+      --divider: #EEEEEE;
+      --header-bg: rgba(244,244,244,0.95);
+      --text: #0E0E0E;
+      --text-secondary: #222222;
+      --text-dim: #444444;
+      --text-dimmer: #666666;
+      --text-faint: #777777;
+      --text-muted: #888888;
+      --text-footer: #888888;
+      --blue-tint: #3958A7;
+      --tag-bg: #EFEFEF;
+      --tag-border: #E0E0E0;
+      --tag-text: #666666;
+      --toggle-active-bg: #0E0E0E;
+      --toggle-active-text: #FFFFFF;
+      --toggle-inactive-text: #888888;
+      --score-empty-bg: #F0F0F0;
+      --score-empty-border: #E0E0E0;
+      --s4-bg: rgba(34,155,85,0.1);
+      --s4-text: #1C7A40;
+      --s3-bg: rgba(57,88,167,0.08);
+      --s3-text: #3958A7;
+      --s2-bg: rgba(184,130,40,0.1);
+      --s2-text: #8A5E15;
+      --s1-bg: rgba(218,80,119,0.1);
+      --s1-text: #B03060;
+      --sna-bg: rgba(0,0,0,0.04);
+      --sna-border: #D0D0D0;
+      --sna-text: #888888;
+    }
+    html[data-theme="light"] .bar-motif {
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 18px,
+        rgba(0,0,0,0.04) 18px,
+        rgba(0,0,0,0.04) 20px
+      );
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, .heading {
+      font-family: 'Satoshi', 'Inter', sans-serif;
+      letter-spacing: -0.03em;
+    }
+    .display { letter-spacing: -0.05em; }
+    .mono { font-family: 'Geist Mono', 'JetBrains Mono', monospace; }
+    textarea, input { font: 13px/1.65 'Geist Mono', 'JetBrains Mono', monospace; }
+
+    /* Score theming */
+    .score-4 { background: var(--s4-bg); border-color: var(--s4-border); color: var(--s4-text); }
+    .score-3 { background: var(--s3-bg); border-color: var(--s3-border); color: var(--s3-text); }
+    .score-2 { background: var(--s2-bg); border-color: var(--s2-border); color: var(--s2-text); }
+    .score-1 { background: var(--s1-bg); border-color: var(--s1-border); color: var(--s1-text); }
+    .score-na { background: var(--sna-bg); border-color: var(--sna-border); color: var(--sna-text); }
+
+    .left-4 { border-left-color: var(--s4-border) !important; }
+    .left-3 { border-left-color: var(--s3-border) !important; }
+    .left-2 { border-left-color: var(--s2-border) !important; }
+    .left-1 { border-left-color: var(--s1-border) !important; }
+
+    /* Vertical bar motif */
+    .bar-motif {
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 18px,
+        rgba(255,255,255,0.025) 18px,
+        rgba(255,255,255,0.025) 20px
+      );
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+
+    /* Textarea / Input */
+    textarea, input[type="text"] {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: 6px;
+      padding: 10px 12px;
+      width: 100%;
+      resize: none;
+      font: 13px/1.65 'Geist Mono', 'JetBrains Mono', monospace !important;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    textarea:focus, input[type="text"]:focus {
+      border-color: #555;
+    }
+    textarea::placeholder, input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Toggle button */
+    .toggle-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: color 0.15s;
+    }
+    .toggle-btn:hover { color: var(--text-secondary); }
+
+    /* Checkbox */
+    input[type="checkbox"] {
+      width: 14px; height: 14px;
+      accent-color: var(--blue);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* CTA button style */
+    .cta {
+      font-family: 'Geist Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useMemo } = React;
+
+    /* ─── DATA ─────────────────────────────────────────────────── */
+
+    const CORE_SECTIONS = [
+      {
+        id: "environment", number: 1,
+        title: "Environment & Introspection",
+        weight: 25, disqualifying: false,
+        question: "Tell me about your environment. What's something challenging you've worked on recently?",
+        context: "Tests whether the candidate can examine their own work with honesty and clarity — separating personal ownership from the team's, and reflecting on what went well or badly without becoming vague or defensive.",
+        strongSignals: [
+          "Specific, personal description — not a team overview",
+          "Clear ownership — explains their role vs the team's",
+          "Articulates what was genuinely hard",
+          "Talks about what went well and what didn't",
+          "Shows real trade-off thinking",
+          "Demonstrates learning or changed thinking",
+          "Not defensive when things didn't go well",
+        ],
+        weakSignals: [
+          "Vague overview that could describe anyone's work",
+          "Descriptive but not reflective",
+          "Ownership is unclear or collective",
+          "No trade-off thinking",
+          "Everything sounds like it went well",
+          "Problems framed as entirely external",
+          "No evidence of learning",
+        ],
+        probeQuestions: [
+          "What was the hardest decision you had to make, and why?",
+          "What would you do differently if you started over?",
+          "What did you learn that changed how you think about this type of problem?",
+        ],
+        scoreGuide: {
+          4: "Clear, grounded example with strong personal ownership, real trade-offs, and genuine reflection.",
+          3: "Credible challenge and reasonable ownership, though depth varies or reflection requires some prompting.",
+          2: "Can describe work at a high level, but reflection and trade-off thinking are limited.",
+          1: "No meaningful example or almost no introspection even after prompting.",
+        },
+        vignettes: {
+          4: "\"We were building a real-time collaboration feature. Halfway through I realised we'd designed the data model wrong — it would hold up for two users but fall apart at ten. My instinct was to push through. I stopped, took two days to redesign, and told the team why. We shipped two weeks late. The honest part is that I'd seen the warning sign earlier and convinced myself it was fine. I had to own that.\"",
+          3: "\"I was working on a service that kept timing out in production. It was tricky because it only happened under load and we had limited staging capacity. We got it resolved — connection pooling, some circuit breakers. I learned a lot about how the infrastructure behaves under pressure that I didn't know before.\"",
+          2: "\"We did a big refactor of our API layer. A lot of services depended on it so it was complex. We used feature flags, it went pretty well overall — a few bumps but nothing major.\"",
+          1: "\"I've been doing a mix of things — backend work, some infrastructure. Always something new to learn. It's a fast-paced team.\"",
+        },
+      },
+      {
+        id: "product", number: 2,
+        title: "Product Ownership & Customer Impact",
+        weight: 25, disqualifying: false,
+        question: "Tell me about a system your users depended on. What problem did it solve, and why did it matter?",
+        context: "The most important product signal in the screen. We want evidence of end-to-end ownership, real user understanding, personal decision-making, and connection to impact — not just implementation.",
+        strongSignals: [
+          "Mentions real users unprompted",
+          "Uses clear ownership language (\"I decided\", \"I shipped\", \"I owned\")",
+          "Explains decisions that were personally theirs",
+          "Understands the user workflow, not just the implementation",
+          "Discusses trade-offs clearly",
+          "Describes impact credibly and specifically",
+          "Can explain how they iterated based on feedback or data",
+          "Ownership sounds end-to-end, not narrow",
+        ],
+        weakSignals: [
+          "Sounds like ticket execution",
+          "User impact is vague or absent",
+          "Contribution sounds partial inside a bigger project",
+          "Cannot explain their specific decisions or trade-offs",
+          "Impact only described in general or abstract terms",
+          "Speaks mostly in implementation detail",
+          "No clear evidence of autonomy",
+        ],
+        probeQuestions: [
+          "Who else was making decisions on that system alongside you?",
+          "If you'd left the company halfway through, what would have broken or stalled?",
+          "What did you learn from users that changed what you built?",
+        ],
+        scoreGuide: {
+          4: "Strong end-to-end ownership of a meaningful system with clear user consequence and real decision-making.",
+          3: "Credible product ownership and user awareness, but weaker on measurement, autonomy, or workflow depth.",
+          2: "Partial ownership only — candidate sounds like a contributor more than an owner.",
+          1: "Little evidence of meaningful ownership, user understanding, or consequence.",
+        },
+        vignettes: {
+          4: "\"I owned our case management workflow — the core loop lawyers used every day. I noticed power users had built workarounds in spreadsheets outside our tool, which told me we were missing something. I interviewed six of them, found they needed to track dependencies between cases. I designed and built it — no PM, just me and one user giving feedback on every prototype. That feature became the most-used part of the product.\"",
+          3: "\"I built the notifications system — figuring out which events mattered, then building the email and in-app delivery. A few users had asked for it. After it shipped we saw a noticeable drop in support tickets asking 'did my job run?' It was well-received.\"",
+          2: "\"I worked on the dashboard redesign. I did the front-end implementation — the charts, the layout. Design gave me the specs. It shipped on time and users responded positively to it.\"",
+          1: "\"I've shipped a lot of features across the stack. Users depend on the product I work on every day. I focus on quality and making sure things work properly.\"",
+        },
+      },
+      {
+        id: "ego", number: 3,
+        title: "Ego & Feedback",
+        weight: 20, disqualifying: true,
+        disqualifyNote: "A score of 1 here is typically disqualifying at Ankar, regardless of weighted average.",
+        question: "Tell me about feedback — from a manager, peer, or close collaborator — that was hard to hear. What was your initial reaction, and how did you navigate it?",
+        context: "Tests whether the candidate can talk about criticism and discomfort without becoming defensive or performative. Not looking for 'humble-sounding' answers — looking for genuine self-awareness, honest initial reaction, and real behaviour change.",
+        strongSignals: [
+          "Concrete, specific feedback example",
+          "Feedback was genuinely uncomfortable — not a compliment reframed",
+          "Describes their initial reaction honestly, including defensiveness",
+          "Acknowledges validity in the feedback",
+          "Explains how they actually navigated it",
+          "Can point to real behaviour change",
+          "Grounded, non-performative tone",
+        ],
+        weakSignals: [
+          "Vague or overly polished example",
+          "Feedback is too easy or self-serving (\"I work too hard\")",
+          "Frames themselves as basically correct",
+          "No real behaviour change",
+          "Blames the manager or broader context",
+          "Answer feels rehearsed or generic",
+        ],
+        probeQuestions: [
+          "What was your gut reaction when you first heard it?",
+          "Did you think the feedback was fair at the time?",
+          "What specifically changed in how you operate after that?",
+        ],
+        scoreGuide: {
+          4: "Concrete, genuinely difficult feedback with honest reaction, grounded navigation, and clear behaviour change.",
+          3: "Credible example and some reflection, but slightly polished or less emotionally honest.",
+          2: "Vague or too-easy example, often requiring heavy prompting.",
+          1: "No meaningful example, clear defensiveness, or weak coachability signal.",
+        },
+        vignettes: {
+          4: "\"My manager told me I was dismissive in technical discussions — that I'd say 'that won't work' before fully understanding what someone was proposing. My first reaction was that she was wrong. I went back and watched a recording of a meeting. She was right — I was cutting people off. I started a rule: ask one clarifying question before responding to any technical suggestion. It slowed me down, but the quality of our decisions got better and people started proposing more ideas.\"",
+          3: "\"I got feedback that my code reviews were too blunt — people felt criticized rather than helped. I didn't totally disagree. I started framing comments as questions instead of corrections. I still tend towards the direct side, but I'm more aware of it now.\"",
+          2: "\"My manager mentioned I could be more patient explaining things to junior engineers. I tried to be more deliberate about that. I think I've improved since then.\"",
+          1: "\"I get pretty good feedback generally. I try to take everything constructively. I can't think of a specific example that was really hard to hear.\"",
+        },
+      },
+      {
+        id: "team", number: 4,
+        title: "Team-Minded",
+        weight: 20, disqualifying: false,
+        question: "What do you think you typically bring to a team that others might not? And what do you tend to rely on teammates for?",
+        context: "Not just a humility question. Tests whether the candidate has a mature understanding of team complementarity — can describe both their strengths and genuine limitations, and sees team effectiveness as more than everyone getting along.",
+        strongSignals: [
+          "Can describe what they bring — specific, not generic",
+          "Can name what they genuinely rely on others for",
+          "Talks about a specific teammate and why they're strong",
+          "Shows admiration without insecurity",
+          "Admits genuine limitations without over-hedging",
+          "Shows active learning from teammates",
+          "Sounds collaborative, not self-centred",
+        ],
+        weakSignals: [
+          "Talks mostly about self",
+          "Generic praise of teammates without specifics",
+          "Cannot name concrete strengths in others",
+          "Implies they could do most things themselves",
+          "No real self-assessment",
+          "No evidence of learning from others",
+          "Blame-oriented framing about team dynamics",
+        ],
+        probeQuestions: [
+          "Can you think of someone you worked with who was strong in a way you're not?",
+          "What's something you consistently ask teammates to help with?",
+          "Tell me about a time the team made you better than you would've been alone.",
+        ],
+        scoreGuide: {
+          4: "Balanced, concrete view of both their strengths and others', with strong humility and clear learning behaviour.",
+          3: "Credible team-minded signal, though somewhat general or slightly self-focused.",
+          2: "Can talk about their own strengths but struggles to name what they rely on others for.",
+          1: "Highly self-referential or weak collective orientation.",
+        },
+        vignettes: {
+          4: "\"I'm good at holding the whole system in my head — I'm the person who says 'this change will break that service nobody's thinking about.' But I'm genuinely weak at reading people in the room. There's an engineer I work with, Marcus, who notices when someone's disengaged before they say anything. I've shipped things that created team friction I didn't notice until he flagged it. I now explicitly ask him after important conversations: 'how did that land?' I'd be worse without him.\"",
+          3: "\"I think I bring structure — I'm good at breaking ambiguous problems into clear tasks. I rely on my teammates for deep domain knowledge, especially on the data science side. We have someone who just sees the statistical angle on everything, and I've learned to loop her in earlier rather than later.\"",
+          2: "\"I bring a lot of energy and I'm willing to take on whatever's needed. I rely on my team for design feedback — I'm more of a backend person. Everyone has different strengths and I think that's what makes a good team.\"",
+          1: "\"I work well with people. I adapt to whatever the team needs. I think I bring a positive attitude and I'm always willing to help.\"",
+        },
+      },
+    ];
+
+    const BONUS_SECTIONS = [
+      { id: "complexity", number: 5, title: "System Complexity & Technical Depth",
+        lookFor: ["High-stakes systems (correctness, trust, auditability)", "Failure modes and edge case thinking", "Scale or distributed systems exposure", "Explainability and observability thinking"] },
+      { id: "technical", number: 6, title: "Technical Experience & Stack",
+        lookFor: ["Frontend vs backend strength", "Cross-stack or full-stack ownership", "Workflow/UI complexity", "Willingness to cross technical boundaries"] },
+      { id: "ambiguity", number: 7, title: "Ambiguity & Agency",
+        lookFor: ["Comfort with unclear requirements", "Self-unblocking without direction", "States explicit assumptions", "Doesn't wait passively for clarity"] },
+      { id: "empathy", number: 8, title: "User Empathy",
+        lookFor: ["Builds for users more expert than themselves", "Uses validation loops", "Respects user mental models", "Avoids building the wrong thing"] },
+      { id: "learning", number: 9, title: "Speed of Learning",
+        lookFor: ["Clear learning strategy", "Ships while still learning", "Prioritises what matters most to learn first"] },
+      { id: "conviction", number: 10, title: "Conviction & Taste",
+        lookFor: ["Takes a position and explains it", "Calm, reasoned articulation", "Open to changing mind with evidence"] },
+      { id: "ai", number: 11, title: "AI Usage & Judgment",
+        lookFor: ["Real AI integration into daily workflow", "Hallucination handling and validation", "Practical exposure, not just awareness"] },
+    ];
+
+    const SCORE_META = {
+      4:   { label: "Strong Yes", cls: "score-4", left: "left-4", dot: "#229955" },
+      3:   { label: "Yes",        cls: "score-3", left: "left-3", dot: "#4A6BC9" },
+      2:   { label: "Weak",       cls: "score-2", left: "left-2", dot: "#B87C28" },
+      1:   { label: "Poor",       cls: "score-1", left: "left-1", dot: "#DA5077" },
+      "N/A": { label: "N/A",     cls: "score-na", left: "",       dot: "#555" },
+    };
+
+    /* ─── SCORE BUTTON ────────────────────────────────────────── */
+    function ScoreBtn({ val, selected, onSelect, compact }) {
+      const meta = SCORE_META[val];
+      const active = selected === val;
+      if (compact) {
+        return (
+          <button onClick={() => onSelect(active ? null : val)} style={{
+            width: 38, height: 38, borderRadius: 6,
+            border: `1.5px solid ${active ? (val === "N/A" ? "#555" : meta.dot) : "var(--border)"}`,
+            background: active ? (val === "N/A" ? "rgba(255,255,255,0.04)" : `rgba(${val===4?"34,155,85":val===3?"74,107,201":val===2?"184,124,40":"218,80,119"},0.18)`) : "transparent",
+            color: active ? meta.dot : "var(--text-muted)",
+            fontFamily: "'Geist Mono', monospace",
+            fontSize: 13, fontWeight: 600,
+            cursor: "pointer", transition: "all 0.15s",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            flexShrink: 0,
+          }}>
+            {val === "N/A" ? "—" : val}
+          </button>
+        );
+      }
+      return (
+        <button onClick={() => onSelect(active ? null : val)} style={{
+          flex: 1, padding: "10px 4px",
+          borderRadius: 8,
+          border: `1.5px solid ${active ? meta.dot : "var(--border)"}`,
+          background: active ? (val === "N/A" ? "rgba(255,255,255,0.04)" : `rgba(${val===4?"34,155,85":val===3?"74,107,201":val===2?"184,124,40":"218,80,119"},0.18)`) : "transparent",
+          color: active ? meta.dot : "var(--text-muted)",
+          fontFamily: "'Geist Mono', monospace",
+          cursor: "pointer", transition: "all 0.15s",
+          textAlign: "center",
+        }}>
+          <div style={{ fontSize: 20, fontWeight: 700, lineHeight: 1 }}>{val === "N/A" ? "—" : val}</div>
+          <div style={{ fontSize: 10, marginTop: 4, textTransform: "uppercase", letterSpacing: "0.07em", opacity: 0.8 }}>{meta.label}</div>
+        </button>
+      );
+    }
+
+    /* ─── CHEVRON ─────────────────────────────────────────────── */
+    function Chevron({ open }) {
+      return (
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ transition: "transform 0.2s", transform: open ? "rotate(90deg)" : "none" }}>
+          <path d="M3 2l4 3-4 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      );
+    }
+
+    /* ─── VIGNETTE CARD ───────────────────────────────────────── */
+    function VignetteCard({ score, text, active }) {
+      const meta = SCORE_META[score];
+      return (
+        <div style={{
+          borderRadius: 8,
+          border: `1px solid ${active ? meta.dot : "var(--score-empty-border)"}`,
+          background: active ? `rgba(${score===4?"34,155,85":score===3?"74,107,201":score===2?"184,124,40":"218,80,119"},0.1)` : "transparent",
+          padding: "12px 14px",
+          transition: "all 0.2s",
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+            <div style={{
+              width: 22, height: 22, borderRadius: 4,
+              background: `rgba(${score===4?"34,155,85":score===3?"74,107,201":score===2?"184,124,40":"218,80,119"},0.25)`,
+              border: `1.5px solid ${meta.dot}`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 12, fontWeight: 700, color: meta.dot, fontFamily: "'Geist Mono', monospace",
+            }}>{score}</div>
+            <span style={{ fontSize: 11, fontWeight: 600, color: meta.dot, textTransform: "uppercase", letterSpacing: "0.07em" }}>{meta.label}</span>
+          </div>
+          <p style={{ fontSize: 12, color: active ? "var(--text-secondary)" : "var(--text-faint)", lineHeight: 1.65, fontStyle: "italic" }}>{text}</p>
+        </div>
+      );
+    }
+
+    /* ─── MAIN APP ────────────────────────────────────────────── */
+    function App() {
+      const [level, setLevel] = useState("swe");
+      const [candidate, setCandidate] = useState("");
+      const [coreScores, setCoreScores] = useState({});
+      const [coreNotes, setCoreNotes] = useState({});
+      const [bonusScores, setBonusScores] = useState({});
+      const [bonusNotes, setBonusNotes] = useState({});
+      const [overallNotes, setOverallNotes] = useState("");
+      const [showSignals, setShowSignals] = useState({});
+      const [showProbes, setShowProbes] = useState({});
+      const [showVignettes, setShowVignettes] = useState({});
+      const [showContext, setShowContext] = useState({});
+      const [checklist, setChecklist] = useState({});
+      const [showSummary, setShowSummary] = useState(false);
+      const [copied, setCopied] = useState(false);
+      const [darkMode, setDarkMode] = useState(true);
+
+      React.useEffect(() => {
+        document.documentElement.dataset.theme = darkMode ? "dark" : "light";
+      }, [darkMode]);
+
+      const weightedScore = useMemo(() => {
+        let wSum = 0, wTotal = 0;
+        CORE_SECTIONS.forEach(s => {
+          const sc = coreScores[s.id];
+          if (sc && sc !== "N/A") { wSum += sc * (s.weight / 100); wTotal += s.weight / 100; }
+        });
+        const bVals = BONUS_SECTIONS.map(s => bonusScores[s.id]).filter(s => s && s !== "N/A");
+        if (bVals.length > 0) {
+          const avg = bVals.reduce((a, b) => a + b, 0) / bVals.length;
+          wSum += avg * 0.1; wTotal += 0.1;
+        }
+        return wTotal > 0 ? wSum / wTotal : null;
+      }, [coreScores, bonusScores]);
+
+      const rec = useMemo(() => {
+        if (coreScores["ego"] === 1)
+          return { label: "No", dot: "#DA5077", bg: "rgba(218,80,119,0.12)", border: "#DA5077", detail: "Disqualifying score in Ego & Feedback — override applies regardless of weighted average." };
+        if (!weightedScore)
+          return { label: "—", dot: "#555", bg: "transparent", border: "#333", detail: "Score core sections to generate a recommendation." };
+        if (weightedScore >= 3.5)
+          return { label: "Strong Yes", dot: "#229955", bg: "rgba(34,155,85,0.15)", border: "#229955", detail: "Clear and consistent signal across core sections." };
+        if (weightedScore >= 2.8)
+          return { label: "Yes", dot: "#4A6BC9", bg: "rgba(74,107,201,0.12)", border: "#4A6BC9",
+            detail: level === "senior" ? "Meets SWE bar — verify area ownership and directional influence reach Senior threshold." : "Solid signal across core sections." };
+        if (weightedScore >= 2.0)
+          return { label: "Borderline", dot: "#B87C28", bg: "rgba(184,124,40,0.12)", border: "#B87C28", detail: "Mixed signal — review which core sections are weak before deciding." };
+        return { label: "No", dot: "#DA5077", bg: "rgba(218,80,119,0.12)", border: "#DA5077", detail: "Insufficient signal across core sections." };
+      }, [coreScores, weightedScore, level]);
+
+      const checkItems = [
+        "Did they give a real, specific example?",
+        "Did they clearly explain what they personally did?",
+        "Did they show reasoning or reflection?",
+        "Did they need significant prompting?",
+        "Is the score based on evidence, not polish?",
+        "Would I feel confident defending this score?",
+      ];
+
+      const toggle = (setter, id) => setter(p => ({ ...p, [id]: !p[id] }));
+
+      const buildSummary = () => {
+        const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+        const levelLabel = level === 'swe' ? 'Software Engineer' : 'Senior Software Engineer';
+        const divider = '─────────────────────────────────────────────';
+        const lines = [];
+
+        lines.push('ANKAR RECRUITER SCREEN');
+        lines.push(levelLabel.toUpperCase());
+        if (candidate) lines.push(`Candidate: ${candidate}`);
+        lines.push(`Date: ${date}`);
+        lines.push('');
+        lines.push(divider);
+        lines.push('');
+        lines.push(`RECOMMENDATION  ${rec.label}`);
+        if (weightedScore) lines.push(`Weighted score  ${weightedScore.toFixed(2)} / 4.00`);
+        lines.push('');
+        lines.push(divider);
+        lines.push('CORE SECTIONS');
+        lines.push('');
+
+        CORE_SECTIONS.forEach(s => {
+          const sc = coreScores[s.id];
+          const m = sc ? SCORE_META[sc] : null;
+          const scoreStr = sc ? (sc === 'N/A' ? 'N/A' : `${sc} — ${m.label}`) : 'Not scored';
+          lines.push(`${s.number}. ${s.title}  [${s.weight}%]`);
+          lines.push(`   Score: ${scoreStr}`);
+          if (coreNotes[s.id] && coreNotes[s.id].trim()) lines.push(`   Notes: ${coreNotes[s.id].trim()}`);
+          lines.push('');
+        });
+
+        const scoredBonus = BONUS_SECTIONS.filter(s => bonusScores[s.id] && bonusScores[s.id] !== 'N/A');
+        if (scoredBonus.length > 0) {
+          lines.push(divider);
+          lines.push('BONUS SECTIONS');
+          lines.push('');
+          scoredBonus.forEach(s => {
+            const sc = bonusScores[s.id];
+            const m = SCORE_META[sc];
+            lines.push(`Q${s.number}. ${s.title}`);
+            lines.push(`   Score: ${sc} — ${m.label}`);
+            if (bonusNotes[s.id] && bonusNotes[s.id].trim()) lines.push(`   Notes: ${bonusNotes[s.id].trim()}`);
+            lines.push('');
+          });
+        }
+
+        if (overallNotes && overallNotes.trim()) {
+          lines.push(divider);
+          lines.push('OVERALL NOTES');
+          lines.push('');
+          lines.push(overallNotes.trim());
+          lines.push('');
+        }
+
+        lines.push(divider);
+        lines.push(`Ankar · ${levelLabel} · ${date}`);
+        return lines.join('\n');
+      };
+
+      const handleCopy = () => {
+        navigator.clipboard.writeText(buildSummary()).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        });
+      };
+
+      return (
+        <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
+
+          {/* ── STICKY HEADER ── */}
+          <div style={{
+            position: "sticky", top: 0, zIndex: 100,
+            background: "var(--header-bg)", backdropFilter: "blur(12px)",
+            borderBottom: "1px solid var(--border-inner)",
+          }} className="bar-motif">
+            <div style={{ maxWidth: 720, margin: "0 auto", padding: "16px 24px" }}>
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
+                <div>
+                  <div style={{ fontSize: 11, color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 500, marginBottom: 4 }}>Ankar · Recruiter Screen</div>
+                  <h1 className="display" style={{ fontSize: 22, fontWeight: 700, color: "var(--text)", lineHeight: 1.1 }}>
+                    Software Engineer Rubric
+                  </h1>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
+                  {/* Level toggle */}
+                  <div style={{ display: "flex", background: "var(--surface)", borderRadius: 8, padding: 3, border: "1px solid var(--border)" }}>
+                    {[["swe","SWE"],["senior","Senior"]].map(([val, lbl]) => (
+                      <button key={val} onClick={() => setLevel(val)} className="cta" style={{
+                        padding: "6px 14px", borderRadius: 5, fontSize: 11, fontWeight: 600,
+                        border: "none", cursor: "pointer", transition: "all 0.15s",
+                        background: level === val ? "var(--toggle-active-bg)" : "transparent",
+                        color: level === val ? "var(--toggle-active-text)" : "var(--toggle-inactive-text)",
+                      }}>{lbl}</button>
+                    ))}
+                  </div>
+                  {/* Dark/light toggle */}
+                  <button onClick={() => setDarkMode(d => !d)} title={darkMode ? "Switch to light mode" : "Switch to dark mode"} style={{
+                    width: 34, height: 34, borderRadius: 8, border: "1px solid var(--border)",
+                    background: "var(--surface)", cursor: "pointer", transition: "all 0.15s",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 16, flexShrink: 0,
+                  }}>
+                    {darkMode ? "☀" : "🌙"}
+                  </button>
+                  {/* Live recommendation */}
+                  <div style={{
+                    padding: "8px 16px", borderRadius: 8,
+                    border: `1.5px solid ${rec.border}`,
+                    background: rec.bg, textAlign: "center", minWidth: 110,
+                  }}>
+                    <div style={{ fontSize: 10, color: "var(--text-faint)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 2 }}>Rec.</div>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: rec.dot, fontFamily: "'Satoshi', sans-serif", letterSpacing: "-0.02em" }}>{rec.label}</div>
+                    <div style={{ fontSize: 10, color: "var(--text-dim)", marginTop: 2 }}>{weightedScore ? `${weightedScore.toFixed(2)} / 4.00` : "—"}</div>
+                  </div>
+                </div>
+              </div>
+              <input type="text" placeholder="Candidate name (optional)"
+                value={candidate} onChange={e => setCandidate(e.target.value)}
+                style={{ marginTop: 12, background: "var(--surface-2)", border: "1px solid var(--border-inner2)" }} />
+            </div>
+          </div>
+
+          <div style={{ maxWidth: 720, margin: "0 auto", padding: "24px 24px 48px" }}>
+
+            {/* ── SENIOR NOTE ── */}
+            {level === "senior" && (
+              <div style={{
+                background: "rgba(57,88,167,0.1)", border: "1px solid rgba(57,88,167,0.4)",
+                borderRadius: 8, padding: "12px 16px", marginBottom: 20,
+                fontSize: 12, color: "var(--blue-tint)", lineHeight: 1.6,
+              }}>
+                <span style={{ fontWeight: 700 }}>Senior bar:</span> Look for area ownership, directional influence, and scope beyond individual contribution. A strong SWE score alone is not sufficient.
+              </div>
+            )}
+
+            {/* ── EVALUATOR CHECKLIST ── */}
+            <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, padding: "18px 20px", marginBottom: 20 }}>
+              <div style={{ fontSize: 10, color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, marginBottom: 14 }}>Before you score</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 24px" }}>
+                {checkItems.map((q, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                    <span style={{ color: "var(--text-dim)", marginTop: 1, flexShrink: 0, fontSize: 16, lineHeight: 1 }}>·</span>
+                    <span style={{ fontSize: 12, color: "var(--text-dim)", lineHeight: 1.6 }}>{q}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ── SECTION LABEL ── */}
+            <div style={{ fontSize: 10, color: "var(--text-dimmer)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, marginBottom: 12 }}>
+              Core Sections — 90% of recommendation weight
+            </div>
+
+            {/* ── CORE SECTIONS ── */}
+            {CORE_SECTIONS.map(section => {
+              const score = coreScores[section.id];
+              const meta = score ? SCORE_META[score] : null;
+              return (
+                <div key={section.id} style={{
+                  background: "var(--surface)", borderRadius: 10,
+                  border: "1px solid var(--border)",
+                  borderLeft: `3px solid ${score && score !== "N/A" ? meta.dot : "var(--score-empty-border)"}`,
+                  marginBottom: 16, overflow: "hidden", transition: "border-color 0.2s",
+                }}>
+                  <div style={{ padding: "18px 20px" }}>
+
+                    {/* Header */}
+                    <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 4 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                        <span style={{ fontSize: 10, color: "var(--text-dimmer)", fontWeight: 600 }}>Q{section.number}</span>
+                        <span style={{ fontSize: 10, background: "var(--tag-bg)", color: "var(--tag-text)", padding: "2px 8px", borderRadius: 20, border: "1px solid var(--tag-border)" }}>{section.weight}%</span>
+                        {section.disqualifying && (
+                          <span style={{ fontSize: 10, background: "rgba(218,80,119,0.1)", color: "#DA5077", padding: "2px 8px", borderRadius: 20, border: "1px solid rgba(218,80,119,0.3)" }}>
+                            Disqualifying if 1
+                          </span>
+                        )}
+                      </div>
+                      {score && (
+                        <span style={{ fontSize: 11, fontWeight: 600, color: meta.dot, background: `rgba(${score===4?"34,155,85":score===3?"74,107,201":score===2?"184,124,40":score===1?"218,80,119":"255,255,255"},0.12)`, padding: "3px 10px", borderRadius: 6, flexShrink: 0 }}>
+                          {score === "N/A" ? "N/A" : `${score} · ${meta.label}`}
+                        </span>
+                      )}
+                    </div>
+
+                    <h3 className="heading" style={{ fontSize: 16, fontWeight: 700, color: "var(--text)", marginBottom: 14 }}>
+                      {section.title}
+                    </h3>
+
+                    {/* Opening question */}
+                    <div style={{ background: "var(--surface-3)", border: "1px solid var(--border-inner)", borderRadius: 8, padding: "12px 14px", marginBottom: 16 }}>
+                      <div style={{ fontSize: 9, color: "var(--text-dimmer)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, marginBottom: 6 }}>Opening Question</div>
+                      <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6, fontStyle: "italic" }}>"{section.question}"</p>
+                    </div>
+
+                    {/* Score buttons */}
+                    <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+                      {[4, 3, 2, 1, "N/A"].map(val => (
+                        <ScoreBtn key={val} val={val} selected={score}
+                          onSelect={s => setCoreScores(p => ({ ...p, [section.id]: s }))} />
+                      ))}
+                    </div>
+
+                    {/* Score guide */}
+                    {score && score !== "N/A" && (
+                      <div style={{
+                        borderRadius: 8, padding: "10px 14px", marginBottom: 12, fontSize: 12, lineHeight: 1.6,
+                        background: `rgba(${score===4?"34,155,85":score===3?"74,107,201":score===2?"184,124,40":"218,80,119"},0.12)`,
+                        color: meta.dot, border: `1px solid ${meta.dot}22`,
+                      }}>
+                        {section.scoreGuide[score]}
+                      </div>
+                    )}
+
+                    {/* Disqualifying warning */}
+                    {section.disqualifying && score === 1 && (
+                      <div style={{
+                        background: "rgba(218,80,119,0.1)", border: "1px solid rgba(218,80,119,0.4)",
+                        borderRadius: 8, padding: "10px 14px", marginBottom: 12,
+                        fontSize: 12, color: "#F07A99", fontWeight: 600, lineHeight: 1.5,
+                      }}>
+                        ⚠ {section.disqualifyNote}
+                      </div>
+                    )}
+
+                    {/* ── Calibration examples toggle ── */}
+                    <button className="toggle-btn" onClick={() => toggle(setShowVignettes, section.id)} style={{ marginBottom: 4 }}>
+                      <Chevron open={showVignettes[section.id]} />
+                      Calibration examples
+                    </button>
+                    {showVignettes[section.id] && (
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 12, marginTop: 8 }}>
+                        {[4, 3, 2, 1].map(v => (
+                          <VignetteCard key={v} score={v} text={section.vignettes[v]} active={score === v} />
+                        ))}
+                      </div>
+                    )}
+
+                    {/* ── Signal reference toggle ── */}
+                    <button className="toggle-btn" onClick={() => toggle(setShowSignals, section.id)} style={{ marginBottom: 4 }}>
+                      <Chevron open={showSignals[section.id]} />
+                      Signal reference
+                    </button>
+                    {showSignals[section.id] && (
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, background: "var(--surface-3)", borderRadius: 8, padding: "14px 16px", marginBottom: 12, marginTop: 8 }}>
+                        <div>
+                          <div style={{ fontSize: 10, fontWeight: 600, color: "var(--blue)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>✓ Strong signals</div>
+                          {section.strongSignals.map(s => (
+                            <div key={s} style={{ display: "flex", gap: 8, marginBottom: 7, alignItems: "flex-start" }}>
+                              <span style={{ color: "var(--blue)", marginTop: 2, flexShrink: 0 }}>·</span>
+                              <span style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.5 }}>{s}</span>
+                            </div>
+                          ))}
+                        </div>
+                        <div>
+                          <div style={{ fontSize: 10, fontWeight: 600, color: "var(--rose)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>✗ Weak signals</div>
+                          {section.weakSignals.map(s => (
+                            <div key={s} style={{ display: "flex", gap: 8, marginBottom: 7, alignItems: "flex-start" }}>
+                              <span style={{ color: "var(--rose)", marginTop: 2, flexShrink: 0 }}>·</span>
+                              <span style={{ fontSize: 12, color: "var(--text-dim)", lineHeight: 1.5 }}>{s}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* ── Probe questions toggle ── */}
+                    <button className="toggle-btn" onClick={() => toggle(setShowProbes, section.id)} style={{ marginBottom: 4 }}>
+                      <Chevron open={showProbes[section.id]} />
+                      Probe questions
+                    </button>
+                    {showProbes[section.id] && (
+                      <div style={{ marginBottom: 12, marginTop: 8, display: "flex", flexDirection: "column", gap: 6 }}>
+                        {section.probeQuestions.map(p => (
+                          <div key={p} style={{
+                            background: "var(--surface-3)", border: "1px solid var(--border-inner)",
+                            borderRadius: 6, padding: "10px 14px",
+                            fontSize: 12, color: "var(--text-dim)", fontStyle: "italic", lineHeight: 1.6,
+                          }}>"{p}"</div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* ── Section context toggle ── */}
+                    <button className="toggle-btn" onClick={() => toggle(setShowContext, section.id)} style={{ marginBottom: 8 }}>
+                      <Chevron open={showContext[section.id]} />
+                      What this section tests
+                    </button>
+                    {showContext[section.id] && (
+                      <p style={{ fontSize: 12, color: "var(--text-faint)", lineHeight: 1.65, background: "var(--surface-3)", padding: "10px 14px", borderRadius: 6, marginBottom: 12 }}>
+                        {section.context}
+                      </p>
+                    )}
+
+                    {/* Notes */}
+                    <textarea rows={2} placeholder="Notes"
+                      value={coreNotes[section.id] || ""}
+                      onChange={e => setCoreNotes(p => ({ ...p, [section.id]: e.target.value }))} />
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* ── BONUS SECTION LABEL ── */}
+            <div style={{ fontSize: 10, color: "var(--text-dimmer)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, margin: "24px 0 12px" }}>
+              Bonus Sections — score only if covered in the conversation
+            </div>
+
+            {/* ── BONUS SECTIONS ── */}
+            <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, overflow: "hidden", marginBottom: 24 }}>
+              {BONUS_SECTIONS.map((section, idx) => {
+                const score = bonusScores[section.id];
+                const meta = score ? SCORE_META[score] : null;
+                return (
+                  <div key={section.id} style={{
+                    padding: "14px 20px",
+                    borderTop: idx > 0 ? "1px solid var(--divider)" : "none",
+                  }}>
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                          <span style={{ fontSize: 10, color: "var(--text-dimmer)", fontWeight: 600 }}>Q{section.number}</span>
+                          <span style={{ fontSize: 13, fontWeight: 600, color: score && score !== "N/A" ? meta.dot : "var(--text-secondary)", fontFamily: "'Satoshi', sans-serif" }}>
+                            {section.title}
+                          </span>
+                        </div>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                          {section.lookFor.map(item => (
+                            <span key={item} style={{
+                              fontSize: 11, background: "var(--surface-3)", border: "1px solid var(--border-inner2)",
+                              color: "var(--text-faint)", padding: "3px 8px", borderRadius: 20,
+                            }}>{item}</span>
+                          ))}
+                        </div>
+                      </div>
+                      <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+                        {[4, 3, 2, 1, "N/A"].map(val => (
+                          <ScoreBtn key={val} val={val} selected={score}
+                            onSelect={s => setBonusScores(p => ({ ...p, [section.id]: s }))} compact />
+                        ))}
+                      </div>
+                    </div>
+                    {score && score !== "N/A" && (
+                      <div style={{ marginTop: 10 }}>
+                        <textarea rows={1} placeholder="Notes…"
+                          value={bonusNotes[section.id] || ""}
+                          onChange={e => setBonusNotes(p => ({ ...p, [section.id]: e.target.value }))} />
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* ── RECOMMENDATION PANEL ── */}
+            <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, padding: "20px 24px" }}>
+              <div style={{ fontSize: 10, color: "var(--text-dimmer)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, marginBottom: 18 }}>
+                Overall Recommendation
+              </div>
+
+              {/* Score breakdown */}
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10, marginBottom: 20 }}>
+                {CORE_SECTIONS.map(section => {
+                  const score = coreScores[section.id];
+                  const meta = score ? SCORE_META[score] : null;
+                  return (
+                    <div key={section.id} style={{
+                      background: score && score !== "N/A" ? `rgba(${score===4?"34,155,85":score===3?"74,107,201":score===2?"184,124,40":"218,80,119"},0.1)` : "var(--score-empty-bg)",
+                      border: `1.5px solid ${score && score !== "N/A" ? meta.dot : "var(--score-empty-border)"}`,
+                      borderRadius: 8, padding: "12px 8px", textAlign: "center",
+                      transition: "all 0.2s",
+                    }}>
+                      <div style={{ fontSize: 10, color: "var(--text-dim)", lineHeight: 1.3, marginBottom: 6 }}>
+                        {section.title.split(" ")[0]}
+                      </div>
+                      <div style={{
+                        fontSize: 26, fontWeight: 700, lineHeight: 1,
+                        color: score && score !== "N/A" ? meta.dot : "var(--text-footer)",
+                        fontFamily: "'Satoshi', sans-serif",
+                      }}>{score || "—"}</div>
+                      <div style={{ fontSize: 10, color: "var(--text-dimmer)", marginTop: 4 }}>{section.weight}%</div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Weighted score */}
+              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 16, padding: "0 2px" }}>
+                <span style={{ fontSize: 12, color: "var(--text-dim)" }}>Weighted score</span>
+                <span style={{ fontFamily: "'Satoshi', sans-serif", fontSize: 32, fontWeight: 700, color: "var(--text)", letterSpacing: "-0.04em" }}>
+                  {weightedScore ? weightedScore.toFixed(2) : "—"}
+                  <span style={{ fontSize: 14, color: "var(--text-dimmer)", fontWeight: 400 }}> / 4.00</span>
+                </span>
+              </div>
+
+              {/* Senior calibration check */}
+              {level === "senior" && weightedScore && weightedScore >= 2.8 && weightedScore < 3.5 && (
+                <div style={{
+                  background: "rgba(57,88,167,0.08)", border: "1px solid rgba(57,88,167,0.3)",
+                  borderRadius: 8, padding: "12px 14px", marginBottom: 16,
+                  fontSize: 12, color: "var(--blue-tint)", lineHeight: 1.6,
+                }}>
+                  <strong>Senior calibration check:</strong> Does this candidate show area ownership and directional influence? A Yes at SWE level is not sufficient for Senior.
+                </div>
+              )}
+
+              {/* Overall notes */}
+              <textarea rows={4} placeholder="Overall notes, reasoning, and next steps…"
+                value={overallNotes} onChange={e => setOverallNotes(e.target.value)} />
+
+              {/* Summarise button */}
+              <button onClick={() => setShowSummary(p => !p)} className="cta" style={{
+                marginTop: 12, width: '100%',
+                background: showSummary ? 'var(--surface-2)' : 'var(--blue)',
+                color: showSummary ? 'var(--text)' : '#FFFFFF', border: `1px solid ${showSummary ? 'var(--border-light)' : 'var(--blue)'}`,
+                padding: '12px 20px', borderRadius: 8,
+                fontSize: 12, cursor: 'pointer', transition: 'all 0.15s',
+                fontWeight: 600,
+              }}>
+                {showSummary ? 'Hide Summary' : 'Summarise'}
+              </button>
+
+              {/* Summary panel */}
+              {showSummary && (
+                <div style={{ marginTop: 12 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                    <span style={{ fontSize: 10, color: 'var(--text-dimmer)', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>
+                      Screen Summary
+                    </span>
+                    <button onClick={handleCopy} className="cta" style={{
+                      fontSize: 10, padding: '5px 14px', borderRadius: 5,
+                      background: copied ? 'rgba(34,153,85,0.2)' : 'var(--surface-2)',
+                      border: `1px solid ${copied ? '#229955' : 'var(--border-light)'}`,
+                      color: copied ? '#5CC98A' : 'var(--text-dimmer)',
+                      cursor: 'pointer', transition: 'all 0.2s', fontWeight: 600,
+                    }}>
+                      {copied ? '✓  Copied' : 'Copy'}
+                    </button>
+                  </div>
+                  <pre style={{
+                    background: 'var(--surface-deep)', border: '1px solid var(--border-inner)',
+                    borderRadius: 8, padding: '18px 20px',
+                    fontSize: 12, color: 'var(--text-secondary)',
+                    lineHeight: 1.75, fontFamily: "'Geist Mono', monospace",
+                    whiteSpace: 'pre-wrap', wordBreak: 'break-word',
+                    maxHeight: 480, overflowY: 'auto',
+                  }}>{buildSummary()}</pre>
+                </div>
+              )}
+
+              {/* Footer */}
+              <div style={{ fontSize: 10, color: "var(--text-footer)", textAlign: "center", marginTop: 20, paddingTop: 16, borderTop: "1px solid var(--border)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                Ankar · {level === "swe" ? "Software Engineer" : "Senior Software Engineer"} · Score on evidence, not polish
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
