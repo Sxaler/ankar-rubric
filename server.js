@@ -15,6 +15,9 @@ const allowed = [
   'interviewSchedule.list',
   'interviewSchedule.submit',
   'interview.list',
+  'feedbackFormDefinition.list',
+  'feedbackFormDefinition.info',
+  'applicationFeedback.submit',
 ];
 
 app.post('/api/ashby', async (req, res) => {

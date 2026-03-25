@@ -89,7 +89,17 @@
 
   /* ─── DATA ─── */
   const CORE_SECTIONS = [
-    {id:"environment",number:1,title:"Environment & Introspection",weight:25,disqualifying:false,
+    {id:"motivation",number:0,title:"Career Motivation",weight:10,disqualifying:false,
+      question:"Why now, and why Ankar?",
+      context:"Assess first. Tests intentionality behind the move, specificity of interest in Ankar, and early signal of product thinking and curiosity.",
+      strongSignals:["Clear \"why now\" grounded in growth, ownership, or environment gaps","Specific, non-generic reasons for Ankar","Mentions product, workflows, or domain meaningfully","Motivation tied to ownership, high-stakes systems, expert users, or real impact","Shows prior engagement with the space"],
+      weakSignals:["Generic AI/startup motivation","\"Exploring options\" with no clear driver","Cannot differentiate Ankar from others","No product or domain understanding"],
+      probeQuestions:["What specifically about Ankar's problem space resonates with you?","What's missing from your current role that you're looking for?","What do you know about the users Ankar serves?"],
+      scoreGuide:{4:"Highly specific, thoughtful, strong alignment with Ankar's mission and problem space.",3:"Good motivation but slightly high-level — genuine interest without deep specificity.",2:"Mixed or generic — could be talking about any AI startup.",1:"Weak or unclear — no real driver, passive exploration."},
+      vignettes:{4:"\"I've been building workflow tools for three years and I keep hitting the same ceiling — the company treats tooling as a cost centre. When I saw what Ankar is doing with expert-user workflows, it clicked. I actually tried to build something similar as a side project. I want to be somewhere the product is the mission, not an afterthought.\"",3:"\"I'm looking for more ownership. My current company is big and I'm one of many engineers on a feature. Ankar looks like a place where I could own something end-to-end. The product space is interesting — I've been reading about it.\"",2:"\"I'm interested in AI companies and startups in general. Ankar seems like it's doing well and the role looked like a good fit for my experience.\"",1:"\"I'm exploring a few options right now. A recruiter reached out and it sounded interesting. I'm open to learning more.\""},
+      templateNotes:{4:"highly specific motivation with clear alignment to Ankar's mission and problem space",3:"genuine interest but slightly high-level — good driver without deep specificity",2:"mixed or generic motivation — could apply to any AI startup",1:"weak or unclear motivation — passive exploration with no real driver"},
+    },
+    {id:"environment",number:1,title:"Environment & Introspection",weight:20,disqualifying:false,
       question:"Tell me about your environment. What's something challenging you've worked on recently?",
       context:"Tests whether the candidate can examine their own work with honesty and clarity — separating personal ownership from the team's, and reflecting on what went well or badly without becoming vague or defensive.",
       strongSignals:["Specific, personal description — not a team overview","Clear ownership — explains their role vs the team's","Articulates what was genuinely hard","Talks about what went well and what didn't","Shows real trade-off thinking","Demonstrates learning or changed thinking","Not defensive when things didn't go well"],
@@ -99,7 +109,7 @@
       vignettes:{4:"\"We were building a real-time collaboration feature. Halfway through I realised we'd designed the data model wrong — it would hold up for two users but fall apart at ten. My instinct was to push through. I stopped, took two days to redesign, and told the team why. We shipped two weeks late. The honest part is that I'd seen the warning sign earlier and convinced myself it was fine. I had to own that.\"",3:"\"I was working on a service that kept timing out in production. It was tricky because it only happened under load and we had limited staging capacity. We got it resolved — connection pooling, some circuit breakers. I learned a lot about how the infrastructure behaves under pressure that I didn't know before.\"",2:"\"We did a big refactor of our API layer. A lot of services depended on it so it was complex. We used feature flags, it went pretty well overall — a few bumps but nothing major.\"",1:"\"I've been doing a mix of things — backend work, some infrastructure. Always something new to learn. It's a fast-paced team.\""},
       templateNotes:{4:"strong personal ownership with genuine reflection on trade-offs and what went wrong",3:"credible challenge with reasonable ownership, though depth required some prompting",2:"high-level description without meaningful reflection or trade-off thinking",1:"no meaningful example or introspection even after prompting"},
     },
-    {id:"product",number:2,title:"Product Ownership & Customer Impact",weight:25,disqualifying:false,
+    {id:"product",number:2,title:"Product Ownership & Customer Impact",weight:20,disqualifying:false,
       question:"Tell me about a system your users depended on. What problem did it solve, and why did it matter?",
       context:"The most important product signal in the screen. We want evidence of end-to-end ownership, real user understanding, personal decision-making, and connection to impact — not just implementation.",
       strongSignals:["Mentions real users unprompted","Uses clear ownership language (\"I decided\", \"I shipped\", \"I owned\")","Explains decisions that were personally theirs","Understands the user workflow, not just the implementation","Discusses trade-offs clearly","Describes impact credibly and specifically","Can explain how they iterated based on feedback or data","Ownership sounds end-to-end, not narrow"],
@@ -109,8 +119,7 @@
       vignettes:{4:"\"I owned our case management workflow — the core loop lawyers used every day. I noticed power users had built workarounds in spreadsheets outside our tool, which told me we were missing something. I interviewed six of them, found they needed to track dependencies between cases. I designed and built it — no PM, just me and one user giving feedback on every prototype. That feature became the most-used part of the product.\"",3:"\"I built the notifications system — figuring out which events mattered, then building the email and in-app delivery. A few users had asked for it. After it shipped we saw a noticeable drop in support tickets asking 'did my job run?' It was well-received.\"",2:"\"I worked on the dashboard redesign. I did the front-end implementation — the charts, the layout. Design gave me the specs. It shipped on time and users responded positively to it.\"",1:"\"I've shipped a lot of features across the stack. Users depend on the product I work on every day. I focus on quality and making sure things work properly.\""},
       templateNotes:{4:"strong end-to-end ownership with real user understanding and clear personal decision-making",3:"credible product ownership and user awareness, weaker on measurement or autonomy depth",2:"contribution-level ownership — sounds like ticket execution rather than end-to-end ownership",1:"little evidence of ownership, user understanding, or consequence"},
     },
-    {id:"ego",number:3,title:"Ego & Feedback",weight:20,disqualifying:true,
-      disqualifyNote:"A score of 1 here is typically disqualifying at Ankar, regardless of weighted average.",
+    {id:"ego",number:3,title:"Ego & Feedback",weight:20,disqualifying:false,
       question:"Tell me about feedback — from a manager, peer, or close collaborator — that was hard to hear. What was your initial reaction, and how did you navigate it?",
       context:"Tests whether the candidate can talk about criticism and discomfort without becoming defensive or performative. Not looking for 'humble-sounding' answers — looking for genuine self-awareness, honest initial reaction, and real behaviour change.",
       strongSignals:["Concrete, specific feedback example","Feedback was genuinely uncomfortable — not a compliment reframed","Describes their initial reaction honestly, including defensiveness","Acknowledges validity in the feedback","Explains how they actually navigated it","Can point to real behaviour change","Grounded, non-performative tone"],
@@ -285,13 +294,15 @@
     const [transcript, setTranscript] = useState("");
     const [aiNarrative, setAiNarrative] = useState(null);
     const [recruiterSummary, setRecruiterSummary] = useState("");
+    const [privateNotes, setPrivateNotes] = useState({});
+    const [watchouts, setWatchouts] = useState("");
     const [isGenerating, setIsGenerating] = useState(false);
     const [aiError, setAiError] = useState(null);
     const [isProcessingTranscript, setIsProcessingTranscript] = useState(false);
     const [transcriptError, setTranscriptError] = useState(null);
     const [transcriptProcessed, setTranscriptProcessed] = useState(false);
     const [showExample, setShowExample] = useState({});
-    const [showTranscript, setShowTranscript] = useState(false);
+    const [showTranscript, setShowTranscript] = useState(true);
     const [showAdmin, setShowAdmin] = useState(false);
     // Admin-level settings (not visible to recruiter by default)
     const [openaiKey, setOpenaiKey] = useState("");
@@ -300,6 +311,7 @@
     const [ashbyStatus, setAshbyStatus] = useState(null);
     const [ashbyMsg, setAshbyMsg] = useState(null);
     const [ashbyFetching, setAshbyFetching] = useState(false);
+    const [showAshbyIdSection, setShowAshbyIdSection] = useState(false);
     const [ashbyFetchMsg, setAshbyFetchMsg] = useState(null);
     const [ashbyInterviewData, setAshbyInterviewData] = useState(null);
     const [darkMode, setDarkMode] = useState(true);
@@ -312,7 +324,7 @@
     useEffect(() => {
       try {
         const raw = localStorage.getItem(STORE_KEY);
-        if (raw) { const s = JSON.parse(raw); if(s.level)setLevel(s.level);if(s.candidate)setCandidate(s.candidate);if(s.interviewDate)setInterviewDate(s.interviewDate);if(s.coreScores)setCoreScores(s.coreScores);if(s.coreNotes)setCoreNotes(s.coreNotes);if(s.bonusScores)setBonusScores(s.bonusScores);if(s.bonusNotes)setBonusNotes(s.bonusNotes);if(s.overallNotes)setOverallNotes(s.overallNotes);if(s.transcript)setTranscript(s.transcript);if(s.aiNarrative)setAiNarrative(s.aiNarrative);if(s.recruiterSummary)setRecruiterSummary(s.recruiterSummary);if(s.ashbyInterviewId)setAshbyInterviewId(s.ashbyInterviewId);if(typeof s.darkMode==='boolean')setDarkMode(s.darkMode); }
+        if (raw) { const s = JSON.parse(raw); if(s.level)setLevel(s.level);if(s.candidate)setCandidate(s.candidate);if(s.interviewDate)setInterviewDate(s.interviewDate);if(s.coreScores)setCoreScores(s.coreScores);if(s.coreNotes)setCoreNotes(s.coreNotes);if(s.bonusScores)setBonusScores(s.bonusScores);if(s.bonusNotes)setBonusNotes(s.bonusNotes);if(s.overallNotes)setOverallNotes(s.overallNotes);if(s.transcript)setTranscript(s.transcript);if(s.aiNarrative)setAiNarrative(s.aiNarrative);if(s.recruiterSummary)setRecruiterSummary(s.recruiterSummary);if(s.privateNotes)setPrivateNotes(s.privateNotes);if(s.watchouts)setWatchouts(s.watchouts);if(s.ashbyInterviewId)setAshbyInterviewId(s.ashbyInterviewId);if(typeof s.darkMode==='boolean')setDarkMode(s.darkMode); }
         const admin = localStorage.getItem(ADMIN_KEY);
         if (admin) { const a = JSON.parse(admin); if(a.openai)setOpenaiKey(a.openai); if(a.ashby)setAshbyApiKey(a.ashby); }
         const hist = localStorage.getItem(HISTORY_KEY);
@@ -324,8 +336,8 @@
     // Save state
     useEffect(() => {
       if (!stateLoaded) return;
-      try { localStorage.setItem(STORE_KEY, JSON.stringify({level,candidate,interviewDate,coreScores,coreNotes,bonusScores,bonusNotes,transcript,aiNarrative,recruiterSummary,ashbyInterviewId,darkMode})); } catch(e) {}
-    }, [level,candidate,interviewDate,coreScores,coreNotes,bonusScores,bonusNotes,transcript,aiNarrative,recruiterSummary,ashbyInterviewId,darkMode,stateLoaded]);
+      try { localStorage.setItem(STORE_KEY, JSON.stringify({level,candidate,interviewDate,coreScores,coreNotes,bonusScores,bonusNotes,transcript,aiNarrative,recruiterSummary,privateNotes,watchouts,ashbyInterviewId,darkMode})); } catch(e) {}
+    }, [level,candidate,interviewDate,coreScores,coreNotes,bonusScores,bonusNotes,transcript,aiNarrative,recruiterSummary,privateNotes,watchouts,ashbyInterviewId,darkMode,stateLoaded]);
 
     useEffect(() => { document.documentElement.dataset.theme = darkMode?"dark":"light"; }, [darkMode]);
 
@@ -495,7 +507,7 @@
         savedAt: new Date().toISOString(),
         candidate: candidate||'Unnamed',
         level, interviewDate, coreScores, coreNotes, bonusScores, bonusNotes,
-        transcript, aiNarrative, ashbyInterviewId, rec: rec.label, weightedScore,
+        transcript, aiNarrative, privateNotes, watchouts, ashbyInterviewId, rec: rec.label, weightedScore,
       };
       const updated = [record, ...savedRecords].slice(0, 50);
       setSavedRecords(updated);
@@ -514,6 +526,8 @@
       setBonusNotes(record.bonusNotes||{});
       setTranscript(record.transcript||'');
       setAiNarrative(record.aiNarrative||null);
+      setPrivateNotes(record.privateNotes||{});
+      setWatchouts(record.watchouts||'');
       setAshbyInterviewId(record.ashbyInterviewId||'');
       setOverallNotes('');
       setScoresChangedSinceAI(false);
@@ -536,7 +550,6 @@
     }, [coreScores, bonusScores]);
 
     const rec = useMemo(() => {
-      if(coreScores["ego"]===1) return {label:"No",dot:"#DA5077",bg:"rgba(218,80,119,0.12)",border:"#DA5077"};
       if(!weightedScore) return {label:"—",dot:"#555",bg:"transparent",border:"#333"};
       if(weightedScore>=3.5) return {label:"Strong Yes",dot:"#229955",bg:"rgba(34,155,85,0.15)",border:"#229955"};
       if(weightedScore>=3.0) return {label:"Yes",dot:"#4A6BC9",bg:"rgba(74,107,201,0.12)",border:"#4A6BC9"};
@@ -557,13 +570,13 @@
     const processTranscript = async () => {
       if(!openaiKey||!transcript.trim()) return;
       setIsProcessingTranscript(true); setTranscriptError(null);
-      const prompt = `Analyze this interview transcript and extract structured notes for a recruiter screen.\n\nSections:\n1. Environment & Introspection — does the candidate reflect on their own work with honesty and specificity?\n2. Product Ownership & Customer Impact — evidence of end-to-end ownership, user understanding, real decision-making\n3. Ego & Feedback — can they describe hard feedback honestly, including initial reaction and what changed?\n4. Team-Minded — do they understand team complementarity?\n\nTRANSCRIPT:\n---\n${transcript.trim()}\n---\n\nReturn ONLY valid JSON:\n{"environment":"2-3 sentences with evidence","product":"2-3 sentences","ego":"2-3 sentences","team":"2-3 sentences","overall":"1-2 sentence overall observation"}\n\nQuote the candidate where useful. If a section wasn't covered, say so.`;
+      const prompt = `Analyze this interview transcript and extract structured notes for a recruiter screen.\n\nSections:\n0. Career Motivation — why now, and why Ankar? Intentionality, specificity, product curiosity\n1. Environment & Introspection — does the candidate reflect on their own work with honesty and specificity?\n2. Product Ownership & Customer Impact — evidence of end-to-end ownership, user understanding, real decision-making\n3. Ego & Feedback — can they describe hard feedback honestly, including initial reaction and what changed?\n4. Team-Minded — do they understand team complementarity?\n\nTRANSCRIPT:\n---\n${transcript.trim()}\n---\n\nReturn ONLY valid JSON:\n{"motivation":"2-3 sentences with evidence","environment":"2-3 sentences with evidence","product":"2-3 sentences","ego":"2-3 sentences","team":"2-3 sentences","overall":"1-2 sentence overall observation"}\n\nQuote the candidate where useful. If a section wasn't covered, say so.`;
       try {
         const text = await callAI(openaiKey, prompt, 800);
         const jsonMatch = text.match(/\{[\s\S]*\}/);
         if(!jsonMatch) throw new Error('Could not parse response');
         const extracted = JSON.parse(jsonMatch[0]);
-        setCoreNotes(p => ({...p,...(extracted.environment?{environment:extracted.environment}:{}),...(extracted.product?{product:extracted.product}:{}),...(extracted.ego?{ego:extracted.ego}:{}),...(extracted.team?{team:extracted.team}:{})}));
+        setCoreNotes(p => ({...p,...(extracted.motivation?{motivation:extracted.motivation}:{}),...(extracted.environment?{environment:extracted.environment}:{}),...(extracted.product?{product:extracted.product}:{}),...(extracted.ego?{ego:extracted.ego}:{}),...(extracted.team?{team:extracted.team}:{})}));
         if(extracted.overall) setOverallNotes(p => p?p+'\n\n[From transcript]: '+extracted.overall:extracted.overall);
         setTranscriptProcessed(true); setAiNarrative(null);
       } catch(e) { setTranscriptError(e.message||'Failed to process transcript'); }
@@ -606,9 +619,11 @@ ${scoredBonus.length>0?'\nBONUS SECTIONS:\n'+scoredBonus.join('\n'):''}
 ${hasTranscript?'\nTRANSCRIPT EXCERPTS (quote directly where relevant):\n'+transcript.trim().slice(0,3000):''}
 
 FORMAT YOUR RESPONSE EXACTLY AS:
-For each scored section, write 1-2 sentences: the score, and the evidence from notes/transcript that supports it. Include direct quotes from the candidate where available. If no notes exist for a section, just state the score.
+Write a short paragraph for each scored section: the section name in bold (e.g. **Environment & Introspection — 3/4 (Yes)**), then 1-2 sentences of evidence from notes/transcript. Include direct quotes where available. If no notes exist, just state the score.
 
-End with: "Recommendation: [rating]" and one sentence of justification based only on the scores above.`;
+Separate each section with a blank line.
+
+End with a blank line, then: "**Recommendation: [rating]**" and one sentence of justification based only on the scores above.`;
 
       try { const text = await callAI(openaiKey, prompt, 800); setAiNarrative(text); setScoresChangedSinceAI(false); }
       catch(e) { setAiError(e.message||'API call failed'); }
@@ -624,7 +639,7 @@ End with: "Recommendation: [rating]" and one sentence of justification based onl
       const payload = {
         interviewScheduleId: ashbyInterviewId,
         overallRecommendation: toAshbyRating(rec.label==='Strong Yes'?4:rec.label==='Yes'?3:rec.label==='Borderline'?2:1),
-        note: (recruiterSummary.trim()?recruiterSummary.trim()+'\n\n':'') + (activeNarrative || scoreTable),
+        note: (recruiterSummary.trim()?recruiterSummary.trim()+'\n\n':'') + (activeNarrative || scoreTable) + (watchouts.trim()?'\n\n--- WATCHOUTS ---\n'+watchouts.trim():'') + (()=>{const pn=Object.entries(privateNotes).filter(([k,v])=>v&&v.trim());return pn.length?'\n\n--- PRIVATE NOTES ---\n'+pn.map(([k,v])=>`${({noticePeriod:'Notice Period',currentSalary:'Current Salary',salaryExpectations:'Salary Expectations',bandAlignment:'Band Alignment',location:'Location / Commute',officeAlignment:'Office-First Alignment',visaStatus:'Visa Status',competingProcesses:'Competing Processes'})[k]||k}: ${v.trim()}`).join('\n'):'';})(),
         attributes: CORE_SECTIONS.map(s => ({
           title: s.title, rating: toAshbyRating(coreScores[s.id]),
           text: (coreNotes[s.id]||'').trim()||null,
@@ -673,7 +688,7 @@ End with: "Recommendation: [rating]" and one sentence of justification based onl
     const clearInterview = () => {
       if(!confirm('Start a new interview? Current data will be auto-saved to history.')) return;
       saveRecord();
-      setCoreScores({});setCoreNotes({});setBonusScores({});setBonusNotes({});setOverallNotes('');setCandidate('');setAiNarrative(null);setRecruiterSummary('');setTranscript('');setTranscriptProcessed(false);setAshbyInterviewId('');setAshbyStatus(null);setAshbyMsg(null);setInterviewDate(new Date().toISOString().slice(0,10));setScoresChangedSinceAI(false);setAshbyInterviewData(null);setAshbySearchResults([]);setAshbyFetchMsg(null);
+      setCoreScores({});setCoreNotes({});setBonusScores({});setBonusNotes({});setOverallNotes('');setCandidate('');setAiNarrative(null);setRecruiterSummary('');setPrivateNotes({});setWatchouts('');setTranscript('');setTranscriptProcessed(false);setAshbyInterviewId('');setAshbyStatus(null);setAshbyMsg(null);setInterviewDate(new Date().toISOString().slice(0,10));setScoresChangedSinceAI(false);setAshbyInterviewData(null);setAshbySearchResults([]);setAshbyFetchMsg(null);setShowAshbyIdSection(false);
     };
 
     const toggleExample = (sectionId,score) => setShowExample(p=>({...p,[`${sectionId}-${score}`]:!p[`${sectionId}-${score}`]}));
@@ -769,24 +784,9 @@ End with: "Recommendation: [rating]" and one sentence of justification based onl
             </div>
           )}
 
-          {/* ── ASHBY + CANDIDATE ── */}
+          {/* ── CANDIDATE + ASHBY ── */}
           <div style={{background:"var(--surface)",border:`1px solid ${ashbyInterviewData?"var(--s4-border)":"var(--border)"}`,borderRadius:10,padding:"18px 20px",marginBottom:20,transition:"border-color 0.2s"}}>
-            {/* Ashby Interview URL — the entry point */}
-            <div style={{marginBottom:16}}>
-              <div className="panel-label">Ashby Interview URL or Schedule ID <span style={{color:"var(--text-muted)",textTransform:"none",fontWeight:400,letterSpacing:"normal"}}>— paste to auto-fill candidate details</span></div>
-              <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
-                <div style={{flex:1}}>
-                  <input type="text" placeholder="e.g. https://app.ashbyhq.com/interviews/intSch_abc123  or  intSch_abc123" value={ashbyInterviewId} onChange={e=>setAshbyInterviewId(e.target.value)} onKeyDown={e=>{if(e.key==='Enter')fetchAshbyInterview();}}/>
-                </div>
-                <button onClick={fetchAshbyInterview} disabled={ashbyFetching||!ashbyInterviewId.trim()} className="cta" style={{fontSize:11,padding:"10px 18px",borderRadius:7,fontWeight:600,cursor:(!ashbyInterviewId.trim()||ashbyFetching)?"default":"pointer",background:ashbyFetching?"var(--surface-2)":"rgba(57,88,167,0.15)",border:"1px solid rgba(57,88,167,0.4)",color:ashbyFetching?"var(--text-muted)":"var(--blue-tint)",opacity:!ashbyInterviewId.trim()?0.5:1,flexShrink:0,whiteSpace:"nowrap"}}>
-                  {ashbyFetching?"Loading…":"Pull from Ashby"}
-                </button>
-              </div>
-              {ashbyFetchMsg && <div style={{marginTop:8,fontSize:11,color:ashbyFetchMsg.startsWith('✓')?"var(--s4-text)":ashbyFetchMsg.startsWith('CORS')?"var(--s2-text)":"var(--s1-text)"}}>{ashbyFetchMsg}</div>}
-              {!ashbyApiKey && ashbyInterviewId.trim() && <div style={{marginTop:6,fontSize:11,color:"var(--text-muted)"}}>Ashby API key required — click ⚙ in header to configure.</div>}
-            </div>
-            <div style={{height:1,background:"var(--border-inner)",margin:"0 -20px 16px",padding:0}}/>
-            {/* Candidate details — auto-filled or manual */}
+            {/* Candidate details — primary entry point */}
             <div style={{display:"flex",alignItems:"flex-end",gap:16,flexWrap:"wrap"}}>
               <div style={{flex:1,minWidth:200,position:"relative"}}>
                 <div className="panel-label">Candidate Name {ashbyInterviewData && <span style={{color:"var(--s4-text)",textTransform:"none",fontWeight:400}}>· from Ashby</span>} {ashbyApiKey && !ashbyInterviewData && <span style={{color:"var(--text-muted)",textTransform:"none",fontWeight:400}}>· type 2+ chars to search Ashby</span>} {!ashbyApiKey && <span style={{color:"var(--text-muted)",textTransform:"none",fontWeight:400}}>· set Ashby key in ⚙ to enable search</span>}</div>
@@ -848,6 +848,28 @@ End with: "Recommendation: [rating]" and one sentence of justification based onl
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>Auto-saved
               </div>
             </div>
+            {/* Ashby Interview ID — optional expandable */}
+            <div style={{borderTop:"1px solid var(--border-inner)",margin:"0 -20px",padding:"0 20px"}}>
+              <button onClick={()=>setShowAshbyIdSection(p=>!p)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"10px 0",display:"flex",alignItems:"center",gap:8,fontSize:11,color:ashbyInterviewId?"var(--s4-text)":"var(--text-muted)"}}>
+                <Chevron open={showAshbyIdSection}/>
+                <span>{ashbyInterviewId ? `Ashby ID: ${parseAshbyId(ashbyInterviewId)}` : "Link Ashby Interview Schedule ID"}</span>
+                {ashbyInterviewData && <span style={{fontSize:10,background:"rgba(34,155,85,0.15)",color:"var(--s4-text)",border:"1px solid rgba(34,155,85,0.3)",padding:"1px 7px",borderRadius:12}}>linked</span>}
+              </button>
+              {showAshbyIdSection && (
+                <div style={{paddingBottom:14}}>
+                  <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                    <div style={{flex:1}}>
+                      <input type="text" placeholder="e.g. https://app.ashbyhq.com/interviews/intSch_abc123  or  intSch_abc123" value={ashbyInterviewId} onChange={e=>setAshbyInterviewId(e.target.value)} onKeyDown={e=>{if(e.key==='Enter')fetchAshbyInterview();}} style={{fontSize:12}}/>
+                    </div>
+                    <button onClick={fetchAshbyInterview} disabled={ashbyFetching||!ashbyInterviewId.trim()} className="cta" style={{fontSize:11,padding:"10px 18px",borderRadius:7,fontWeight:600,cursor:(!ashbyInterviewId.trim()||ashbyFetching)?"default":"pointer",background:ashbyFetching?"var(--surface-2)":"rgba(57,88,167,0.15)",border:"1px solid rgba(57,88,167,0.4)",color:ashbyFetching?"var(--text-muted)":"var(--blue-tint)",opacity:!ashbyInterviewId.trim()?0.5:1,flexShrink:0,whiteSpace:"nowrap"}}>
+                      {ashbyFetching?"Loading…":"Pull from Ashby"}
+                    </button>
+                  </div>
+                  {ashbyFetchMsg && <div style={{marginTop:6,fontSize:11,color:ashbyFetchMsg.startsWith('✓')?"var(--s4-text)":ashbyFetchMsg.startsWith('CORS')?"var(--s2-text)":"var(--s1-text)"}}>{ashbyFetchMsg}</div>}
+                  {!ashbyApiKey && ashbyInterviewId.trim() && <div style={{marginTop:6,fontSize:11,color:"var(--text-muted)"}}>Ashby API key required — click ⚙ in header to configure.</div>}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* ── SENIOR NOTE ── */}
@@ -861,7 +883,7 @@ End with: "Recommendation: [rating]" and one sentence of justification based onl
             </div>
           </div>
 
-          <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600,marginBottom:12}}>Core Sections — 90% of recommendation weight</div>
+          <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600,marginBottom:12}}>Core Sections — 90% of score weight</div>
 
           {/* ── CORE SECTIONS ── */}
           {CORE_SECTIONS.map(section => {
@@ -915,39 +937,15 @@ End with: "Recommendation: [rating]" and one sentence of justification based onl
             );})}
           </div>
 
-          {/* ── CALL TRANSCRIPT ── */}
-          <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:10,marginBottom:24,overflow:"hidden"}}>
-            <button onClick={()=>setShowTranscript(p=>!p)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"14px 20px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:12}}>
-              <div style={{display:"flex",alignItems:"center",gap:10}}>
-                <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600}}>Call Notes / Transcript</div>
-                {transcriptProcessed && <span style={{fontSize:10,background:"rgba(34,155,85,0.15)",color:"var(--s4-text)",border:"1px solid rgba(34,155,85,0.3)",padding:"2px 8px",borderRadius:20}}>Processed</span>}
-              </div>
-              <div style={{display:"flex",alignItems:"center",gap:8,fontSize:11,color:"var(--text-muted)"}}><span>Paste AI notes to auto-fill section notes</span><Chevron open={showTranscript}/></div>
-            </button>
-            {showTranscript && (
-              <div style={{padding:"0 20px 20px"}}>
-                <textarea rows={10} placeholder="Paste your call transcript, AI note-taker output, or raw notes here…" value={transcript} onChange={e=>{setTranscript(e.target.value);setTranscriptProcessed(false);}} style={{marginBottom:12}}/>
-                <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
-                  <button onClick={processTranscript} disabled={!transcript.trim()||isProcessingTranscript||!hasApiKey} className="cta" style={{fontSize:11,padding:"8px 18px",borderRadius:7,fontWeight:600,cursor:(!transcript.trim()||isProcessingTranscript||!hasApiKey)?"default":"pointer",background:isProcessingTranscript?"var(--surface-2)":"rgba(57,88,167,0.2)",border:"1px solid rgba(57,88,167,0.5)",color:isProcessingTranscript?"var(--text-muted)":"var(--blue-tint)",opacity:(!transcript.trim()||!hasApiKey)?0.5:1}}>
-                    {isProcessingTranscript?"Processing…":"Process with AI → Fill Section Notes"}
-                  </button>
-                  {!hasApiKey && <span style={{fontSize:11,color:"var(--text-muted)"}}>Requires OpenAI API key (Admin ⚙)</span>}
-                  {transcriptProcessed && <span style={{fontSize:11,color:"var(--s4-text)"}}>✓ Notes filled from transcript</span>}
-                  {transcriptError && <span style={{fontSize:11,color:"var(--s1-text)"}}>Error: {transcriptError}</span>}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* ── OVERALL RECOMMENDATION ── */}
+          {/* ── SCORE SUMMARY ── */}
           <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:10,padding:"20px 24px",marginBottom:24}}>
-            <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600,marginBottom:18}}>Overall Recommendation</div>
-            <div style={{display:"grid",gridTemplateColumns:"repeat(4, 1fr)",gap:10,marginBottom:20}}>
+            <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600,marginBottom:18}}>Score Summary</div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(5, 1fr)",gap:8,marginBottom:20}}>
               {CORE_SECTIONS.map(section=>{const sc=coreScores[section.id];const m=sc?SCORE_META[sc]:null;return(
-                <div key={section.id} style={{background:sc&&sc!=="N/A"?`rgba(${m.rgb},0.1)`:"var(--score-empty-bg)",border:`1.5px solid ${sc&&sc!=="N/A"?m.dot:"var(--score-empty-border)"}`,borderRadius:8,padding:"12px 8px",textAlign:"center"}}>
-                  <div style={{fontSize:10,color:"var(--text-dim)",lineHeight:1.3,marginBottom:6}}>{section.title.split(" ")[0]}</div>
-                  <div style={{fontSize:26,fontWeight:700,lineHeight:1,color:sc&&sc!=="N/A"?m.dot:"var(--text-footer)",fontFamily:"'Satoshi',sans-serif"}}>{sc||"—"}</div>
-                  <div style={{fontSize:10,color:"var(--text-dimmer)",marginTop:4}}>{section.weight}%</div>
+                <div key={section.id} style={{background:sc&&sc!=="N/A"?`rgba(${m.rgb},0.1)`:"var(--score-empty-bg)",border:`1.5px solid ${sc&&sc!=="N/A"?m.dot:"var(--score-empty-border)"}`,borderRadius:8,padding:"10px 6px",textAlign:"center"}}>
+                  <div style={{fontSize:9,color:"var(--text-dim)",lineHeight:1.3,marginBottom:5}}>{section.id==="motivation"?"Motivation":section.title.split(" ")[0]}</div>
+                  <div style={{fontSize:24,fontWeight:700,lineHeight:1,color:sc&&sc!=="N/A"?m.dot:"var(--text-footer)",fontFamily:"'Satoshi',sans-serif"}}>{sc||"—"}</div>
+                  <div style={{fontSize:9,color:"var(--text-dimmer)",marginTop:3}}>{section.weight}%</div>
                 </div>
               );})}
             </div>
@@ -961,6 +959,30 @@ End with: "Recommendation: [rating]" and one sentence of justification based onl
               {weightedScore && weightedScore >= 3.0 && weightedScore < 3.5 && <span style={{color:"var(--s3-text)"}}>Weak pass — 3.0–3.5 range. Solid but not exceptional.</span>}
               {weightedScore && weightedScore >= 3.5 && <span style={{color:"var(--s4-text)"}}>Strong fit — above 3.5.</span>}
             </div>
+          </div>
+
+          {/* ── CALL NOTES / TRANSCRIPT ── */}
+          <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:10,marginBottom:24,overflow:"hidden"}}>
+            <button onClick={()=>setShowTranscript(p=>!p)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"10px 20px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:12}}>
+              <div style={{display:"flex",alignItems:"center",gap:10}}>
+                <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600}}>Call Notes / Transcript</div>
+                {transcriptProcessed && <span style={{fontSize:10,background:"rgba(34,155,85,0.15)",color:"var(--s4-text)",border:"1px solid rgba(34,155,85,0.3)",padding:"2px 8px",borderRadius:20}}>Processed</span>}
+              </div>
+              <div style={{display:"flex",alignItems:"center",gap:8,fontSize:11,color:"var(--text-muted)"}}><span>Paste AI notes to auto-fill section notes</span><Chevron open={showTranscript}/></div>
+            </button>
+            {showTranscript && (
+              <div style={{padding:"0 20px 14px"}}>
+                <textarea rows={4} placeholder="Paste your call transcript, AI note-taker output, or raw notes here…" value={transcript} onChange={e=>{setTranscript(e.target.value);setTranscriptProcessed(false);}} style={{marginBottom:8}}/>
+                <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
+                  <button onClick={processTranscript} disabled={!transcript.trim()||isProcessingTranscript||!hasApiKey} className="cta" style={{fontSize:11,padding:"6px 16px",borderRadius:7,fontWeight:600,cursor:(!transcript.trim()||isProcessingTranscript||!hasApiKey)?"default":"pointer",background:isProcessingTranscript?"var(--surface-2)":"rgba(57,88,167,0.2)",border:"1px solid rgba(57,88,167,0.5)",color:isProcessingTranscript?"var(--text-muted)":"var(--blue-tint)",opacity:(!transcript.trim()||!hasApiKey)?0.5:1}}>
+                    {isProcessingTranscript?"Processing…":"Process with AI → Fill Section Notes"}
+                  </button>
+                  {!hasApiKey && <span style={{fontSize:11,color:"var(--text-muted)"}}>Requires OpenAI API key (Admin ⚙)</span>}
+                  {transcriptProcessed && <span style={{fontSize:11,color:"var(--s4-text)"}}>✓ Notes filled from transcript</span>}
+                  {transcriptError && <span style={{fontSize:11,color:"var(--s1-text)"}}>Error: {transcriptError}</span>}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* ── ASHBY SCORECARD SUBMISSION (primary, open by default) ── */}
@@ -981,24 +1003,27 @@ End with: "Recommendation: [rating]" and one sentence of justification based onl
             {!ashbyInterviewId && <div style={{marginBottom:14,padding:"10px 14px",background:"rgba(184,124,40,0.08)",border:"1px solid rgba(184,124,40,0.25)",borderRadius:8,fontSize:12,color:"var(--s2-text)"}}>⚠ No Ashby Interview ID set. Enter it at the top of the page to enable submission.</div>}
 
             {/* Score mapping */}
-            <div style={{background:"var(--surface-3)",border:"1px solid var(--border-inner)",borderRadius:8,padding:"14px 16px",marginBottom:18}}>
-              <div className="panel-label" style={{marginBottom:12}}>Score Mapping → Ashby Ratings</div>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:8}}>
-                {CORE_SECTIONS.map(section => {
-                  const sc = coreScores[section.id]; const m = sc ? SCORE_META[sc] : null;
-                  const ashbyLabel = sc===4?'Strong Yes':sc===3?'Yes':sc===2?'No':sc===1?'Strong No':null;
-                  return (
-                    <div key={section.id} style={{padding:"10px 8px",borderRadius:7,textAlign:"center",border:`1px solid ${sc&&sc!=='N/A'?`rgba(${m.rgb},0.35)`:"var(--border-inner2)"}`,background:sc&&sc!=='N/A'?`rgba(${m.rgb},0.06)`:"transparent"}}>
-                      <div style={{fontSize:10,color:"var(--text-dim)",marginBottom:6,lineHeight:1.3}}>{section.title.split(" ")[0]}</div>
-                      <div style={{fontSize:18,fontWeight:700,color:sc&&sc!=='N/A'?m.dot:"var(--text-footer)",fontFamily:"'Satoshi',sans-serif"}}>{sc||"—"}</div>
-                      {ashbyLabel && <div style={{fontSize:9,color:m.dot,marginTop:4,textTransform:"uppercase",letterSpacing:"0.06em"}}>→ {ashbyLabel}</div>}
-                    </div>
-                  );
-                })}
-                <div style={{padding:"10px 8px",borderRadius:7,textAlign:"center",border:`1.5px solid ${rec.border}`,background:rec.bg}}>
-                  <div style={{fontSize:10,color:"var(--text-dim)",marginBottom:6}}>Overall</div>
-                  <div style={{fontSize:14,fontWeight:700,color:rec.dot,fontFamily:"'Satoshi',sans-serif"}}>{rec.label}</div>
-                  {weightedScore && <div style={{fontSize:10,color:"var(--text-dimmer)",marginTop:4}}>{weightedScore.toFixed(2)}</div>}
+            <div style={{background:"var(--surface-3)",border:"1px solid var(--border-inner)",borderRadius:8,padding:"16px 18px",marginBottom:18}}>
+              <div style={{display:"flex",alignItems:"stretch",gap:14}}>
+                {/* Overall — prominent */}
+                <div style={{padding:"16px 20px",borderRadius:10,textAlign:"center",border:`2px solid ${rec.border}`,background:rec.bg,minWidth:120,display:"flex",flexDirection:"column",justifyContent:"center"}}>
+                  <div style={{fontSize:9,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600,marginBottom:6}}>Overall</div>
+                  <div style={{fontSize:22,fontWeight:700,color:rec.dot,fontFamily:"'Satoshi',sans-serif",lineHeight:1}}>{rec.label}</div>
+                  {weightedScore && <div style={{fontSize:20,fontWeight:700,color:"var(--text)",fontFamily:"'Satoshi',sans-serif",marginTop:6,letterSpacing:"-0.03em"}}>{weightedScore.toFixed(2)}<span style={{fontSize:11,color:"var(--text-dimmer)",fontWeight:400}}> / 4</span></div>}
+                </div>
+                {/* Individual section scores — compact */}
+                <div style={{flex:1,display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:6,alignContent:"center"}}>
+                  {CORE_SECTIONS.map(section => {
+                    const sc = coreScores[section.id]; const m = sc ? SCORE_META[sc] : null;
+                    const ashbyLabel = sc===4?'Strong Yes':sc===3?'Yes':sc===2?'No':sc===1?'Strong No':null;
+                    return (
+                      <div key={section.id} style={{padding:"8px 4px",borderRadius:6,textAlign:"center",border:`1px solid ${sc&&sc!=='N/A'?`rgba(${m.rgb},0.3)`:"var(--border-inner2)"}`,background:sc&&sc!=='N/A'?`rgba(${m.rgb},0.05)`:"transparent"}}>
+                        <div style={{fontSize:9,color:"var(--text-muted)",lineHeight:1.2,marginBottom:4}}>{section.id==="motivation"?"Motivation":section.title.split(" ")[0]}</div>
+                        <div style={{fontSize:16,fontWeight:700,color:sc&&sc!=='N/A'?m.dot:"var(--text-footer)",fontFamily:"'Satoshi',sans-serif",lineHeight:1}}>{sc||"—"}</div>
+                        {ashbyLabel && <div style={{fontSize:8,color:m.dot,marginTop:3,textTransform:"uppercase",letterSpacing:"0.05em"}}>→ {ashbyLabel}</div>}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -1010,7 +1035,7 @@ End with: "Recommendation: [rating]" and one sentence of justification based onl
             </div>
 
             {/* Score + evidence summary */}
-            <div style={{marginBottom:18}}>
+            <div style={{marginBottom:24}}>
               <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
                 <div style={{display:"flex",alignItems:"center",gap:10}}>
                   <div className="panel-label" style={{marginBottom:0}}>Score Summary & Evidence</div>
@@ -1035,25 +1060,59 @@ End with: "Recommendation: [rating]" and one sentence of justification based onl
               )}
 
               {/* Score table */}
-              <div style={{background:"var(--surface-deep)",border:"1px solid var(--border-inner)",borderRadius:8,padding:"14px 18px",marginBottom:10,fontFamily:"'Geist Mono',monospace",fontSize:12,color:"var(--text-secondary)",lineHeight:1.8,whiteSpace:"pre-wrap"}}>{scoreTable}</div>
+              <div style={{background:"var(--surface-deep)",border:"1px solid var(--border-inner)",borderRadius:8,padding:"16px 20px",marginBottom:16,fontFamily:"'Geist Mono',monospace",fontSize:12,color:"var(--text-secondary)",lineHeight:2,whiteSpace:"pre-wrap"}}>{scoreTable}</div>
 
               {/* Editable evidence narrative */}
               {activeNarrative ? (
-                <textarea value={activeNarrative} onChange={e=>setAiNarrative(e.target.value)} style={{background:"var(--surface-3)",border:"1px solid var(--border-inner)",borderRadius:8,padding:"16px 18px",fontSize:13,color:"var(--text-secondary)",lineHeight:1.75,whiteSpace:"pre-wrap",wordBreak:"break-word",minHeight:160,width:"100%",resize:"vertical"}}/>
+                <div style={{background:"var(--surface-3)",border:"1px solid var(--border-inner)",borderRadius:8,padding:"20px 22px",cursor:"text"}} onClick={e=>{const ta=e.currentTarget.querySelector('textarea');if(ta)ta.focus();}}>
+                  <textarea ref={el=>{if(el){el.style.height='auto';el.style.height=Math.max(120,el.scrollHeight+16)+'px';}}} value={activeNarrative} onChange={e=>setAiNarrative(e.target.value)} style={{background:"transparent",border:"none",padding:0,fontSize:13,color:"var(--text-secondary)",lineHeight:1.9,whiteSpace:"pre-wrap",wordBreak:"break-word",minHeight:120,width:"100%",resize:"none",overflow:"hidden",letterSpacing:"0.01em"}}/>
+                </div>
               ) : hasAnyScores ? (
-                <div style={{padding:"16px 18px",background:"var(--surface-3)",borderRadius:8,border:"1px solid var(--border-inner)",color:"var(--text-dim)",fontSize:12,lineHeight:1.7}}>
+                <div style={{padding:"20px 22px",background:"var(--surface-3)",borderRadius:8,border:"1px solid var(--border-inner)",color:"var(--text-dim)",fontSize:12,lineHeight:1.7}}>
                   {scoredSections.map(s => (
-                    <div key={s.section.id} style={{marginBottom:8}}>
+                    <div key={s.section.id} style={{marginBottom:14}}>
                       <strong style={{color:s.meta.dot}}>{s.section.title}: {s.score}/4 ({s.meta.label})</strong>
                       {s.notes ? <span> — {s.notes}</span> : <span style={{color:"var(--text-muted)"}}> — no notes</span>}
                     </div>
                   ))}
-                  <div style={{marginTop:8,fontSize:11,color:"var(--text-muted)"}}>Click "Generate with AI" to create a prose summary from these scores and notes{transcript.trim()?', including transcript evidence':''}</div>
+                  <div style={{marginTop:10,fontSize:11,color:"var(--text-muted)"}}>Click "Generate with AI" to create a prose summary from these scores and notes{transcript.trim()?', including transcript evidence':''}</div>
                 </div>
               ) : (
                 <div style={{padding:"20px",background:"var(--surface-3)",borderRadius:8,border:"1px solid var(--border-inner)",textAlign:"center",color:"var(--text-muted)",fontSize:12}}>Score sections above to build the summary.</div>
               )}
             </div>
+
+            {/* Watchouts */}
+            <div style={{marginBottom:18}}>
+              <div className="panel-label">Watchouts <span style={{color:"var(--text-muted)",textTransform:"none",fontWeight:400,letterSpacing:"normal"}}>— areas to probe further</span></div>
+              <div style={{fontSize:11,color:"var(--text-muted)",marginBottom:8,lineHeight:1.5}}>Short bullets: risks, gaps, or missing signals for the next interviewer. [Area]: description. 3–5 max.</div>
+              <textarea rows={3} placeholder={"e.g.\n[Environment / Introspection]: Reflection mostly emerged after prompting rather than naturally.\n[Career Motivation]: Interest in startup ownership clear, but Ankar-specific pull still fairly broad."} value={watchouts} onChange={e=>setWatchouts(e.target.value)} style={{fontSize:12}}/>
+              {!watchouts.trim() && weightedScore && weightedScore >= 3.5 && <div style={{marginTop:5,fontSize:11,color:"var(--text-muted)",fontStyle:"italic"}}>If no meaningful watchouts: "No significant watchouts from this screen."</div>}
+            </div>
+
+            {/* Private Notes */}
+            <div style={{marginBottom:20}}>
+              <div className="panel-label">Private Notes <span style={{color:"var(--text-muted)",textTransform:"none",fontWeight:400,letterSpacing:"normal"}}>— not scored, included in submission</span></div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px 14px"}}>
+                {[
+                  {key:"noticePeriod",label:"Notice Period"},
+                  {key:"currentSalary",label:"Current Salary"},
+                  {key:"salaryExpectations",label:"Salary Expectations"},
+                  {key:"bandAlignment",label:"Band Alignment"},
+                  {key:"location",label:"Location / Commute"},
+                  {key:"officeAlignment",label:"Office-First Alignment"},
+                  {key:"visaStatus",label:"Visa Status"},
+                  {key:"competingProcesses",label:"Competing Processes"},
+                ].map(f=>(
+                  <div key={f.key}>
+                    <div style={{fontSize:10,color:"var(--text-muted)",marginBottom:3,fontWeight:500}}>{f.label}</div>
+                    <input type="text" placeholder={f.label+"…"} value={privateNotes[f.key]||""} onChange={e=>setPrivateNotes(p=>({...p,[f.key]:e.target.value}))} style={{fontSize:12,padding:"7px 10px"}}/>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div style={{height:1,background:"rgba(57,88,167,0.2)",margin:"0 -28px 20px"}}/>
 
             {/* Action buttons */}
             <div style={{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}}>

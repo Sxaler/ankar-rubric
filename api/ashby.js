@@ -8,6 +8,9 @@ const ALLOWED = [
   'interviewSchedule.list',
   'interviewSchedule.submit',
   'interview.list',
+  'feedbackFormDefinition.list',
+  'feedbackFormDefinition.info',
+  'applicationFeedback.submit',
 ];
 
 export default async function handler(req, res) {
