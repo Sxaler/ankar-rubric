@@ -9,1044 +9,1100 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
-      /* Layout */
-      --bg: #1A1A1A;
-      --surface: #222222;
-      --surface-2: #2A2A2A;
-      --surface-3: #1E1E1E;
-      --surface-deep: #171717;
-      --border: #333333;
-      --border-light: #3A3A3A;
-      --border-inner: #2A2A2A;
-      --border-inner2: #2E2E2E;
-      --divider: #272727;
-      --header-bg: rgba(26,26,26,0.95);
-      /* Text */
-      --text: #FFFFFF;
-      --text-secondary: #DEDEDE;
-      --text-dim: #BBBBBB;
-      --text-dimmer: #AAAAAA;
-      --text-faint: #999999;
-      --text-muted: #888888;
-      --text-footer: #666666;
-      /* Accents */
-      --blue: #3958A7;
-      --blue-light: #5B7ED4;
-      --blue-tint: #7BAAF5;
-      --rose: #DA5077;
-      /* Tags */
-      --tag-bg: #2A2A2A;
-      --tag-border: #333333;
-      --tag-text: #999999;
-      /* Level toggle */
-      --toggle-active-bg: #FFFFFF;
-      --toggle-active-text: #0E0E0E;
-      --toggle-inactive-text: #666666;
-      /* Score empty state */
-      --score-empty-bg: #1E1E1E;
-      --score-empty-border: #2A2A2A;
-      /* Score colours */
-      --s4-bg: rgba(34,155,85,0.18);
-      --s4-border: #229955;
-      --s4-text: #5CC98A;
-      --s3-bg: rgba(57,88,167,0.09);
-      --s3-border: #4A6BC9;
-      --s3-text: #6898E8;
-      --s2-bg: rgba(184,130,40,0.18);
-      --s2-border: #B87C28;
-      --s2-text: #D4983C;
-      --s1-bg: rgba(218,80,119,0.18);
-      --s1-border: #DA5077;
-      --s1-text: #F07A99;
-      --sna-bg: rgba(255,255,255,0.04);
-      --sna-border: #444444;
-      --sna-text: #777777;
+      --bg:#1A1A1A;--surface:#222222;--surface-2:#2A2A2A;--surface-3:#1E1E1E;--surface-deep:#171717;
+      --border:#333333;--border-light:#3A3A3A;--border-inner:#2A2A2A;--border-inner2:#2E2E2E;--divider:#272727;
+      --header-bg:rgba(26,26,26,0.95);--text:#FFFFFF;--text-secondary:#DEDEDE;--text-dim:#BBBBBB;
+      --text-dimmer:#AAAAAA;--text-faint:#999999;--text-muted:#888888;--text-footer:#666666;
+      --blue:#3958A7;--blue-light:#5B7ED4;--blue-tint:#7BAAF5;--rose:#DA5077;
+      --tag-bg:#2A2A2A;--tag-border:#333333;--tag-text:#999999;
+      --toggle-active-bg:#FFFFFF;--toggle-active-text:#0E0E0E;--toggle-inactive-text:#666666;
+      --score-empty-bg:#1E1E1E;--score-empty-border:#2A2A2A;
+      --s4-bg:rgba(34,155,85,0.18);--s4-border:#229955;--s4-text:#5CC98A;
+      --s3-bg:rgba(57,88,167,0.09);--s3-border:#4A6BC9;--s3-text:#6898E8;
+      --s2-bg:rgba(184,130,40,0.18);--s2-border:#B87C28;--s2-text:#D4983C;
+      --s1-bg:rgba(218,80,119,0.18);--s1-border:#DA5077;--s1-text:#F07A99;
+      --sna-bg:rgba(255,255,255,0.04);--sna-border:#444444;--sna-text:#777777;
     }
     html[data-theme="light"] {
-      --bg: #F4F4F4;
-      --surface: #FFFFFF;
-      --surface-2: #EFEFEF;
-      --surface-3: #E8E8E8;
-      --surface-deep: #E2E2E2;
-      --border: #E0E0E0;
-      --border-light: #D0D0D0;
-      --border-inner: #DEDEDE;
-      --border-inner2: #E8E8E8;
-      --divider: #EEEEEE;
-      --header-bg: rgba(244,244,244,0.95);
-      --text: #0E0E0E;
-      --text-secondary: #222222;
-      --text-dim: #444444;
-      --text-dimmer: #666666;
-      --text-faint: #777777;
-      --text-muted: #888888;
-      --text-footer: #888888;
-      --blue-tint: #3958A7;
-      --tag-bg: #EFEFEF;
-      --tag-border: #E0E0E0;
-      --tag-text: #666666;
-      --toggle-active-bg: #0E0E0E;
-      --toggle-active-text: #FFFFFF;
-      --toggle-inactive-text: #888888;
-      --score-empty-bg: #F0F0F0;
-      --score-empty-border: #E0E0E0;
-      --s4-bg: rgba(34,155,85,0.1);
-      --s4-text: #1C7A40;
-      --s3-bg: rgba(57,88,167,0.08);
-      --s3-text: #3958A7;
-      --s2-bg: rgba(184,130,40,0.1);
-      --s2-text: #8A5E15;
-      --s1-bg: rgba(218,80,119,0.1);
-      --s1-text: #B03060;
-      --sna-bg: rgba(0,0,0,0.04);
-      --sna-border: #D0D0D0;
-      --sna-text: #888888;
+      --bg:#F4F4F4;--surface:#FFFFFF;--surface-2:#EFEFEF;--surface-3:#E8E8E8;--surface-deep:#E2E2E2;
+      --border:#E0E0E0;--border-light:#D0D0D0;--border-inner:#DEDEDE;--border-inner2:#E8E8E8;--divider:#EEEEEE;
+      --header-bg:rgba(244,244,244,0.95);--text:#0E0E0E;--text-secondary:#222222;--text-dim:#444444;
+      --text-dimmer:#666666;--text-faint:#777777;--text-muted:#888888;--text-footer:#888888;
+      --blue-tint:#3958A7;--tag-bg:#EFEFEF;--tag-border:#E0E0E0;--tag-text:#666666;
+      --toggle-active-bg:#0E0E0E;--toggle-active-text:#FFFFFF;--toggle-inactive-text:#888888;
+      --score-empty-bg:#F0F0F0;--score-empty-border:#E0E0E0;
+      --s4-bg:rgba(34,155,85,0.1);--s4-text:#1C7A40;--s4-border:#229955;
+      --s3-bg:rgba(57,88,167,0.08);--s3-text:#3958A7;--s3-border:#4A6BC9;
+      --s2-bg:rgba(184,130,40,0.1);--s2-text:#8A5E15;--s2-border:#B87C28;
+      --s1-bg:rgba(218,80,119,0.1);--s1-text:#B03060;--s1-border:#DA5077;
+      --sna-bg:rgba(0,0,0,0.04);--sna-border:#D0D0D0;--sna-text:#888888;
     }
-    html[data-theme="light"] .bar-motif {
-      background-image: repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 18px,
-        rgba(0,0,0,0.04) 18px,
-        rgba(0,0,0,0.04) 20px
-      );
+    html[data-theme="light"] .bar-motif { background-image:repeating-linear-gradient(90deg,transparent,transparent 18px,rgba(0,0,0,0.04) 18px,rgba(0,0,0,0.04) 20px); }
+    * { box-sizing:border-box;margin:0;padding:0; }
+    body { background:var(--bg);color:var(--text);font-family:'Geist Mono','JetBrains Mono',monospace;-webkit-font-smoothing:antialiased; }
+    h1,h2,h3,.heading { font-family:'Satoshi','Inter',sans-serif;letter-spacing:-0.03em; }
+    .display { letter-spacing:-0.05em; }
+    .bar-motif { background-image:repeating-linear-gradient(90deg,transparent,transparent 18px,rgba(255,255,255,0.025) 18px,rgba(255,255,255,0.025) 20px); }
+    ::-webkit-scrollbar { width:6px; }
+    ::-webkit-scrollbar-track { background:var(--bg); }
+    ::-webkit-scrollbar-thumb { background:var(--border-light);border-radius:3px; }
+    textarea,input[type="text"],input[type="password"],input[type="date"] {
+      background:var(--surface-2);border:1px solid var(--border);color:var(--text-secondary);
+      border-radius:6px;padding:10px 12px;width:100%;resize:none;
+      font:13px/1.65 'Geist Mono','JetBrains Mono',monospace !important;
+      outline:none;transition:border-color 0.15s;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Geist Mono', 'JetBrains Mono', monospace;
-      -webkit-font-smoothing: antialiased;
-    }
-    h1, h2, h3, .heading {
-      font-family: 'Satoshi', 'Inter', sans-serif;
-      letter-spacing: -0.03em;
-    }
-    .display { letter-spacing: -0.05em; }
-    .mono { font-family: 'Geist Mono', 'JetBrains Mono', monospace; }
-    textarea, input { font: 13px/1.65 'Geist Mono', 'JetBrains Mono', monospace; }
+    textarea:focus,input:focus { border-color:#555; }
+    textarea::placeholder,input::placeholder { color:var(--text-muted); }
+    .cta { font-family:'Geist Mono',monospace;text-transform:uppercase;letter-spacing:0.07em; }
+    .panel-label { font-size:9px;color:var(--text-dimmer);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-bottom:8px; }
+    .ex-btn { background:none;border:none;cursor:pointer;font-family:'Geist Mono',monospace;font-size:10px;color:var(--text-muted);display:flex;align-items:center;gap:3px;flex-shrink:0;padding:0;margin-top:1px;transition:color 0.15s; }
+    .ex-btn:hover { color:var(--text-dim); }
 
-    /* Score theming */
-    .score-4 { background: var(--s4-bg); border-color: var(--s4-border); color: var(--s4-text); }
-    .score-3 { background: var(--s3-bg); border-color: var(--s3-border); color: var(--s3-text); }
-    .score-2 { background: var(--s2-bg); border-color: var(--s2-border); color: var(--s2-text); }
-    .score-1 { background: var(--s1-bg); border-color: var(--s1-border); color: var(--s1-text); }
-    .score-na { background: var(--sna-bg); border-color: var(--sna-border); color: var(--sna-text); }
-
-    .left-4 { border-left-color: var(--s4-border) !important; }
-    .left-3 { border-left-color: var(--s3-border) !important; }
-    .left-2 { border-left-color: var(--s2-border) !important; }
-    .left-1 { border-left-color: var(--s1-border) !important; }
-
-    /* Vertical bar motif */
-    .bar-motif {
-      background-image: repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 18px,
-        rgba(255,255,255,0.025) 18px,
-        rgba(255,255,255,0.025) 20px
-      );
+    @media print {
+      .no-print { display:none !important; }
+      body { background:white !important;color:#111 !important;font-size:11pt;-webkit-print-color-adjust:exact;print-color-adjust:exact; }
+      .app-root { display:none !important; }
+      #print-view { display:block !important;padding:32px;font-family:'Satoshi','Inter',sans-serif; }
+      #print-view h1 { font-size:20pt;font-weight:700;margin-bottom:4px; }
+      #print-view .pv-meta { font-size:10pt;color:#555;margin-bottom:20px; }
+      #print-view .pv-score-table { width:100%;border-collapse:collapse;margin-bottom:20px; }
+      #print-view .pv-score-table th { font-size:9pt;text-align:left;color:#888;padding:6px 10px;border-bottom:1px solid #ddd; }
+      #print-view .pv-score-table td { font-size:11pt;padding:8px 10px;border-bottom:1px solid #eee; }
+      #print-view .pv-rec-row { font-size:16pt;font-weight:700;margin-bottom:20px;padding:12px 16px;border-radius:6px;display:inline-block; }
+      #print-view .pv-summary { margin-top:16px;padding:16px;background:#f5f5f5;border-radius:8px; }
+      #print-view .pv-summary-title { font-weight:700;font-size:12pt;margin-bottom:8px; }
+      #print-view .pv-summary-text { font-size:11pt;line-height:1.7;white-space:pre-wrap; }
+      #print-view .pv-divider { border:none;border-top:1px solid #ddd;margin:16px 0; }
+      #print-view .pv-section { margin-bottom:12px;padding:10px 14px;border-radius:6px;border-left:3px solid #ccc; }
     }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
-
-    /* Textarea / Input */
-    textarea, input[type="text"] {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      border-radius: 6px;
-      padding: 10px 12px;
-      width: 100%;
-      resize: none;
-      font: 13px/1.65 'Geist Mono', 'JetBrains Mono', monospace !important;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-    textarea:focus, input[type="text"]:focus {
-      border-color: #555;
-    }
-    textarea::placeholder, input::placeholder {
-      color: var(--text-muted);
-    }
-
-    /* Toggle button */
-    .toggle-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-family: 'Geist Mono', monospace;
-      font-size: 11px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 0;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      transition: color 0.15s;
-    }
-    .toggle-btn:hover { color: var(--text-secondary); }
-
-    /* Checkbox */
-    input[type="checkbox"] {
-      width: 14px; height: 14px;
-      accent-color: var(--blue);
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    /* CTA button style */
-    .cta {
-      font-family: 'Geist Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
+    #print-view { display:none; }
   </style>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel">
-    const { useState, useMemo } = React;
+<div id="root"></div>
+<div id="print-view"></div>
+<script type="text/babel">
+  const { useState, useMemo, useEffect, useRef } = React;
 
-    /* ─── DATA ─────────────────────────────────────────────────── */
+  /* ─── DATA ─── */
+  const CORE_SECTIONS = [
+    {id:"environment",number:1,title:"Environment & Introspection",weight:25,disqualifying:false,
+      question:"Tell me about your environment. What's something challenging you've worked on recently?",
+      context:"Tests whether the candidate can examine their own work with honesty and clarity — separating personal ownership from the team's, and reflecting on what went well or badly without becoming vague or defensive.",
+      strongSignals:["Specific, personal description — not a team overview","Clear ownership — explains their role vs the team's","Articulates what was genuinely hard","Talks about what went well and what didn't","Shows real trade-off thinking","Demonstrates learning or changed thinking","Not defensive when things didn't go well"],
+      weakSignals:["Vague overview that could describe anyone's work","Descriptive but not reflective","Ownership is unclear or collective","No trade-off thinking","Everything sounds like it went well","Problems framed as entirely external","No evidence of learning"],
+      probeQuestions:["What was the hardest decision you had to make, and why?","What would you do differently if you started over?","What did you learn that changed how you think about this type of problem?"],
+      scoreGuide:{4:"Clear, grounded example with strong personal ownership, real trade-offs, and genuine reflection.",3:"Credible challenge and reasonable ownership, though depth varies or reflection requires some prompting.",2:"Can describe work at a high level, but reflection and trade-off thinking are limited.",1:"No meaningful example or almost no introspection even after prompting."},
+      vignettes:{4:"\"We were building a real-time collaboration feature. Halfway through I realised we'd designed the data model wrong — it would hold up for two users but fall apart at ten. My instinct was to push through. I stopped, took two days to redesign, and told the team why. We shipped two weeks late. The honest part is that I'd seen the warning sign earlier and convinced myself it was fine. I had to own that.\"",3:"\"I was working on a service that kept timing out in production. It was tricky because it only happened under load and we had limited staging capacity. We got it resolved — connection pooling, some circuit breakers. I learned a lot about how the infrastructure behaves under pressure that I didn't know before.\"",2:"\"We did a big refactor of our API layer. A lot of services depended on it so it was complex. We used feature flags, it went pretty well overall — a few bumps but nothing major.\"",1:"\"I've been doing a mix of things — backend work, some infrastructure. Always something new to learn. It's a fast-paced team.\""},
+      templateNotes:{4:"strong personal ownership with genuine reflection on trade-offs and what went wrong",3:"credible challenge with reasonable ownership, though depth required some prompting",2:"high-level description without meaningful reflection or trade-off thinking",1:"no meaningful example or introspection even after prompting"},
+    },
+    {id:"product",number:2,title:"Product Ownership & Customer Impact",weight:25,disqualifying:false,
+      question:"Tell me about a system your users depended on. What problem did it solve, and why did it matter?",
+      context:"The most important product signal in the screen. We want evidence of end-to-end ownership, real user understanding, personal decision-making, and connection to impact — not just implementation.",
+      strongSignals:["Mentions real users unprompted","Uses clear ownership language (\"I decided\", \"I shipped\", \"I owned\")","Explains decisions that were personally theirs","Understands the user workflow, not just the implementation","Discusses trade-offs clearly","Describes impact credibly and specifically","Can explain how they iterated based on feedback or data","Ownership sounds end-to-end, not narrow"],
+      weakSignals:["Sounds like ticket execution","User impact is vague or absent","Contribution sounds partial inside a bigger project","Cannot explain their specific decisions or trade-offs","Impact only described in general or abstract terms","Speaks mostly in implementation detail","No clear evidence of autonomy"],
+      probeQuestions:["Who else was making decisions on that system alongside you?","If you'd left the company halfway through, what would have broken or stalled?","What did you learn from users that changed what you built?"],
+      scoreGuide:{4:"Strong end-to-end ownership of a meaningful system with clear user consequence and real decision-making.",3:"Credible product ownership and user awareness, but weaker on measurement, autonomy, or workflow depth.",2:"Partial ownership only — candidate sounds like a contributor more than an owner.",1:"Little evidence of meaningful ownership, user understanding, or consequence."},
+      vignettes:{4:"\"I owned our case management workflow — the core loop lawyers used every day. I noticed power users had built workarounds in spreadsheets outside our tool, which told me we were missing something. I interviewed six of them, found they needed to track dependencies between cases. I designed and built it — no PM, just me and one user giving feedback on every prototype. That feature became the most-used part of the product.\"",3:"\"I built the notifications system — figuring out which events mattered, then building the email and in-app delivery. A few users had asked for it. After it shipped we saw a noticeable drop in support tickets asking 'did my job run?' It was well-received.\"",2:"\"I worked on the dashboard redesign. I did the front-end implementation — the charts, the layout. Design gave me the specs. It shipped on time and users responded positively to it.\"",1:"\"I've shipped a lot of features across the stack. Users depend on the product I work on every day. I focus on quality and making sure things work properly.\""},
+      templateNotes:{4:"strong end-to-end ownership with real user understanding and clear personal decision-making",3:"credible product ownership and user awareness, weaker on measurement or autonomy depth",2:"contribution-level ownership — sounds like ticket execution rather than end-to-end ownership",1:"little evidence of ownership, user understanding, or consequence"},
+    },
+    {id:"ego",number:3,title:"Ego & Feedback",weight:20,disqualifying:true,
+      disqualifyNote:"A score of 1 here is typically disqualifying at Ankar, regardless of weighted average.",
+      question:"Tell me about feedback — from a manager, peer, or close collaborator — that was hard to hear. What was your initial reaction, and how did you navigate it?",
+      context:"Tests whether the candidate can talk about criticism and discomfort without becoming defensive or performative. Not looking for 'humble-sounding' answers — looking for genuine self-awareness, honest initial reaction, and real behaviour change.",
+      strongSignals:["Concrete, specific feedback example","Feedback was genuinely uncomfortable — not a compliment reframed","Describes their initial reaction honestly, including defensiveness","Acknowledges validity in the feedback","Explains how they actually navigated it","Can point to real behaviour change","Grounded, non-performative tone"],
+      weakSignals:["Vague or overly polished example","Feedback is too easy or self-serving (\"I work too hard\")","Frames themselves as basically correct","No real behaviour change","Blames the manager or broader context","Answer feels rehearsed or generic"],
+      probeQuestions:["What was your gut reaction when you first heard it?","Did you think the feedback was fair at the time?","What specifically changed in how you operate after that?"],
+      scoreGuide:{4:"Concrete, genuinely difficult feedback with honest reaction, grounded navigation, and clear behaviour change.",3:"Credible example and some reflection, but slightly polished or less emotionally honest.",2:"Vague or too-easy example, often requiring heavy prompting.",1:"No meaningful example, clear defensiveness, or weak coachability signal."},
+      vignettes:{4:"\"My manager told me I was dismissive in technical discussions — that I'd say 'that won't work' before fully understanding what someone was proposing. My first reaction was that she was wrong. I went back and watched a recording of a meeting. She was right — I was cutting people off. I started a rule: ask one clarifying question before responding to any technical suggestion. It slowed me down, but the quality of our decisions got better and people started proposing more ideas.\"",3:"\"I got feedback that my code reviews were too blunt — people felt criticized rather than helped. I didn't totally disagree. I started framing comments as questions instead of corrections. I still tend towards the direct side, but I'm more aware of it now.\"",2:"\"My manager mentioned I could be more patient explaining things to junior engineers. I tried to be more deliberate about that. I think I've improved since then.\"",1:"\"I get pretty good feedback generally. I try to take everything constructively. I can't think of a specific example that was really hard to hear.\""},
+      templateNotes:{4:"concrete, genuinely difficult feedback with honest reaction and clear behaviour change",3:"credible example with some reflection, though slightly polished or rehearsed",2:"vague or too-easy example — required heavy prompting to draw out",1:"no credible feedback example; coachability concern (typically disqualifying)"},
+    },
+    {id:"team",number:4,title:"Team-Minded",weight:20,disqualifying:false,
+      question:"What do you think you typically bring to a team that others might not? And what do you tend to rely on teammates for?",
+      context:"Not just a humility question. Tests whether the candidate has a mature understanding of team complementarity — can describe both their strengths and genuine limitations, and sees team effectiveness as more than everyone getting along.",
+      strongSignals:["Can describe what they bring — specific, not generic","Can name what they genuinely rely on others for","Talks about a specific teammate and why they're strong","Shows admiration without insecurity","Admits genuine limitations without over-hedging","Shows active learning from teammates","Sounds collaborative, not self-centred"],
+      weakSignals:["Talks mostly about self","Generic praise of teammates without specifics","Cannot name concrete strengths in others","Implies they could do most things themselves","No real self-assessment","No evidence of learning from others","Blame-oriented framing about team dynamics"],
+      probeQuestions:["Can you think of someone you worked with who was strong in a way you're not?","What's something you consistently ask teammates to help with?","Tell me about a time the team made you better than you would've been alone."],
+      scoreGuide:{4:"Balanced, concrete view of both their strengths and others', with strong humility and clear learning behaviour.",3:"Credible team-minded signal, though somewhat general or slightly self-focused.",2:"Can talk about their own strengths but struggles to name what they rely on others for.",1:"Highly self-referential or weak collective orientation."},
+      vignettes:{4:"\"I'm good at holding the whole system in my head — I'm the person who says 'this change will break that service nobody's thinking about.' But I'm genuinely weak at reading people in the room. There's an engineer I work with, Marcus, who notices when someone's disengaged before they say anything. I've shipped things that created team friction I didn't notice until he flagged it. I now explicitly ask him after important conversations: 'how did that land?' I'd be worse without him.\"",3:"\"I think I bring structure — I'm good at breaking ambiguous problems into clear tasks. I rely on my teammates for deep domain knowledge, especially on the data science side. We have someone who just sees the statistical angle on everything, and I've learned to loop her in earlier rather than later.\"",2:"\"I bring a lot of energy and I'm willing to take on whatever's needed. I rely on my team for design feedback — I'm more of a backend person. Everyone has different strengths and I think that's what makes a good team.\"",1:"\"I work well with people. I adapt to whatever the team needs. I think I bring a positive attitude and I'm always willing to help.\""},
+      templateNotes:{4:"balanced, concrete view of their strengths and others', with specific examples of learning from teammates",3:"solid team orientation — credible but somewhat general in examples",2:"self-focused; can describe their contributions but limited evidence of genuine reliance on others",1:"highly self-referential with weak collective orientation"},
+    },
+  ];
 
-    const CORE_SECTIONS = [
-      {
-        id: "environment", number: 1,
-        title: "Environment & Introspection",
-        weight: 25, disqualifying: false,
-        question: "Tell me about your environment. What's something challenging you've worked on recently?",
-        context: "Tests whether the candidate can examine their own work with honesty and clarity — separating personal ownership from the team's, and reflecting on what went well or badly without becoming vague or defensive.",
-        strongSignals: [
-          "Specific, personal description — not a team overview",
-          "Clear ownership — explains their role vs the team's",
-          "Articulates what was genuinely hard",
-          "Talks about what went well and what didn't",
-          "Shows real trade-off thinking",
-          "Demonstrates learning or changed thinking",
-          "Not defensive when things didn't go well",
-        ],
-        weakSignals: [
-          "Vague overview that could describe anyone's work",
-          "Descriptive but not reflective",
-          "Ownership is unclear or collective",
-          "No trade-off thinking",
-          "Everything sounds like it went well",
-          "Problems framed as entirely external",
-          "No evidence of learning",
-        ],
-        probeQuestions: [
-          "What was the hardest decision you had to make, and why?",
-          "What would you do differently if you started over?",
-          "What did you learn that changed how you think about this type of problem?",
-        ],
-        scoreGuide: {
-          4: "Clear, grounded example with strong personal ownership, real trade-offs, and genuine reflection.",
-          3: "Credible challenge and reasonable ownership, though depth varies or reflection requires some prompting.",
-          2: "Can describe work at a high level, but reflection and trade-off thinking are limited.",
-          1: "No meaningful example or almost no introspection even after prompting.",
-        },
-        vignettes: {
-          4: "\"We were building a real-time collaboration feature. Halfway through I realised we'd designed the data model wrong — it would hold up for two users but fall apart at ten. My instinct was to push through. I stopped, took two days to redesign, and told the team why. We shipped two weeks late. The honest part is that I'd seen the warning sign earlier and convinced myself it was fine. I had to own that.\"",
-          3: "\"I was working on a service that kept timing out in production. It was tricky because it only happened under load and we had limited staging capacity. We got it resolved — connection pooling, some circuit breakers. I learned a lot about how the infrastructure behaves under pressure that I didn't know before.\"",
-          2: "\"We did a big refactor of our API layer. A lot of services depended on it so it was complex. We used feature flags, it went pretty well overall — a few bumps but nothing major.\"",
-          1: "\"I've been doing a mix of things — backend work, some infrastructure. Always something new to learn. It's a fast-paced team.\"",
-        },
-      },
-      {
-        id: "product", number: 2,
-        title: "Product Ownership & Customer Impact",
-        weight: 25, disqualifying: false,
-        question: "Tell me about a system your users depended on. What problem did it solve, and why did it matter?",
-        context: "The most important product signal in the screen. We want evidence of end-to-end ownership, real user understanding, personal decision-making, and connection to impact — not just implementation.",
-        strongSignals: [
-          "Mentions real users unprompted",
-          "Uses clear ownership language (\"I decided\", \"I shipped\", \"I owned\")",
-          "Explains decisions that were personally theirs",
-          "Understands the user workflow, not just the implementation",
-          "Discusses trade-offs clearly",
-          "Describes impact credibly and specifically",
-          "Can explain how they iterated based on feedback or data",
-          "Ownership sounds end-to-end, not narrow",
-        ],
-        weakSignals: [
-          "Sounds like ticket execution",
-          "User impact is vague or absent",
-          "Contribution sounds partial inside a bigger project",
-          "Cannot explain their specific decisions or trade-offs",
-          "Impact only described in general or abstract terms",
-          "Speaks mostly in implementation detail",
-          "No clear evidence of autonomy",
-        ],
-        probeQuestions: [
-          "Who else was making decisions on that system alongside you?",
-          "If you'd left the company halfway through, what would have broken or stalled?",
-          "What did you learn from users that changed what you built?",
-        ],
-        scoreGuide: {
-          4: "Strong end-to-end ownership of a meaningful system with clear user consequence and real decision-making.",
-          3: "Credible product ownership and user awareness, but weaker on measurement, autonomy, or workflow depth.",
-          2: "Partial ownership only — candidate sounds like a contributor more than an owner.",
-          1: "Little evidence of meaningful ownership, user understanding, or consequence.",
-        },
-        vignettes: {
-          4: "\"I owned our case management workflow — the core loop lawyers used every day. I noticed power users had built workarounds in spreadsheets outside our tool, which told me we were missing something. I interviewed six of them, found they needed to track dependencies between cases. I designed and built it — no PM, just me and one user giving feedback on every prototype. That feature became the most-used part of the product.\"",
-          3: "\"I built the notifications system — figuring out which events mattered, then building the email and in-app delivery. A few users had asked for it. After it shipped we saw a noticeable drop in support tickets asking 'did my job run?' It was well-received.\"",
-          2: "\"I worked on the dashboard redesign. I did the front-end implementation — the charts, the layout. Design gave me the specs. It shipped on time and users responded positively to it.\"",
-          1: "\"I've shipped a lot of features across the stack. Users depend on the product I work on every day. I focus on quality and making sure things work properly.\"",
-        },
-      },
-      {
-        id: "ego", number: 3,
-        title: "Ego & Feedback",
-        weight: 20, disqualifying: true,
-        disqualifyNote: "A score of 1 here is typically disqualifying at Ankar, regardless of weighted average.",
-        question: "Tell me about feedback — from a manager, peer, or close collaborator — that was hard to hear. What was your initial reaction, and how did you navigate it?",
-        context: "Tests whether the candidate can talk about criticism and discomfort without becoming defensive or performative. Not looking for 'humble-sounding' answers — looking for genuine self-awareness, honest initial reaction, and real behaviour change.",
-        strongSignals: [
-          "Concrete, specific feedback example",
-          "Feedback was genuinely uncomfortable — not a compliment reframed",
-          "Describes their initial reaction honestly, including defensiveness",
-          "Acknowledges validity in the feedback",
-          "Explains how they actually navigated it",
-          "Can point to real behaviour change",
-          "Grounded, non-performative tone",
-        ],
-        weakSignals: [
-          "Vague or overly polished example",
-          "Feedback is too easy or self-serving (\"I work too hard\")",
-          "Frames themselves as basically correct",
-          "No real behaviour change",
-          "Blames the manager or broader context",
-          "Answer feels rehearsed or generic",
-        ],
-        probeQuestions: [
-          "What was your gut reaction when you first heard it?",
-          "Did you think the feedback was fair at the time?",
-          "What specifically changed in how you operate after that?",
-        ],
-        scoreGuide: {
-          4: "Concrete, genuinely difficult feedback with honest reaction, grounded navigation, and clear behaviour change.",
-          3: "Credible example and some reflection, but slightly polished or less emotionally honest.",
-          2: "Vague or too-easy example, often requiring heavy prompting.",
-          1: "No meaningful example, clear defensiveness, or weak coachability signal.",
-        },
-        vignettes: {
-          4: "\"My manager told me I was dismissive in technical discussions — that I'd say 'that won't work' before fully understanding what someone was proposing. My first reaction was that she was wrong. I went back and watched a recording of a meeting. She was right — I was cutting people off. I started a rule: ask one clarifying question before responding to any technical suggestion. It slowed me down, but the quality of our decisions got better and people started proposing more ideas.\"",
-          3: "\"I got feedback that my code reviews were too blunt — people felt criticized rather than helped. I didn't totally disagree. I started framing comments as questions instead of corrections. I still tend towards the direct side, but I'm more aware of it now.\"",
-          2: "\"My manager mentioned I could be more patient explaining things to junior engineers. I tried to be more deliberate about that. I think I've improved since then.\"",
-          1: "\"I get pretty good feedback generally. I try to take everything constructively. I can't think of a specific example that was really hard to hear.\"",
-        },
-      },
-      {
-        id: "team", number: 4,
-        title: "Team-Minded",
-        weight: 20, disqualifying: false,
-        question: "What do you think you typically bring to a team that others might not? And what do you tend to rely on teammates for?",
-        context: "Not just a humility question. Tests whether the candidate has a mature understanding of team complementarity — can describe both their strengths and genuine limitations, and sees team effectiveness as more than everyone getting along.",
-        strongSignals: [
-          "Can describe what they bring — specific, not generic",
-          "Can name what they genuinely rely on others for",
-          "Talks about a specific teammate and why they're strong",
-          "Shows admiration without insecurity",
-          "Admits genuine limitations without over-hedging",
-          "Shows active learning from teammates",
-          "Sounds collaborative, not self-centred",
-        ],
-        weakSignals: [
-          "Talks mostly about self",
-          "Generic praise of teammates without specifics",
-          "Cannot name concrete strengths in others",
-          "Implies they could do most things themselves",
-          "No real self-assessment",
-          "No evidence of learning from others",
-          "Blame-oriented framing about team dynamics",
-        ],
-        probeQuestions: [
-          "Can you think of someone you worked with who was strong in a way you're not?",
-          "What's something you consistently ask teammates to help with?",
-          "Tell me about a time the team made you better than you would've been alone.",
-        ],
-        scoreGuide: {
-          4: "Balanced, concrete view of both their strengths and others', with strong humility and clear learning behaviour.",
-          3: "Credible team-minded signal, though somewhat general or slightly self-focused.",
-          2: "Can talk about their own strengths but struggles to name what they rely on others for.",
-          1: "Highly self-referential or weak collective orientation.",
-        },
-        vignettes: {
-          4: "\"I'm good at holding the whole system in my head — I'm the person who says 'this change will break that service nobody's thinking about.' But I'm genuinely weak at reading people in the room. There's an engineer I work with, Marcus, who notices when someone's disengaged before they say anything. I've shipped things that created team friction I didn't notice until he flagged it. I now explicitly ask him after important conversations: 'how did that land?' I'd be worse without him.\"",
-          3: "\"I think I bring structure — I'm good at breaking ambiguous problems into clear tasks. I rely on my teammates for deep domain knowledge, especially on the data science side. We have someone who just sees the statistical angle on everything, and I've learned to loop her in earlier rather than later.\"",
-          2: "\"I bring a lot of energy and I'm willing to take on whatever's needed. I rely on my team for design feedback — I'm more of a backend person. Everyone has different strengths and I think that's what makes a good team.\"",
-          1: "\"I work well with people. I adapt to whatever the team needs. I think I bring a positive attitude and I'm always willing to help.\"",
-        },
-      },
-    ];
+  const BONUS_SECTIONS = [
+    {id:"complexity",number:5,title:"System Complexity & Technical Depth",lookFor:["High-stakes systems (correctness, trust, auditability)","Failure modes and edge case thinking","Scale or distributed systems exposure","Explainability and observability thinking"]},
+    {id:"technical",number:6,title:"Technical Experience & Stack",lookFor:["Frontend vs backend strength","Cross-stack or full-stack ownership","Workflow/UI complexity","Willingness to cross technical boundaries"]},
+    {id:"ambiguity",number:7,title:"Ambiguity & Agency",lookFor:["Comfort with unclear requirements","Self-unblocking without direction","States explicit assumptions","Doesn't wait passively for clarity"]},
+    {id:"empathy",number:8,title:"User Empathy",lookFor:["Builds for users more expert than themselves","Uses validation loops","Respects user mental models","Avoids building the wrong thing"]},
+    {id:"learning",number:9,title:"Speed of Learning",lookFor:["Clear learning strategy","Ships while still learning","Prioritises what matters most to learn first"]},
+    {id:"conviction",number:10,title:"Conviction & Taste",lookFor:["Takes a position and explains it","Calm, reasoned articulation","Open to changing mind with evidence"]},
+    {id:"ai",number:11,title:"AI Usage & Judgment",lookFor:["Real AI integration into daily workflow","Hallucination handling and validation","Practical exposure, not just awareness"]},
+  ];
 
-    const BONUS_SECTIONS = [
-      { id: "complexity", number: 5, title: "System Complexity & Technical Depth",
-        lookFor: ["High-stakes systems (correctness, trust, auditability)", "Failure modes and edge case thinking", "Scale or distributed systems exposure", "Explainability and observability thinking"] },
-      { id: "technical", number: 6, title: "Technical Experience & Stack",
-        lookFor: ["Frontend vs backend strength", "Cross-stack or full-stack ownership", "Workflow/UI complexity", "Willingness to cross technical boundaries"] },
-      { id: "ambiguity", number: 7, title: "Ambiguity & Agency",
-        lookFor: ["Comfort with unclear requirements", "Self-unblocking without direction", "States explicit assumptions", "Doesn't wait passively for clarity"] },
-      { id: "empathy", number: 8, title: "User Empathy",
-        lookFor: ["Builds for users more expert than themselves", "Uses validation loops", "Respects user mental models", "Avoids building the wrong thing"] },
-      { id: "learning", number: 9, title: "Speed of Learning",
-        lookFor: ["Clear learning strategy", "Ships while still learning", "Prioritises what matters most to learn first"] },
-      { id: "conviction", number: 10, title: "Conviction & Taste",
-        lookFor: ["Takes a position and explains it", "Calm, reasoned articulation", "Open to changing mind with evidence"] },
-      { id: "ai", number: 11, title: "AI Usage & Judgment",
-        lookFor: ["Real AI integration into daily workflow", "Hallucination handling and validation", "Practical exposure, not just awareness"] },
-    ];
+  const SCORE_META = {
+    4:{label:"Strong Yes",dot:"#229955",rgb:"34,155,85"},
+    3:{label:"Yes",dot:"#4A6BC9",rgb:"74,107,201"},
+    2:{label:"Weak",dot:"#B87C28",rgb:"184,124,40"},
+    1:{label:"Poor",dot:"#DA5077",rgb:"218,80,119"},
+    "N/A":{label:"N/A",dot:"#555",rgb:"150,150,150"},
+  };
 
-    const SCORE_META = {
-      4:   { label: "Strong Yes", cls: "score-4", left: "left-4", dot: "#229955" },
-      3:   { label: "Yes",        cls: "score-3", left: "left-3", dot: "#4A6BC9" },
-      2:   { label: "Weak",       cls: "score-2", left: "left-2", dot: "#B87C28" },
-      1:   { label: "Poor",       cls: "score-1", left: "left-1", dot: "#DA5077" },
-      "N/A": { label: "N/A",     cls: "score-na", left: "",       dot: "#555" },
+  const STORE_KEY = 'ankar_rubric_v3';
+  const ADMIN_KEY = 'ankar_admin_cfg';
+  const HISTORY_KEY = 'ankar_rubric_history';
+
+  /* ─── COMPONENTS ─── */
+  function Chevron({ open }) {
+    return <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{transition:"transform 0.2s",transform:open?"rotate(90deg)":"none",flexShrink:0}}><path d="M3 2l4 3-4 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+  }
+
+  function ScoreBtn({ val, selected, onSelect, compact }) {
+    const meta = SCORE_META[val]; const active = selected === val;
+    if (compact) return <button onClick={() => onSelect(active?null:val)} style={{width:36,height:36,borderRadius:6,border:`1.5px solid ${active?meta.dot:"var(--border)"}`,background:active?`rgba(${meta.rgb},0.18)`:"transparent",color:active?meta.dot:"var(--text-muted)",fontFamily:"'Geist Mono',monospace",fontSize:12,fontWeight:600,cursor:"pointer",transition:"all 0.15s",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{val==="N/A"?"—":val}</button>;
+    return (
+      <button onClick={() => onSelect(active?null:val)} style={{flex:1,padding:"10px 4px",borderRadius:8,border:`1.5px solid ${active?meta.dot:"var(--border)"}`,background:active?`rgba(${meta.rgb},0.18)`:"transparent",color:active?meta.dot:"var(--text-muted)",fontFamily:"'Geist Mono',monospace",cursor:"pointer",transition:"all 0.15s",textAlign:"center"}}>
+        <div style={{fontSize:20,fontWeight:700,lineHeight:1}}>{val==="N/A"?"—":val}</div>
+        <div style={{fontSize:10,marginTop:4,textTransform:"uppercase",letterSpacing:"0.07em",opacity:0.8}}>{meta.label}</div>
+      </button>
+    );
+  }
+
+  function RubricRow({ score, statement, vignette, isSelected, exOpen, onToggleEx }) {
+    const meta = SCORE_META[score];
+    return (
+      <div style={{borderRadius:7,padding:"9px 11px",transition:"all 0.15s",border:`1px solid ${isSelected?meta.dot:"var(--border-inner2)"}`,background:isSelected?`rgba(${meta.rgb},0.08)`:"var(--surface-2)"}}>
+        <div style={{display:"flex",alignItems:"flex-start",gap:9}}>
+          <div style={{width:22,height:22,borderRadius:4,flexShrink:0,background:`rgba(${meta.rgb},0.2)`,border:`1.5px solid ${meta.dot}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,color:meta.dot,fontFamily:"'Geist Mono',monospace"}}>{score}</div>
+          <div style={{flex:1,minWidth:0}}>
+            <div style={{fontSize:10,fontWeight:600,color:meta.dot,textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:3}}>{meta.label}</div>
+            <div style={{fontSize:12,color:isSelected?"var(--text-secondary)":"var(--text-dim)",lineHeight:1.55}}>{statement}</div>
+          </div>
+          <button className="ex-btn" onClick={onToggleEx}><Chevron open={exOpen}/>eg.</button>
+        </div>
+        {exOpen && <div style={{marginTop:9,padding:"9px 11px",background:"var(--surface-3)",borderRadius:5,borderLeft:`2px solid ${meta.dot}`,fontSize:12,color:"var(--text-faint)",fontStyle:"italic",lineHeight:1.65}}>{vignette}</div>}
+      </div>
+    );
+  }
+
+  /* ─── SUMMARY BUILDERS ─── */
+  function buildScoreTable({ coreScores, rec, weightedScore }) {
+    const pad = (s,n) => s.length>=n?s:s+' '.repeat(n-s.length);
+    const lines = [`RECOMMENDATION: ${rec.label}${weightedScore?'  ·  '+weightedScore.toFixed(2)+' / 4.00':''}`,''];
+    CORE_SECTIONS.forEach(s => {
+      const sc = coreScores[s.id]; const m = sc?SCORE_META[sc]:null;
+      lines.push(`${pad(s.title,38)}  ${sc?(sc==='N/A'?'N/A ':''+sc+'/4'):'—  '}  ${sc&&sc!=='N/A'?m.label:'Not scored'}`);
+    });
+    return lines.join('\n');
+  }
+
+  function buildNarrative({ candidate, level, coreScores, coreNotes, bonusScores, bonusNotes, overallNotes, rec, weightedScore }) {
+    const scored = CORE_SECTIONS.map(s => ({...s,score:coreScores[s.id],note:(coreNotes[s.id]||'').trim()})).filter(s => s.score&&s.score!=='N/A');
+    if (scored.length===0) return null;
+    const name = candidate?candidate.trim().split(' ')[0]:'The candidate';
+    const ll = level==='swe'?'engineer':'senior engineer';
+    const paragraphs = [];
+    const openings = {'Strong Yes':`${name} presented a strong signal as a ${ll}`,'Yes':`${name} presented as a credible ${ll} candidate`,'Borderline':`${name} gave a mixed picture across the core sections`,'No':`${name} did not reach the bar`,'—':`${name} is being evaluated`};
+    let opening = (openings[rec.label]||`${name} was evaluated`)+(weightedScore?`, weighted score ${weightedScore.toFixed(2)}/4.00`:'')+'.';
+    if (scored.length<CORE_SECTIONS.length) opening += ` (${CORE_SECTIONS.length-scored.length} section(s) not yet scored.)`;
+    paragraphs.push(opening);
+    const strengths = scored.filter(s => s.score>=3);
+    if (strengths.length>0) paragraphs.push('Strengths:\n'+strengths.map(s => `· ${s.title} (${s.score} — ${SCORE_META[s.score].label}): ${s.note||s.templateNotes[s.score]}`).join('\n'));
+    const concerns = scored.filter(s => s.score<=2);
+    if (concerns.length>0) {
+      let block = 'Concerns:\n'+concerns.map(s => `· ${s.title} (${s.score} — ${SCORE_META[s.score].label}): ${s.note||s.templateNotes[s.score]}`).join('\n');
+      if (coreScores['ego']===1) block += '\n\n⚠ DISQUALIFYING: Ego & Feedback scored 1 — overrides weighted average.';
+      paragraphs.push(block);
+    }
+    const scoredBonus = BONUS_SECTIONS.filter(s => bonusScores[s.id]&&bonusScores[s.id]!=='N/A');
+    if (scoredBonus.length>0) paragraphs.push('Bonus signals:\n'+scoredBonus.map(s => `· ${s.title}: ${bonusScores[s.id]} (${SCORE_META[bonusScores[s.id]].label})${bonusNotes[s.id]?' — '+bonusNotes[s.id].trim():''}`).join('\n'));
+    if (overallNotes&&overallNotes.trim()) paragraphs.push(overallNotes.trim());
+    let closing = `Recommendation: ${rec.label}.`;
+    if (level==='senior'&&(rec.label==='Yes'||rec.label==='Borderline')) closing += ' Confirm area ownership and directional influence before advancing to Senior.';
+    paragraphs.push(closing);
+    return paragraphs.join('\n\n');
+  }
+
+  function buildMarkdown({ candidate, level, rec, weightedScore, coreScores, coreNotes, bonusScores, bonusNotes, overallNotes, summary }) {
+    const date = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+    const ll = level==='swe'?'Software Engineer':'Senior Software Engineer';
+    const lines = [`# Ankar Recruiter Screen — ${candidate||'Candidate'}`,`**${ll}** · ${date}`,``,`## Recommendation: ${rec.label}${weightedScore?` (${weightedScore.toFixed(2)} / 4.00)`:''}`,``,'## Scores',''];
+    CORE_SECTIONS.forEach(s => { const sc = coreScores[s.id]; const m = sc?SCORE_META[sc]:null; lines.push(`| ${s.title} [${s.weight}%] | ${sc?(sc==='N/A'?'N/A':`${sc} — ${m.label}`):'Not scored'} |`); });
+    lines.push('','## Section Notes','');
+    CORE_SECTIONS.forEach(s => { if (coreNotes[s.id]&&coreNotes[s.id].trim()) { lines.push(`### ${s.title}`,coreNotes[s.id].trim(),''); } });
+    if (summary&&summary.trim()) lines.push('## Summary','',summary.trim(),'');
+    lines.push('---',`*Ankar · ${ll} · ${date}*`);
+    return lines.join('\n');
+  }
+
+  function buildRichHTML({ candidate, level, rec, weightedScore, coreScores, coreNotes, bonusScores, bonusNotes, summary }) {
+    const date = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+    const ll = level==='swe'?'Software Engineer':'Senior Software Engineer';
+    const scoreColors = {4:'#1C7A40',3:'#3958A7',2:'#8A5E15',1:'#B03060'};
+    const recCol = rec.label==='Strong Yes'?'#1C7A40':rec.label==='Yes'?'#3958A7':rec.label==='Borderline'?'#8A5E15':'#B03060';
+    let html = `<div style="font-family:sans-serif;max-width:700px;color:#111;"><h1 style="font-size:20px;margin-bottom:4px;">Ankar Recruiter Screen</h1><p style="color:#555;font-size:12px;margin-bottom:16px;">${ll} · ${candidate||'Candidate'} · ${date}</p><p style="font-size:18px;font-weight:700;color:${recCol};margin-bottom:4px;">Recommendation: ${rec.label}</p>`;
+    if (weightedScore) html += `<p style="color:#555;font-size:13px;margin-bottom:16px;">${weightedScore.toFixed(2)} / 4.00</p>`;
+    html += `<table style="width:100%;border-collapse:collapse;margin-bottom:20px;font-size:13px;"><tr><th style="text-align:left;padding:6px 10px;border-bottom:2px solid #ddd;color:#888;">Section</th><th style="text-align:left;padding:6px 10px;border-bottom:2px solid #ddd;color:#888;">Score</th><th style="text-align:left;padding:6px 10px;border-bottom:2px solid #ddd;color:#888;">Weight</th></tr>`;
+    CORE_SECTIONS.forEach(s => { const sc = coreScores[s.id]; const m = sc?SCORE_META[sc]:null; const col = sc&&sc!=='N/A'?scoreColors[sc]:'#888'; html += `<tr><td style="padding:7px 10px;border-bottom:1px solid #eee;">${s.title}</td><td style="padding:7px 10px;border-bottom:1px solid #eee;color:${col};font-weight:600;">${sc?(sc==='N/A'?'N/A':`${sc} — ${m.label}`):'—'}</td><td style="padding:7px 10px;border-bottom:1px solid #eee;color:#888;">${s.weight}%</td></tr>`; });
+    html += `</table>`;
+    CORE_SECTIONS.forEach(s => { if (coreNotes[s.id]&&coreNotes[s.id].trim()) { const sc = coreScores[s.id]; const col = sc&&sc!=='N/A'?scoreColors[sc]:'#ccc'; html += `<div style="margin-bottom:12px;padding:10px 14px;border-left:3px solid ${col};background:#f9f9f9;"><strong style="font-size:13px;">${s.title}</strong><p style="font-size:12px;color:#333;margin-top:4px;">${coreNotes[s.id].trim()}</p></div>`; } });
+    if (summary&&summary.trim()) { html += `<hr style="border:none;border-top:1px solid #ddd;margin:16px 0;"><p style="font-weight:700;font-size:14px;margin-bottom:8px;">Summary</p>`; summary.trim().split('\n\n').forEach(p => { html += `<p style="font-size:13px;line-height:1.65;margin-bottom:10px;white-space:pre-wrap;">${p}</p>`; }); }
+    html += `<hr style="border:none;border-top:1px solid #ddd;margin:16px 0;"><p style="font-size:11px;color:#888;">Ankar · ${ll} · ${date}</p></div>`;
+    return html;
+  }
+
+  /* ─── OPENAI API ─── */
+  async function callAI(apiKey, prompt, maxTokens = 800) {
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        max_tokens: maxTokens,
+        messages: [
+          { role: 'system', content: 'You are an expert recruiter assistant helping evaluate software engineering candidates. Be specific, direct, and evidence-based.' },
+          { role: 'user', content: prompt },
+        ],
+      }),
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+    return data.choices[0].message.content;
+  }
+
+  /* ─── MAIN APP ─── */
+  function App() {
+    const [level, setLevel] = useState("swe");
+    const [candidate, setCandidate] = useState("");
+    const [interviewDate, setInterviewDate] = useState(() => new Date().toISOString().slice(0,10));
+    const [coreScores, setCoreScores] = useState({});
+    const [coreNotes, setCoreNotes] = useState({});
+    const [bonusScores, setBonusScores] = useState({});
+    const [bonusNotes, setBonusNotes] = useState({});
+    const [overallNotes, setOverallNotes] = useState("");
+    const [transcript, setTranscript] = useState("");
+    const [aiNarrative, setAiNarrative] = useState(null);
+    const [recruiterSummary, setRecruiterSummary] = useState("");
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [aiError, setAiError] = useState(null);
+    const [isProcessingTranscript, setIsProcessingTranscript] = useState(false);
+    const [transcriptError, setTranscriptError] = useState(null);
+    const [transcriptProcessed, setTranscriptProcessed] = useState(false);
+    const [showExample, setShowExample] = useState({});
+    const [showTranscript, setShowTranscript] = useState(false);
+    const [showAdmin, setShowAdmin] = useState(false);
+    // Admin-level settings (not visible to recruiter by default)
+    const [openaiKey, setOpenaiKey] = useState("");
+    const [ashbyApiKey, setAshbyApiKey] = useState("");
+    const [ashbyInterviewId, setAshbyInterviewId] = useState("");
+    const [ashbyStatus, setAshbyStatus] = useState(null);
+    const [ashbyMsg, setAshbyMsg] = useState(null);
+    const [ashbyFetching, setAshbyFetching] = useState(false);
+    const [ashbyFetchMsg, setAshbyFetchMsg] = useState(null);
+    const [ashbyInterviewData, setAshbyInterviewData] = useState(null);
+    const [darkMode, setDarkMode] = useState(true);
+    const [stateLoaded, setStateLoaded] = useState(false);
+    const [exportMsg, setExportMsg] = useState(null);
+    const [savedRecords, setSavedRecords] = useState([]);
+    const [showHistory, setShowHistory] = useState(false);
+
+    // Load state
+    useEffect(() => {
+      try {
+        const raw = localStorage.getItem(STORE_KEY);
+        if (raw) { const s = JSON.parse(raw); if(s.level)setLevel(s.level);if(s.candidate)setCandidate(s.candidate);if(s.interviewDate)setInterviewDate(s.interviewDate);if(s.coreScores)setCoreScores(s.coreScores);if(s.coreNotes)setCoreNotes(s.coreNotes);if(s.bonusScores)setBonusScores(s.bonusScores);if(s.bonusNotes)setBonusNotes(s.bonusNotes);if(s.overallNotes)setOverallNotes(s.overallNotes);if(s.transcript)setTranscript(s.transcript);if(s.aiNarrative)setAiNarrative(s.aiNarrative);if(s.recruiterSummary)setRecruiterSummary(s.recruiterSummary);if(s.ashbyInterviewId)setAshbyInterviewId(s.ashbyInterviewId);if(typeof s.darkMode==='boolean')setDarkMode(s.darkMode); }
+        const admin = localStorage.getItem(ADMIN_KEY);
+        if (admin) { const a = JSON.parse(admin); if(a.openai)setOpenaiKey(a.openai); if(a.ashby)setAshbyApiKey(a.ashby); }
+        const hist = localStorage.getItem(HISTORY_KEY);
+        if (hist) setSavedRecords(JSON.parse(hist));
+      } catch(e) {}
+      setStateLoaded(true);
+    }, []);
+
+    // Save state
+    useEffect(() => {
+      if (!stateLoaded) return;
+      try { localStorage.setItem(STORE_KEY, JSON.stringify({level,candidate,interviewDate,coreScores,coreNotes,bonusScores,bonusNotes,transcript,aiNarrative,recruiterSummary,ashbyInterviewId,darkMode})); } catch(e) {}
+    }, [level,candidate,interviewDate,coreScores,coreNotes,bonusScores,bonusNotes,transcript,aiNarrative,recruiterSummary,ashbyInterviewId,darkMode,stateLoaded]);
+
+    useEffect(() => { document.documentElement.dataset.theme = darkMode?"dark":"light"; }, [darkMode]);
+
+    const saveAdmin = () => {
+      try { localStorage.setItem(ADMIN_KEY, JSON.stringify({openai:openaiKey,ashby:ashbyApiKey})); } catch(e) {}
+      setShowAdmin(false);
     };
 
-    /* ─── SCORE BUTTON ────────────────────────────────────────── */
-    function ScoreBtn({ val, selected, onSelect, compact }) {
-      const meta = SCORE_META[val];
-      const active = selected === val;
-      if (compact) {
-        return (
-          <button onClick={() => onSelect(active ? null : val)} style={{
-            width: 38, height: 38, borderRadius: 6,
-            border: `1.5px solid ${active ? (val === "N/A" ? "#555" : meta.dot) : "var(--border)"}`,
-            background: active ? (val === "N/A" ? "rgba(255,255,255,0.04)" : `rgba(${val===4?"34,155,85":val===3?"74,107,201":val===2?"184,124,40":"218,80,119"},0.18)`) : "transparent",
-            color: active ? meta.dot : "var(--text-muted)",
-            fontFamily: "'Geist Mono', monospace",
-            fontSize: 13, fontWeight: 600,
-            cursor: "pointer", transition: "all 0.15s",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            flexShrink: 0,
-          }}>
-            {val === "N/A" ? "—" : val}
-          </button>
-        );
+    // Ashby API call via local proxy (avoids CORS)
+    const ashbyCall = async (endpoint, body) => {
+      const res = await fetch(`/api/ashby/${endpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ apiKey: ashbyApiKey, ...body }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || data.errors?.[0]?.message || `HTTP ${res.status}`);
+      return data;
+    };
+
+    // Extract interview schedule ID from URL or raw ID
+    const parseAshbyId = (input) => {
+      const trimmed = (input||'').trim();
+      const match = trimmed.match(/intSch_[a-zA-Z0-9]+/);
+      if (match) return match[0];
+      if (trimmed.startsWith('intSch_')) return trimmed;
+      return trimmed;
+    };
+
+    // Search candidates in Ashby by name
+    const [ashbySearchResults, setAshbySearchResults] = useState([]);
+    const [ashbySearching, setAshbySearching] = useState(false);
+    const searchTimeoutRef = useRef(null);
+
+    const [expandedCandidateId, setExpandedCandidateId] = useState(null);
+
+    const searchAshbyCandidates = async (query) => {
+      if (!ashbyApiKey || !query || query.length < 2) { setAshbySearchResults([]); return; }
+      setAshbySearching(true); setAshbyFetchMsg(null); setExpandedCandidateId(null);
+      try {
+        const data = await ashbyCall('candidate.search', { name: query, limit: 10 });
+        let candidates = data.results || [];
+        if (candidates.length === 0) { setAshbySearchResults([]); setAshbySearching(false); return; }
+        // Sort: exact prefix matches first
+        const q = query.toLowerCase();
+        candidates.sort((a, b) => {
+          const aName = (a.name || '').toLowerCase();
+          const bName = (b.name || '').toLowerCase();
+          const aExact = aName.startsWith(q) ? 0 : 1;
+          const bExact = bName.startsWith(q) ? 0 : 1;
+          if (aExact !== bExact) return aExact - bExact;
+          return aName.length - bName.length;
+        });
+        // Show top 5 candidates immediately — no schedule fetching yet
+        setAshbySearchResults(candidates.slice(0, 5).map(c => ({ ...c, schedules: null })));
+      } catch (e) {
+        setAshbySearchResults([]);
+        const msg = e.message || 'Search failed';
+        if (msg.includes('Unauthorized')) {
+          setAshbyFetchMsg('Ashby API key unauthorized. Check key and permissions in ⚙ Admin.');
+        } else {
+          setAshbyFetchMsg('Search error: ' + msg);
+        }
+      } finally { setAshbySearching(false); }
+    };
+
+    // Load interviews for a specific candidate when clicked
+    const loadCandidateSchedules = async (candidateId) => {
+      if (expandedCandidateId === candidateId) { setExpandedCandidateId(null); return; }
+      setExpandedCandidateId(candidateId);
+      // Find the candidate's applicationIds
+      const cand = ashbySearchResults.find(c => c.id === candidateId);
+      const appIds = cand?.applicationIds || [];
+      try {
+        let allScheds = [];
+        if (appIds.length > 0) {
+          // Fetch by applicationId — much faster & returns only relevant interviews
+          const results = await Promise.all(appIds.slice(0, 3).map(appId =>
+            ashbyCall('interviewSchedule.list', { applicationId: appId }).then(d => d.results || []).catch(() => [])
+          ));
+          allScheds = results.flat();
+        } else {
+          // Fallback to candidateId
+          const schedData = await ashbyCall('interviewSchedule.list', { candidateId });
+          allScheds = schedData.results || [];
+        }
+        const targetDate = new Date(interviewDate);
+        // Filter out Cancelled + NeedsScheduling with no events, then score remaining
+        const valid = allScheds
+          .filter(s => s.status !== 'Cancelled')
+          .filter(s => !(s.status === 'NeedsScheduling' && (!s.interviewEvents || s.interviewEvents.length === 0)))
+          .map(s => {
+            const event = s.interviewEvents?.[0];
+            const t = event?.startTime ? new Date(event.startTime) : null;
+            const hasSubmitted = event?.hasSubmittedFeedback;
+            const daysDiff = t ? Math.abs(t - targetDate) / 86400000 : 9999;
+            // Priority: Scheduled/WaitingOnFeedback first, then by date proximity
+            let priority = 0;
+            if (s.status === 'Scheduled') priority = 0;
+            else if (s.status === 'WaitingOnFeedback') priority = 5;
+            else if (s.status === 'Complete' && !hasSubmitted) priority = 10;
+            else if (s.status === 'Complete' && hasSubmitted) priority = 200;
+            else priority = 100;
+            if (!t) priority += 500;
+            priority += daysDiff * 0.1; // date proximity as tiebreaker
+            return { ...s, _time: t, _priority: priority };
+          })
+          .sort((a, b) => a._priority - b._priority)
+          .slice(0, 5);
+        setAshbySearchResults(prev => prev.map(c => c.id === candidateId ? { ...c, schedules: valid } : c));
+      } catch(e) {
+        setAshbySearchResults(prev => prev.map(c => c.id === candidateId ? { ...c, schedules: [] } : c));
       }
-      return (
-        <button onClick={() => onSelect(active ? null : val)} style={{
-          flex: 1, padding: "10px 4px",
-          borderRadius: 8,
-          border: `1.5px solid ${active ? meta.dot : "var(--border)"}`,
-          background: active ? (val === "N/A" ? "rgba(255,255,255,0.04)" : `rgba(${val===4?"34,155,85":val===3?"74,107,201":val===2?"184,124,40":"218,80,119"},0.18)`) : "transparent",
-          color: active ? meta.dot : "var(--text-muted)",
-          fontFamily: "'Geist Mono', monospace",
-          cursor: "pointer", transition: "all 0.15s",
-          textAlign: "center",
-        }}>
-          <div style={{ fontSize: 20, fontWeight: 700, lineHeight: 1 }}>{val === "N/A" ? "—" : val}</div>
-          <div style={{ fontSize: 10, marginTop: 4, textTransform: "uppercase", letterSpacing: "0.07em", opacity: 0.8 }}>{meta.label}</div>
-        </button>
-      );
-    }
+    };
 
-    /* ─── CHEVRON ─────────────────────────────────────────────── */
-    function Chevron({ open }) {
-      return (
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ transition: "transform 0.2s", transform: open ? "rotate(90deg)" : "none" }}>
-          <path d="M3 2l4 3-4 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      );
-    }
+    const handleCandidateSearch = (value) => {
+      setCandidate(value);
+      if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
+      if (value.length >= 2 && ashbyApiKey) {
+        searchTimeoutRef.current = setTimeout(() => searchAshbyCandidates(value), 400);
+      } else {
+        setAshbySearchResults([]);
+      }
+    };
 
-    /* ─── VIGNETTE CARD ───────────────────────────────────────── */
-    function VignetteCard({ score, text, active }) {
-      const meta = SCORE_META[score];
-      return (
-        <div style={{
-          borderRadius: 8,
-          border: `1px solid ${active ? meta.dot : "var(--score-empty-border)"}`,
-          background: active ? `rgba(${score===4?"34,155,85":score===3?"74,107,201":score===2?"184,124,40":"218,80,119"},0.1)` : "transparent",
-          padding: "12px 14px",
-          transition: "all 0.2s",
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-            <div style={{
-              width: 22, height: 22, borderRadius: 4,
-              background: `rgba(${score===4?"34,155,85":score===3?"74,107,201":score===2?"184,124,40":"218,80,119"},0.25)`,
-              border: `1.5px solid ${meta.dot}`,
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 12, fontWeight: 700, color: meta.dot, fontFamily: "'Geist Mono', monospace",
-            }}>{score}</div>
-            <span style={{ fontSize: 11, fontWeight: 600, color: meta.dot, textTransform: "uppercase", letterSpacing: "0.07em" }}>{meta.label}</span>
-          </div>
-          <p style={{ fontSize: 12, color: active ? "var(--text-secondary)" : "var(--text-faint)", lineHeight: 1.65, fontStyle: "italic" }}>{text}</p>
-        </div>
-      );
-    }
+    const selectAshbyCandidate = (cand, schedule) => {
+      setCandidate(cand.name || (cand.firstName + ' ' + cand.lastName));
+      if (schedule) {
+        setAshbyInterviewId(schedule.id);
+        // Get start time from interviewEvents if available
+        const event = schedule.interviewEvents?.[0];
+        const startAt = event?.startTime || schedule.startTime || schedule.createdAt;
+        if (startAt) setInterviewDate(new Date(startAt).toISOString().slice(0, 10));
+        setAshbyInterviewData(schedule);
+        setAshbyFetchMsg('✓ Linked to interview');
+        setTimeout(() => setAshbyFetchMsg(null), 3000);
+      }
+      setAshbySearchResults([]);
+    };
 
-    /* ─── MAIN APP ────────────────────────────────────────────── */
-    function App() {
-      const [level, setLevel] = useState("swe");
-      const [candidate, setCandidate] = useState("");
-      const [coreScores, setCoreScores] = useState({});
-      const [coreNotes, setCoreNotes] = useState({});
-      const [bonusScores, setBonusScores] = useState({});
-      const [bonusNotes, setBonusNotes] = useState({});
-      const [overallNotes, setOverallNotes] = useState("");
-      const [showSignals, setShowSignals] = useState({});
-      const [showProbes, setShowProbes] = useState({});
-      const [showVignettes, setShowVignettes] = useState({});
-      const [showContext, setShowContext] = useState({});
-      const [checklist, setChecklist] = useState({});
-      const [showSummary, setShowSummary] = useState(false);
-      const [copied, setCopied] = useState(false);
-      const [darkMode, setDarkMode] = useState(true);
+    // Fetch interview details from Ashby by ID
+    const fetchAshbyInterview = async () => {
+      if (!ashbyApiKey) { setAshbyFetchMsg('Ashby API key not configured. Click ⚙ to set up.'); return; }
+      const parsedId = parseAshbyId(ashbyInterviewId);
+      if (!parsedId) { setAshbyFetchMsg('Enter an Ashby Interview Schedule ID or URL.'); return; }
+      setAshbyFetching(true); setAshbyFetchMsg(null);
+      try {
+        const data = await ashbyCall('interviewSchedule.info', { interviewScheduleId: parsedId });
+        const info = data.results || data;
+        setAshbyInterviewData(info);
+        const cName = info.candidate?.name || info.candidateName;
+        if (cName) setCandidate(cName);
+        const startAt = info.startTime || info.startAt || info.scheduledStartAt;
+        if (startAt) setInterviewDate(new Date(startAt).toISOString().slice(0, 10));
+        if (parsedId !== ashbyInterviewId) setAshbyInterviewId(parsedId);
+        setAshbyFetchMsg('✓ Loaded from Ashby');
+        setTimeout(() => setAshbyFetchMsg(null), 3000);
+      } catch (e) {
+        setAshbyFetchMsg('Error: ' + e.message);
+      } finally { setAshbyFetching(false); }
+    };
 
-      React.useEffect(() => {
-        document.documentElement.dataset.theme = darkMode ? "dark" : "light";
-      }, [darkMode]);
-
-      const weightedScore = useMemo(() => {
-        let wSum = 0, wTotal = 0;
-        CORE_SECTIONS.forEach(s => {
-          const sc = coreScores[s.id];
-          if (sc && sc !== "N/A") { wSum += sc * (s.weight / 100); wTotal += s.weight / 100; }
-        });
-        const bVals = BONUS_SECTIONS.map(s => bonusScores[s.id]).filter(s => s && s !== "N/A");
-        if (bVals.length > 0) {
-          const avg = bVals.reduce((a, b) => a + b, 0) / bVals.length;
-          wSum += avg * 0.1; wTotal += 0.1;
-        }
-        return wTotal > 0 ? wSum / wTotal : null;
-      }, [coreScores, bonusScores]);
-
-      const rec = useMemo(() => {
-        if (coreScores["ego"] === 1)
-          return { label: "No", dot: "#DA5077", bg: "rgba(218,80,119,0.12)", border: "#DA5077", detail: "Disqualifying score in Ego & Feedback — override applies regardless of weighted average." };
-        if (!weightedScore)
-          return { label: "—", dot: "#555", bg: "transparent", border: "#333", detail: "Score core sections to generate a recommendation." };
-        if (weightedScore >= 3.5)
-          return { label: "Strong Yes", dot: "#229955", bg: "rgba(34,155,85,0.15)", border: "#229955", detail: "Clear and consistent signal across core sections." };
-        if (weightedScore >= 2.8)
-          return { label: "Yes", dot: "#4A6BC9", bg: "rgba(74,107,201,0.12)", border: "#4A6BC9",
-            detail: level === "senior" ? "Meets SWE bar — verify area ownership and directional influence reach Senior threshold." : "Solid signal across core sections." };
-        if (weightedScore >= 2.0)
-          return { label: "Borderline", dot: "#B87C28", bg: "rgba(184,124,40,0.12)", border: "#B87C28", detail: "Mixed signal — review which core sections are weak before deciding." };
-        return { label: "No", dot: "#DA5077", bg: "rgba(218,80,119,0.12)", border: "#DA5077", detail: "Insufficient signal across core sections." };
-      }, [coreScores, weightedScore, level]);
-
-      const checkItems = [
-        "Did they give a real, specific example?",
-        "Did they clearly explain what they personally did?",
-        "Did they show reasoning or reflection?",
-        "Did they need significant prompting?",
-        "Is the score based on evidence, not polish?",
-        "Would I feel confident defending this score?",
-      ];
-
-      const toggle = (setter, id) => setter(p => ({ ...p, [id]: !p[id] }));
-
-      const buildSummary = () => {
-        const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-        const levelLabel = level === 'swe' ? 'Software Engineer' : 'Senior Software Engineer';
-        const divider = '─────────────────────────────────────────────';
-        const lines = [];
-
-        lines.push('ANKAR RECRUITER SCREEN');
-        lines.push(levelLabel.toUpperCase());
-        if (candidate) lines.push(`Candidate: ${candidate}`);
-        lines.push(`Date: ${date}`);
-        lines.push('');
-        lines.push(divider);
-        lines.push('');
-        lines.push(`RECOMMENDATION  ${rec.label}`);
-        if (weightedScore) lines.push(`Weighted score  ${weightedScore.toFixed(2)} / 4.00`);
-        lines.push('');
-        lines.push(divider);
-        lines.push('CORE SECTIONS');
-        lines.push('');
-
-        CORE_SECTIONS.forEach(s => {
-          const sc = coreScores[s.id];
-          const m = sc ? SCORE_META[sc] : null;
-          const scoreStr = sc ? (sc === 'N/A' ? 'N/A' : `${sc} — ${m.label}`) : 'Not scored';
-          lines.push(`${s.number}. ${s.title}  [${s.weight}%]`);
-          lines.push(`   Score: ${scoreStr}`);
-          if (coreNotes[s.id] && coreNotes[s.id].trim()) lines.push(`   Notes: ${coreNotes[s.id].trim()}`);
-          lines.push('');
-        });
-
-        const scoredBonus = BONUS_SECTIONS.filter(s => bonusScores[s.id] && bonusScores[s.id] !== 'N/A');
-        if (scoredBonus.length > 0) {
-          lines.push(divider);
-          lines.push('BONUS SECTIONS');
-          lines.push('');
-          scoredBonus.forEach(s => {
-            const sc = bonusScores[s.id];
-            const m = SCORE_META[sc];
-            lines.push(`Q${s.number}. ${s.title}`);
-            lines.push(`   Score: ${sc} — ${m.label}`);
-            if (bonusNotes[s.id] && bonusNotes[s.id].trim()) lines.push(`   Notes: ${bonusNotes[s.id].trim()}`);
-            lines.push('');
-          });
-        }
-
-        if (overallNotes && overallNotes.trim()) {
-          lines.push(divider);
-          lines.push('OVERALL NOTES');
-          lines.push('');
-          lines.push(overallNotes.trim());
-          lines.push('');
-        }
-
-        lines.push(divider);
-        lines.push(`Ankar · ${levelLabel} · ${date}`);
-        return lines.join('\n');
+    const saveRecord = () => {
+      if(!candidate.trim()&&!Object.keys(coreScores).length) return;
+      const record = {
+        id: Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+        savedAt: new Date().toISOString(),
+        candidate: candidate||'Unnamed',
+        level, interviewDate, coreScores, coreNotes, bonusScores, bonusNotes,
+        transcript, aiNarrative, ashbyInterviewId, rec: rec.label, weightedScore,
       };
+      const updated = [record, ...savedRecords].slice(0, 50);
+      setSavedRecords(updated);
+      try { localStorage.setItem(HISTORY_KEY, JSON.stringify(updated)); } catch(e) {}
+      showMsg(setExportMsg, `Record saved for ${record.candidate}`);
+    };
 
-      const handleCopy = () => {
-        navigator.clipboard.writeText(buildSummary()).then(() => {
-          setCopied(true);
-          setTimeout(() => setCopied(false), 2000);
-        });
+    const loadRecord = (record) => {
+      if(!confirm(`Load record for "${record.candidate}" from ${new Date(record.savedAt).toLocaleDateString()}? This will replace current data.`)) return;
+      setCandidate(record.candidate||'');
+      setLevel(record.level||'swe');
+      setInterviewDate(record.interviewDate||new Date().toISOString().slice(0,10));
+      setCoreScores(record.coreScores||{});
+      setCoreNotes(record.coreNotes||{});
+      setBonusScores(record.bonusScores||{});
+      setBonusNotes(record.bonusNotes||{});
+      setTranscript(record.transcript||'');
+      setAiNarrative(record.aiNarrative||null);
+      setAshbyInterviewId(record.ashbyInterviewId||'');
+      setOverallNotes('');
+      setScoresChangedSinceAI(false);
+      setShowHistory(false);
+    };
+
+    const deleteRecord = (id) => {
+      if(!confirm('Delete this record?')) return;
+      const updated = savedRecords.filter(r => r.id !== id);
+      setSavedRecords(updated);
+      try { localStorage.setItem(HISTORY_KEY, JSON.stringify(updated)); } catch(e) {}
+    };
+
+    const weightedScore = useMemo(() => {
+      let wSum=0,wTotal=0;
+      CORE_SECTIONS.forEach(s => { const sc=coreScores[s.id]; if(sc&&sc!=="N/A"){wSum+=sc*(s.weight/100);wTotal+=s.weight/100;} });
+      const bVals=BONUS_SECTIONS.map(s=>bonusScores[s.id]).filter(s=>s&&s!=="N/A");
+      if(bVals.length>0){const avg=bVals.reduce((a,b)=>a+b,0)/bVals.length;wSum+=avg*0.1;wTotal+=0.1;}
+      return wTotal>0?wSum/wTotal:null;
+    }, [coreScores, bonusScores]);
+
+    const rec = useMemo(() => {
+      if(coreScores["ego"]===1) return {label:"No",dot:"#DA5077",bg:"rgba(218,80,119,0.12)",border:"#DA5077"};
+      if(!weightedScore) return {label:"—",dot:"#555",bg:"transparent",border:"#333"};
+      if(weightedScore>=3.5) return {label:"Strong Yes",dot:"#229955",bg:"rgba(34,155,85,0.15)",border:"#229955"};
+      if(weightedScore>=3.0) return {label:"Yes",dot:"#4A6BC9",bg:"rgba(74,107,201,0.12)",border:"#4A6BC9"};
+      if(weightedScore>=2.7) return {label:"Borderline",dot:"#B87C28",bg:"rgba(184,124,40,0.12)",border:"#B87C28"};
+      return {label:"No",dot:"#DA5077",bg:"rgba(218,80,119,0.12)",border:"#DA5077"};
+    }, [coreScores, weightedScore]);
+
+    const [scoresChangedSinceAI, setScoresChangedSinceAI] = useState(false);
+    const prevScoresKey = useRef(null);
+    useEffect(() => { if(!stateLoaded)return; const key=JSON.stringify(coreScores); if(prevScoresKey.current!==null&&prevScoresKey.current!==key&&aiNarrative){setScoresChangedSinceAI(true);} prevScoresKey.current=key; }, [coreScores,stateLoaded]);
+
+    const scoreTable = useMemo(() => buildScoreTable({coreScores,rec,weightedScore}), [coreScores,rec,weightedScore]);
+    const templateNarrative = useMemo(() => buildNarrative({candidate,level,coreScores,coreNotes,bonusScores,bonusNotes,overallNotes,rec,weightedScore}), [candidate,level,coreScores,coreNotes,bonusScores,bonusNotes,overallNotes,rec,weightedScore]);
+    const activeNarrative = aiNarrative || templateNarrative;
+    const hasApiKey = !!openaiKey;
+
+    // Process transcript
+    const processTranscript = async () => {
+      if(!openaiKey||!transcript.trim()) return;
+      setIsProcessingTranscript(true); setTranscriptError(null);
+      const prompt = `Analyze this interview transcript and extract structured notes for a recruiter screen.\n\nSections:\n1. Environment & Introspection — does the candidate reflect on their own work with honesty and specificity?\n2. Product Ownership & Customer Impact — evidence of end-to-end ownership, user understanding, real decision-making\n3. Ego & Feedback — can they describe hard feedback honestly, including initial reaction and what changed?\n4. Team-Minded — do they understand team complementarity?\n\nTRANSCRIPT:\n---\n${transcript.trim()}\n---\n\nReturn ONLY valid JSON:\n{"environment":"2-3 sentences with evidence","product":"2-3 sentences","ego":"2-3 sentences","team":"2-3 sentences","overall":"1-2 sentence overall observation"}\n\nQuote the candidate where useful. If a section wasn't covered, say so.`;
+      try {
+        const text = await callAI(openaiKey, prompt, 800);
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        if(!jsonMatch) throw new Error('Could not parse response');
+        const extracted = JSON.parse(jsonMatch[0]);
+        setCoreNotes(p => ({...p,...(extracted.environment?{environment:extracted.environment}:{}),...(extracted.product?{product:extracted.product}:{}),...(extracted.ego?{ego:extracted.ego}:{}),...(extracted.team?{team:extracted.team}:{})}));
+        if(extracted.overall) setOverallNotes(p => p?p+'\n\n[From transcript]: '+extracted.overall:extracted.overall);
+        setTranscriptProcessed(true); setAiNarrative(null);
+      } catch(e) { setTranscriptError(e.message||'Failed to process transcript'); }
+      finally { setIsProcessingTranscript(false); }
+    };
+
+    // Generate AI narrative — ONLY from actual scored data + notes + transcript
+    const scoredSections = useMemo(() => CORE_SECTIONS.map(s => { const sc=coreScores[s.id]; if(!sc||sc==='N/A')return null; const m=SCORE_META[sc]; return {section:s,score:sc,meta:m,notes:(coreNotes[s.id]||'').trim()}; }).filter(Boolean), [coreScores,coreNotes]);
+    const hasAnyScores = scoredSections.length > 0;
+
+    const generateAI = async () => {
+      if(!openaiKey) return;
+      if(!hasAnyScores) { setAiError('Score at least one section before generating a summary.'); return; }
+      setIsGenerating(true); setAiError(null);
+      const ll = level==='swe'?'Software Engineer':'Senior Software Engineer';
+      const coreBlock = scoredSections.map(s => {
+        let line = `${s.section.title}: ${s.score}/4 (${s.meta.label})`;
+        if (s.notes) line += `\n  Recruiter notes: "${s.notes}"`;
+        return line;
+      }).join('\n\n');
+      const scoredBonus = BONUS_SECTIONS.filter(s=>bonusScores[s.id]&&bonusScores[s.id]!=='N/A').map(s => `${s.title}: ${bonusScores[s.id]}/4 (${SCORE_META[bonusScores[s.id]].label})${bonusNotes[s.id]?' — '+bonusNotes[s.id].trim():''}`);
+      const hasTranscript = transcript.trim().length > 100;
+
+      const prompt = `You are summarising a recruiter screen scorecard for a ${ll} candidate.
+
+CRITICAL RULES:
+- You may ONLY reference information provided below. Do NOT invent, assume, or infer anything not explicitly stated.
+- If a section has no notes, say only the score and rating. Do not elaborate.
+- If transcript excerpts are provided, you may quote them directly.
+- Do NOT add generic filler about what "strong candidates typically do".
+- Zero hallucination. Every claim must trace to data below.
+
+CANDIDATE: ${candidate||'Not specified'}
+LEVEL: ${ll}
+RECOMMENDATION: ${rec.label}${weightedScore?' ('+weightedScore.toFixed(2)+'/4.00)':''}
+
+SCORED SECTIONS:
+${coreBlock}
+${scoredBonus.length>0?'\nBONUS SECTIONS:\n'+scoredBonus.join('\n'):''}
+${hasTranscript?'\nTRANSCRIPT EXCERPTS (quote directly where relevant):\n'+transcript.trim().slice(0,3000):''}
+
+FORMAT YOUR RESPONSE EXACTLY AS:
+For each scored section, write 1-2 sentences: the score, and the evidence from notes/transcript that supports it. Include direct quotes from the candidate where available. If no notes exist for a section, just state the score.
+
+End with: "Recommendation: [rating]" and one sentence of justification based only on the scores above.`;
+
+      try { const text = await callAI(openaiKey, prompt, 800); setAiNarrative(text); setScoresChangedSinceAI(false); }
+      catch(e) { setAiError(e.message||'API call failed'); }
+      finally { setIsGenerating(false); }
+    };
+
+    // Push to Ashby
+    const pushToAshby = async () => {
+      if(!ashbyApiKey) { setAshbyMsg('Ashby API key not configured. Set it in Admin settings (gear icon).'); return; }
+      if(!ashbyInterviewId) { setAshbyMsg('Enter the Interview Schedule ID first.'); return; }
+      setAshbyStatus('pushing'); setAshbyMsg(null);
+      const toAshbyRating = sc => ({4:'strong_yes',3:'yes',2:'no',1:'strong_no'}[sc]||null);
+      const payload = {
+        interviewScheduleId: ashbyInterviewId,
+        overallRecommendation: toAshbyRating(rec.label==='Strong Yes'?4:rec.label==='Yes'?3:rec.label==='Borderline'?2:1),
+        note: (recruiterSummary.trim()?recruiterSummary.trim()+'\n\n':'') + (activeNarrative || scoreTable),
+        attributes: CORE_SECTIONS.map(s => ({
+          title: s.title, rating: toAshbyRating(coreScores[s.id]),
+          text: (coreNotes[s.id]||'').trim()||null,
+        })).filter(a => a.rating),
       };
+      try {
+        const data = await ashbyCall('interviewSchedule.submit', payload);
+        setAshbyStatus('success'); setAshbyMsg('Successfully submitted to Ashby');
+      } catch(e) {
+        setAshbyStatus('error');
+        setAshbyMsg('Error: '+e.message);
+      }
+    };
 
-      return (
-        <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
+    // Exports
+    const showMsg = (setter,msg) => { setter(msg); setTimeout(()=>setter(null),3000); };
 
-          {/* ── STICKY HEADER ── */}
-          <div style={{
-            position: "sticky", top: 0, zIndex: 100,
-            background: "var(--header-bg)", backdropFilter: "blur(12px)",
-            borderBottom: "1px solid var(--border-inner)",
-          }} className="bar-motif">
-            <div style={{ maxWidth: 720, margin: "0 auto", padding: "16px 24px" }}>
-              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
-                <div>
-                  <div style={{ fontSize: 11, color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 500, marginBottom: 4 }}>Ankar · Recruiter Screen</div>
-                  <h1 className="display" style={{ fontSize: 22, fontWeight: 700, color: "var(--text)", lineHeight: 1.1 }}>
-                    Software Engineer Rubric
-                  </h1>
+    const exportPDF = () => {
+      const pv=document.getElementById('print-view');
+      const date=new Date(interviewDate).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+      const ll=level==='swe'?'Software Engineer':'Senior Software Engineer';
+      const recColors={'Strong Yes':'#1C7A40','Yes':'#3958A7','Borderline':'#8A5E15','No':'#B03060','—':'#888'};
+      const scoreColors={4:'#229955',3:'#4A6BC9',2:'#B87C28',1:'#DA5077'};
+      let html=`<h1>Ankar Recruiter Screen</h1><div class="pv-meta">${ll}${candidate?' · '+candidate:''} · ${date}</div>`;
+      html+=`<div class="pv-rec-row" style="background:rgba(0,0,0,0.05);color:${recColors[rec.label]||'#333'};border:1.5px solid ${recColors[rec.label]||'#ccc'};">${rec.label}${weightedScore?' · '+weightedScore.toFixed(2)+' / 4.00':''}</div>`;
+      html+=`<table class="pv-score-table"><tr><th>Section</th><th>Score</th><th>Weight</th></tr>`;
+      CORE_SECTIONS.forEach(s=>{const sc=coreScores[s.id];const m=sc?SCORE_META[sc]:null;const col=sc&&sc!=='N/A'?scoreColors[sc]:'#ccc';html+=`<tr><td>${s.title}</td><td style="color:${col};font-weight:600;">${sc?(sc==='N/A'?'N/A':`${sc} — ${m.label}`):'—'}</td><td style="color:#888;">${s.weight}%</td></tr>`;});
+      html+=`</table><hr class="pv-divider">`;
+      CORE_SECTIONS.forEach(s=>{const sc=coreScores[s.id];const m=sc?SCORE_META[sc]:null;const col=sc&&sc!=='N/A'?scoreColors[sc]:'#ccc';html+=`<div class="pv-section" style="border-left-color:${col}"><div style="font-weight:700;margin-bottom:4px;">${s.number}. ${s.title}</div>`;if(sc)html+=`<div style="font-size:10pt;color:${col};margin-bottom:${coreNotes[s.id]?6:0}px;">${sc==='N/A'?'N/A':`${sc} — ${m.label}`}</div>`;if(coreNotes[s.id]&&coreNotes[s.id].trim())html+=`<div style="font-size:10pt;color:#333;">${coreNotes[s.id].trim()}</div>`;html+=`</div>`;});
+      if(activeNarrative) html+=`<div class="pv-summary"><div class="pv-summary-title">Summary</div><div class="pv-summary-text">${activeNarrative}</div></div>`;
+      pv.innerHTML=html; window.print(); setTimeout(()=>{pv.innerHTML='';},1000);
+    };
+
+    const exportMarkdown = () => {
+      const md=buildMarkdown({candidate,level,rec,weightedScore,coreScores,coreNotes,bonusScores,bonusNotes,overallNotes,summary:activeNarrative});
+      const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([md],{type:'text/markdown'}));a.download=`screen-${(candidate||'candidate').toLowerCase().replace(/\s+/g,'-')}.md`;a.click();
+      showMsg(setExportMsg,'Markdown downloaded');
+    };
+
+    const exportRichText = async () => {
+      const richHtml=buildRichHTML({candidate,level,rec,weightedScore,coreScores,coreNotes,bonusScores,bonusNotes,summary:activeNarrative});
+      try { await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([richHtml],{type:'text/html'}),'text/plain':new Blob([activeNarrative||''],{type:'text/plain'})})]); showMsg(setExportMsg,'Rich text copied — paste into Docs, Word, or email'); }
+      catch(e) { await navigator.clipboard.writeText(activeNarrative||''); showMsg(setExportMsg,'Copied as plain text'); }
+    };
+
+    const clearInterview = () => {
+      if(!confirm('Start a new interview? Current data will be auto-saved to history.')) return;
+      saveRecord();
+      setCoreScores({});setCoreNotes({});setBonusScores({});setBonusNotes({});setOverallNotes('');setCandidate('');setAiNarrative(null);setRecruiterSummary('');setTranscript('');setTranscriptProcessed(false);setAshbyInterviewId('');setAshbyStatus(null);setAshbyMsg(null);setInterviewDate(new Date().toISOString().slice(0,10));setScoresChangedSinceAI(false);setAshbyInterviewData(null);setAshbySearchResults([]);setAshbyFetchMsg(null);
+    };
+
+    const toggleExample = (sectionId,score) => setShowExample(p=>({...p,[`${sectionId}-${score}`]:!p[`${sectionId}-${score}`]}));
+
+    return (
+      <div className="app-root" style={{minHeight:"100vh",background:"var(--bg)"}}>
+
+        {/* ── HEADER ── */}
+        <div className="no-print bar-motif" style={{position:"sticky",top:0,zIndex:100,background:"var(--header-bg)",backdropFilter:"blur(12px)",borderBottom:"1px solid var(--border-inner)"}}>
+          <div style={{maxWidth:1400,margin:"0 auto",padding:"12px 32px"}}>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:16}}>
+              <div>
+                <div style={{fontSize:10,color:"var(--text-dim)",textTransform:"uppercase",letterSpacing:"0.12em",fontWeight:500,marginBottom:2}}>Ankar · Recruiter Screen</div>
+                <h1 className="display" style={{fontSize:18,fontWeight:700,color:"var(--text)",lineHeight:1.1}}>Software Engineer Rubric</h1>
+              </div>
+              <div style={{display:"flex",alignItems:"center",gap:10,flexShrink:0}}>
+                <div style={{display:"flex",background:"var(--surface)",borderRadius:8,padding:3,border:"1px solid var(--border)"}}>
+                  {[["swe","SWE"],["senior","Senior"]].map(([val,lbl])=>(
+                    <button key={val} onClick={()=>setLevel(val)} className="cta" style={{padding:"6px 14px",borderRadius:5,fontSize:11,fontWeight:600,border:"none",cursor:"pointer",transition:"all 0.15s",background:level===val?"var(--toggle-active-bg)":"transparent",color:level===val?"var(--toggle-active-text)":"var(--toggle-inactive-text)"}}>{lbl}</button>
+                  ))}
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
-                  {/* Level toggle */}
-                  <div style={{ display: "flex", background: "var(--surface)", borderRadius: 8, padding: 3, border: "1px solid var(--border)" }}>
-                    {[["swe","SWE"],["senior","Senior"]].map(([val, lbl]) => (
-                      <button key={val} onClick={() => setLevel(val)} className="cta" style={{
-                        padding: "6px 14px", borderRadius: 5, fontSize: 11, fontWeight: 600,
-                        border: "none", cursor: "pointer", transition: "all 0.15s",
-                        background: level === val ? "var(--toggle-active-bg)" : "transparent",
-                        color: level === val ? "var(--toggle-active-text)" : "var(--toggle-inactive-text)",
-                      }}>{lbl}</button>
-                    ))}
-                  </div>
-                  {/* Dark/light toggle */}
-                  <button onClick={() => setDarkMode(d => !d)} title={darkMode ? "Switch to light mode" : "Switch to dark mode"} style={{
-                    width: 34, height: 34, borderRadius: 8, border: "1px solid var(--border)",
-                    background: "var(--surface)", cursor: "pointer", transition: "all 0.15s",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 16, flexShrink: 0,
-                  }}>
-                    {darkMode ? "☀" : "🌙"}
-                  </button>
-                  {/* Live recommendation */}
-                  <div style={{
-                    padding: "8px 16px", borderRadius: 8,
-                    border: `1.5px solid ${rec.border}`,
-                    background: rec.bg, textAlign: "center", minWidth: 110,
-                  }}>
-                    <div style={{ fontSize: 10, color: "var(--text-faint)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 2 }}>Rec.</div>
-                    <div style={{ fontSize: 16, fontWeight: 700, color: rec.dot, fontFamily: "'Satoshi', sans-serif", letterSpacing: "-0.02em" }}>{rec.label}</div>
-                    <div style={{ fontSize: 10, color: "var(--text-dim)", marginTop: 2 }}>{weightedScore ? `${weightedScore.toFixed(2)} / 4.00` : "—"}</div>
-                  </div>
+                <button onClick={()=>setDarkMode(d=>!d)} style={{width:32,height:32,borderRadius:8,border:"1px solid var(--border)",background:"var(--surface)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>{darkMode?"☀":"🌙"}</button>
+                <button onClick={saveRecord} className="cta" title="Save current interview to history" style={{padding:"6px 14px",borderRadius:8,fontSize:10,fontWeight:600,border:"1px solid var(--border)",background:"transparent",color:"var(--text-muted)",cursor:"pointer"}}>Save</button>
+                <button onClick={()=>setShowHistory(p=>!p)} className="cta" title="View saved records" style={{padding:"6px 14px",borderRadius:8,fontSize:10,fontWeight:600,border:`1px solid ${showHistory?"var(--blue)":"var(--border)"}`,background:showHistory?"rgba(57,88,167,0.15)":"transparent",color:showHistory?"var(--blue-tint)":"var(--text-muted)",cursor:"pointer"}}>{savedRecords.length>0?`History (${savedRecords.length})`:"History"}</button>
+                <button onClick={clearInterview} className="cta" style={{padding:"6px 14px",borderRadius:8,fontSize:10,fontWeight:600,border:"1px solid var(--border)",background:"transparent",color:"var(--text-muted)",cursor:"pointer"}}>New</button>
+                {/* Admin gear */}
+                <button onClick={()=>setShowAdmin(p=>!p)} title="Admin settings" style={{width:32,height:32,borderRadius:8,border:`1px solid ${showAdmin?"var(--blue)":"var(--border)"}`,background:showAdmin?"rgba(57,88,167,0.15)":"var(--surface)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,color:showAdmin?"var(--blue-tint)":"var(--text-muted)",transition:"all 0.15s"}}>⚙</button>
+                {/* Rec badge */}
+                <div style={{padding:"7px 16px",borderRadius:8,border:`1.5px solid ${rec.border}`,background:rec.bg,textAlign:"center",minWidth:110}}>
+                  <div style={{fontSize:9,color:"var(--text-faint)",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:2}}>Rec.</div>
+                  <div style={{fontSize:15,fontWeight:700,color:rec.dot,fontFamily:"'Satoshi',sans-serif",letterSpacing:"-0.02em"}}>{rec.label}</div>
+                  <div style={{fontSize:10,color:"var(--text-dim)",marginTop:2}}>{weightedScore?`${weightedScore.toFixed(2)} / 4.00`:"—"}</div>
                 </div>
               </div>
-              <input type="text" placeholder="Candidate name (optional)"
-                value={candidate} onChange={e => setCandidate(e.target.value)}
-                style={{ marginTop: 12, background: "var(--surface-2)", border: "1px solid var(--border-inner2)" }} />
+            </div>
+          </div>
+        </div>
+
+        <div style={{maxWidth:1400,margin:"0 auto",padding:"24px 32px 48px"}}>
+
+          {/* ── ADMIN PANEL (hidden from recruiters unless gear clicked) ── */}
+          {showAdmin && (
+            <div style={{background:"var(--surface)",border:"1px solid var(--blue)",borderRadius:10,padding:"18px 20px",marginBottom:20}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14}}>
+                <div style={{fontSize:10,color:"var(--blue-tint)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600}}>Admin Settings</div>
+                <span style={{fontSize:10,color:"var(--text-muted)"}}>Keys stored in browser localStorage only</span>
+              </div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,marginBottom:14}}>
+                <div>
+                  <div className="panel-label">OpenAI API Key</div>
+                  <input type="password" placeholder="sk-…" value={openaiKey} onChange={e=>setOpenaiKey(e.target.value)}/>
+                </div>
+                <div>
+                  <div className="panel-label">Ashby API Key</div>
+                  <input type="password" placeholder="your-ashby-api-key" value={ashbyApiKey} onChange={e=>setAshbyApiKey(e.target.value)}/>
+                </div>
+              </div>
+              <button onClick={saveAdmin} className="cta" style={{fontSize:11,padding:"8px 20px",borderRadius:7,fontWeight:600,background:"var(--blue)",color:"#fff",border:"none",cursor:"pointer"}}>Save & Close</button>
+              {!openaiKey && <span style={{fontSize:11,color:"var(--text-muted)",marginLeft:12}}>OpenAI key required for AI features (transcript processing, summary generation)</span>}
+            </div>
+          )}
+
+          {/* ── HISTORY PANEL ── */}
+          {showHistory && (
+            <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:10,padding:"18px 20px",marginBottom:20,maxHeight:400,overflow:"auto"}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14}}>
+                <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600}}>Saved Records ({savedRecords.length})</div>
+                <button onClick={()=>setShowHistory(false)} style={{background:"none",border:"none",color:"var(--text-muted)",cursor:"pointer",fontSize:14}}>×</button>
+              </div>
+              {savedRecords.length===0 ? (
+                <div style={{padding:"20px",textAlign:"center",color:"var(--text-muted)",fontSize:12}}>No saved records yet. Click "Save" or "New" to save the current interview.</div>
+              ) : (
+                <div style={{display:"flex",flexDirection:"column",gap:8}}>
+                  {savedRecords.map(record => {
+                    const recColor = record.rec==='Strong Yes'?'#229955':record.rec==='Yes'?'#4A6BC9':record.rec==='Borderline'?'#B87C28':record.rec==='No'?'#DA5077':'#555';
+                    return (
+                      <div key={record.id} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 14px",background:"var(--surface-2)",border:"1px solid var(--border-inner)",borderRadius:8}}>
+                        <div style={{flex:1,minWidth:0}}>
+                          <div style={{fontSize:13,fontWeight:600,color:"var(--text)",fontFamily:"'Satoshi',sans-serif"}}>{record.candidate}</div>
+                          <div style={{fontSize:11,color:"var(--text-muted)",marginTop:2}}>
+                            {record.level==='senior'?'Senior ':''}SWE · {new Date(record.savedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})} at {new Date(record.savedAt).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}
+                          </div>
+                        </div>
+                        {record.weightedScore && <div style={{fontSize:12,color:"var(--text-dim)",fontFamily:"'Geist Mono',monospace"}}>{record.weightedScore.toFixed(2)}</div>}
+                        <div style={{fontSize:11,fontWeight:600,color:recColor,background:`${recColor}18`,padding:"3px 10px",borderRadius:6,border:`1px solid ${recColor}40`,flexShrink:0}}>{record.rec||'—'}</div>
+                        <button onClick={()=>loadRecord(record)} className="cta" style={{fontSize:10,padding:"5px 12px",borderRadius:6,background:"rgba(57,88,167,0.15)",border:"1px solid rgba(57,88,167,0.4)",color:"var(--blue-tint)",cursor:"pointer",fontWeight:600,flexShrink:0}}>Load</button>
+                        <button onClick={()=>deleteRecord(record.id)} style={{background:"none",border:"none",color:"var(--text-muted)",cursor:"pointer",fontSize:14,flexShrink:0,padding:"2px 4px"}} title="Delete record">×</button>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ── ASHBY + CANDIDATE ── */}
+          <div style={{background:"var(--surface)",border:`1px solid ${ashbyInterviewData?"var(--s4-border)":"var(--border)"}`,borderRadius:10,padding:"18px 20px",marginBottom:20,transition:"border-color 0.2s"}}>
+            {/* Ashby Interview URL — the entry point */}
+            <div style={{marginBottom:16}}>
+              <div className="panel-label">Ashby Interview URL or Schedule ID <span style={{color:"var(--text-muted)",textTransform:"none",fontWeight:400,letterSpacing:"normal"}}>— paste to auto-fill candidate details</span></div>
+              <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                <div style={{flex:1}}>
+                  <input type="text" placeholder="e.g. https://app.ashbyhq.com/interviews/intSch_abc123  or  intSch_abc123" value={ashbyInterviewId} onChange={e=>setAshbyInterviewId(e.target.value)} onKeyDown={e=>{if(e.key==='Enter')fetchAshbyInterview();}}/>
+                </div>
+                <button onClick={fetchAshbyInterview} disabled={ashbyFetching||!ashbyInterviewId.trim()} className="cta" style={{fontSize:11,padding:"10px 18px",borderRadius:7,fontWeight:600,cursor:(!ashbyInterviewId.trim()||ashbyFetching)?"default":"pointer",background:ashbyFetching?"var(--surface-2)":"rgba(57,88,167,0.15)",border:"1px solid rgba(57,88,167,0.4)",color:ashbyFetching?"var(--text-muted)":"var(--blue-tint)",opacity:!ashbyInterviewId.trim()?0.5:1,flexShrink:0,whiteSpace:"nowrap"}}>
+                  {ashbyFetching?"Loading…":"Pull from Ashby"}
+                </button>
+              </div>
+              {ashbyFetchMsg && <div style={{marginTop:8,fontSize:11,color:ashbyFetchMsg.startsWith('✓')?"var(--s4-text)":ashbyFetchMsg.startsWith('CORS')?"var(--s2-text)":"var(--s1-text)"}}>{ashbyFetchMsg}</div>}
+              {!ashbyApiKey && ashbyInterviewId.trim() && <div style={{marginTop:6,fontSize:11,color:"var(--text-muted)"}}>Ashby API key required — click ⚙ in header to configure.</div>}
+            </div>
+            <div style={{height:1,background:"var(--border-inner)",margin:"0 -20px 16px",padding:0}}/>
+            {/* Candidate details — auto-filled or manual */}
+            <div style={{display:"flex",alignItems:"flex-end",gap:16,flexWrap:"wrap"}}>
+              <div style={{flex:1,minWidth:200,position:"relative"}}>
+                <div className="panel-label">Candidate Name {ashbyInterviewData && <span style={{color:"var(--s4-text)",textTransform:"none",fontWeight:400}}>· from Ashby</span>} {ashbyApiKey && !ashbyInterviewData && <span style={{color:"var(--text-muted)",textTransform:"none",fontWeight:400}}>· type 2+ chars to search Ashby</span>} {!ashbyApiKey && <span style={{color:"var(--text-muted)",textTransform:"none",fontWeight:400}}>· set Ashby key in ⚙ to enable search</span>}</div>
+                <input type="text" placeholder="e.g. Alex Johnson" value={candidate} onChange={e=>handleCandidateSearch(e.target.value)} onBlur={()=>setTimeout(()=>{setAshbySearchResults([]);setExpandedCandidateId(null);},400)} autoComplete="off"/>
+                {ashbySearching && <div style={{position:"absolute",right:12,top:28,fontSize:10,color:"var(--text-muted)"}}>searching…</div>}
+                {ashbySearchResults.length > 0 && (
+                  <div onMouseDown={e=>e.preventDefault()} style={{position:"absolute",top:"100%",left:0,right:0,zIndex:50,marginTop:4,background:"var(--surface)",border:"1px solid var(--border-light)",borderRadius:8,boxShadow:"0 8px 24px rgba(0,0,0,0.3)",maxHeight:360,overflow:"auto"}}>
+                    {ashbySearchResults.map(c => {
+                      const name = c.name || (c.firstName + ' ' + c.lastName);
+                      const isExpanded = expandedCandidateId === c.id;
+                      const hasSchedules = c.schedules && c.schedules.length > 0;
+                      const schedulesLoaded = c.schedules !== null;
+                      return (
+                        <div key={c.id} style={{borderBottom:"1px solid var(--border-inner)"}}>
+                          {/* Candidate row — click to expand */}
+                          <button onClick={()=>loadCandidateSchedules(c.id)} style={{width:"100%",display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,padding:"10px 14px",background:isExpanded?"var(--surface-2)":"none",border:"none",cursor:"pointer",textAlign:"left",transition:"background 0.1s"}} onMouseEnter={e=>{if(!isExpanded)e.currentTarget.style.background='var(--surface-2)'}} onMouseLeave={e=>{if(!isExpanded)e.currentTarget.style.background='none'}}>
+                            <div style={{fontWeight:600,fontFamily:"'Satoshi',sans-serif",fontSize:13,color:"var(--text)"}}>{name}</div>
+                            <div style={{display:"flex",alignItems:"center",gap:8}}>
+                              {c.profileUrl && <span style={{fontSize:10,color:"var(--text-muted)"}}>{new Date(c.createdAt).toLocaleDateString('en-GB',{month:'short',year:'numeric'})}</span>}
+                              <span style={{fontSize:10,color:"var(--blue-tint)"}}><Chevron open={isExpanded}/></span>
+                            </div>
+                          </button>
+                          {/* Expanded: show interviews */}
+                          {isExpanded && (
+                            <div style={{padding:"0 0 6px",background:"var(--surface-2)"}}>
+                              {!schedulesLoaded ? (
+                                <div style={{padding:"8px 14px 8px 28px",fontSize:11,color:"var(--text-muted)"}}>Loading interviews…</div>
+                              ) : hasSchedules ? c.schedules.map((sched, idx) => {
+                                const event = sched.interviewEvents?.[0];
+                                const startTime = event?.startTime;
+                                const hasSubmitted = event?.hasSubmittedFeedback;
+                                const statusLabel = hasSubmitted ? 'feedback submitted' : sched.status === 'Scheduled' ? 'scheduled' : sched.status === 'NeedsScheduling' ? 'needs scheduling' : sched.status?.toLowerCase() || '—';
+                                const statusColor = hasSubmitted ? 'var(--s2-text)' : sched.status === 'Scheduled' ? 'var(--blue-tint)' : sched.status === 'Complete' && !hasSubmitted ? 'var(--s4-text)' : 'var(--text-muted)';
+                                return (
+                                  <button key={sched.id||idx} onClick={()=>selectAshbyCandidate(c, sched)} style={{width:"100%",display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,padding:"7px 14px 7px 28px",background:"none",border:"none",cursor:"pointer",textAlign:"left",fontSize:12,fontFamily:"'Geist Mono',monospace",color:"var(--text-secondary)",transition:"background 0.1s"}} onMouseEnter={e=>e.currentTarget.style.background='var(--surface-3)'} onMouseLeave={e=>e.currentTarget.style.background='none'}>
+                                    <div style={{fontSize:11,color:"var(--text-dim)"}}>
+                                      {startTime ? new Date(startTime).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : 'No date'}
+                                      {' · '}<span style={{color:statusColor}}>{statusLabel}</span>
+                                    </div>
+                                    <span style={{fontSize:10,color:hasSubmitted?"var(--text-muted)":"var(--blue-tint)",background:hasSubmitted?"transparent":"rgba(57,88,167,0.12)",padding:"2px 8px",borderRadius:12,flexShrink:0}}>{hasSubmitted?"Resubmit":"Select"}</span>
+                                  </button>
+                                );
+                              }) : (
+                                <div style={{padding:"8px 14px 8px 28px",fontSize:11,color:"var(--text-muted)"}}>No active interviews found</div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+              <div style={{width:180}}>
+                <div className="panel-label">Interview Date {ashbyInterviewData && <span style={{color:"var(--s4-text)",textTransform:"none",fontWeight:400}}>· from Ashby</span>}</div>
+                <input type="date" value={interviewDate} onChange={e=>setInterviewDate(e.target.value)} style={{colorScheme:darkMode?"dark":"light"}}/>
+              </div>
+              <div style={{display:"flex",alignItems:"center",gap:6,fontSize:11,color:"var(--text-muted)",paddingBottom:10}}>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>Auto-saved
+              </div>
             </div>
           </div>
 
-          <div style={{ maxWidth: 720, margin: "0 auto", padding: "24px 24px 48px" }}>
+          {/* ── SENIOR NOTE ── */}
+          {level==="senior" && <div style={{background:"rgba(57,88,167,0.1)",border:"1px solid rgba(57,88,167,0.4)",borderRadius:8,padding:"11px 16px",marginBottom:16,fontSize:12,color:"var(--blue-tint)",lineHeight:1.6}}><span style={{fontWeight:700}}>Senior bar:</span> Look for area ownership, directional influence, and scope beyond individual contribution.</div>}
 
-            {/* ── SENIOR NOTE ── */}
-            {level === "senior" && (
-              <div style={{
-                background: "rgba(57,88,167,0.1)", border: "1px solid rgba(57,88,167,0.4)",
-                borderRadius: 8, padding: "12px 16px", marginBottom: 20,
-                fontSize: 12, color: "var(--blue-tint)", lineHeight: 1.6,
-              }}>
-                <span style={{ fontWeight: 700 }}>Senior bar:</span> Look for area ownership, directional influence, and scope beyond individual contribution. A strong SWE score alone is not sufficient.
+          {/* ── EVALUATOR CHECKLIST ── */}
+          <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:10,padding:"13px 20px",marginBottom:20}}>
+            <div className="panel-label">Before you score</div>
+            <div style={{display:"flex",flexWrap:"wrap",gap:"8px 32px"}}>
+              {["Did they give a real, specific example?","Did they clearly explain what they personally did?","Did they show reasoning or reflection?","Did they need significant prompting?","Is the score based on evidence, not polish?","Would I feel confident defending this score?"].map((q,i)=>(<div key={i} style={{display:"flex",alignItems:"flex-start",gap:8}}><span style={{color:"var(--text-dim)",flexShrink:0,fontSize:14,lineHeight:1.2,marginTop:1}}>·</span><span style={{fontSize:12,color:"var(--text-dim)",lineHeight:1.5}}>{q}</span></div>))}
+            </div>
+          </div>
+
+          <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600,marginBottom:12}}>Core Sections — 90% of recommendation weight</div>
+
+          {/* ── CORE SECTIONS ── */}
+          {CORE_SECTIONS.map(section => {
+            const score=coreScores[section.id]; const meta=score?SCORE_META[score]:null;
+            return (
+              <div key={section.id} style={{background:"var(--surface)",borderRadius:10,border:"1px solid var(--border)",borderLeft:`3px solid ${score&&score!=="N/A"?meta.dot:"var(--score-empty-border)"}`,marginBottom:20,overflow:"hidden",transition:"border-color 0.2s"}}>
+                <div style={{padding:"13px 20px",borderBottom:"1px solid var(--border-inner)",display:"flex",alignItems:"center",justifyContent:"space-between",gap:12}}>
+                  <div style={{display:"flex",alignItems:"center",gap:10}}>
+                    <span style={{fontSize:10,color:"var(--text-dimmer)",fontWeight:600}}>Q{section.number}</span>
+                    <span style={{fontSize:10,background:"var(--tag-bg)",color:"var(--tag-text)",padding:"2px 8px",borderRadius:20,border:"1px solid var(--tag-border)"}}>{section.weight}%</span>
+                    {section.disqualifying && <span style={{fontSize:10,background:"rgba(218,80,119,0.1)",color:"#DA5077",padding:"2px 8px",borderRadius:20,border:"1px solid rgba(218,80,119,0.3)"}}>Disqualifying if 1</span>}
+                    <h3 className="heading" style={{fontSize:15,fontWeight:700,color:"var(--text)"}}>{section.title}</h3>
+                  </div>
+                  {score && <span style={{fontSize:11,fontWeight:600,color:meta.dot,background:`rgba(${meta.rgb},0.12)`,padding:"3px 10px",borderRadius:6,flexShrink:0}}>{score==="N/A"?"N/A":`${score} · ${meta.label}`}</span>}
+                </div>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 400px"}}>
+                  <div style={{padding:"20px 22px",borderRight:"1px solid var(--border-inner)"}}>
+                    <div style={{background:"var(--surface-3)",border:"1px solid var(--border-inner)",borderRadius:8,padding:"11px 14px",marginBottom:18}}>
+                      <div className="panel-label">Opening Question</div>
+                      <p style={{fontSize:13,color:"var(--text-secondary)",lineHeight:1.6,fontStyle:"italic"}}>"{section.question}"</p>
+                    </div>
+                    <div style={{marginBottom:18}}><div className="panel-label">What this tests</div><p style={{fontSize:12,color:"var(--text-faint)",lineHeight:1.65}}>{section.context}</p></div>
+                    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,marginBottom:18}}>
+                      <div><div className="panel-label" style={{color:"var(--blue-light)"}}>Strong signals</div>{section.strongSignals.map((s,i)=><div key={i} style={{display:"flex",gap:7,marginBottom:6}}><span style={{color:"var(--blue-light)",marginTop:2,flexShrink:0,fontSize:12}}>·</span><span style={{fontSize:12,color:"var(--text-secondary)",lineHeight:1.5}}>{s}</span></div>)}</div>
+                      <div><div className="panel-label" style={{color:"var(--rose)"}}>Weak signals</div>{section.weakSignals.map((s,i)=><div key={i} style={{display:"flex",gap:7,marginBottom:6}}><span style={{color:"var(--rose)",marginTop:2,flexShrink:0,fontSize:12}}>·</span><span style={{fontSize:12,color:"var(--text-dim)",lineHeight:1.5}}>{s}</span></div>)}</div>
+                    </div>
+                    <div><div className="panel-label">Probe Questions</div><div style={{display:"flex",flexDirection:"column",gap:6}}>{section.probeQuestions.map((q,i)=><div key={i} style={{background:"var(--surface-3)",border:"1px solid var(--border-inner)",borderRadius:6,padding:"9px 13px",fontSize:12,color:"var(--text-dim)",fontStyle:"italic",lineHeight:1.6}}>"{q}"</div>)}</div></div>
+                  </div>
+                  <div style={{padding:"20px 22px",display:"flex",flexDirection:"column",gap:14}}>
+                    <div><div className="panel-label">Score</div><div style={{display:"flex",gap:8}}>{[4,3,2,1,"N/A"].map(val=><ScoreBtn key={val} val={val} selected={score} onSelect={s=>setCoreScores(p=>({...p,[section.id]:s}))}/>)}</div></div>
+                    {section.disqualifying&&score===1 && <div style={{background:"rgba(218,80,119,0.1)",border:"1px solid rgba(218,80,119,0.4)",borderRadius:8,padding:"10px 14px",fontSize:12,color:"#F07A99",fontWeight:600,lineHeight:1.5}}>⚠ {section.disqualifyNote}</div>}
+                    <div><div className="panel-label">Rubric</div><div style={{display:"flex",flexDirection:"column",gap:6}}>{[4,3,2,1].map(v=><RubricRow key={v} score={v} statement={section.scoreGuide[v]} vignette={section.vignettes[v]} isSelected={score===v} exOpen={!!showExample[`${section.id}-${v}`]} onToggleEx={()=>toggleExample(section.id,v)}/>)}</div></div>
+                    <div style={{flex:1}}><div className="panel-label">Notes</div><textarea rows={4} placeholder="Notes from this section…" value={coreNotes[section.id]||""} onChange={e=>setCoreNotes(p=>({...p,[section.id]:e.target.value}))} style={{minHeight:80}}/></div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+
+          {/* ── BONUS SECTIONS ── */}
+          <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600,margin:"24px 0 12px"}}>Bonus Sections — score only if covered in the conversation</div>
+          <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:10,overflow:"hidden",marginBottom:24}}>
+            {BONUS_SECTIONS.map((section,idx)=>{const score=bonusScores[section.id];const meta=score?SCORE_META[score]:null;return(
+              <div key={section.id} style={{padding:"13px 20px",borderTop:idx>0?"1px solid var(--divider)":"none"}}>
+                <div style={{display:"flex",alignItems:"flex-start",gap:16}}>
+                  <div style={{flex:1}}><div style={{display:"flex",alignItems:"center",gap:8,marginBottom:7}}><span style={{fontSize:10,color:"var(--text-dimmer)",fontWeight:600}}>Q{section.number}</span><span style={{fontSize:13,fontWeight:600,color:score&&score!=="N/A"?meta.dot:"var(--text-secondary)",fontFamily:"'Satoshi',sans-serif"}}>{section.title}</span></div><div style={{display:"flex",flexWrap:"wrap",gap:5}}>{section.lookFor.map(item=><span key={item} style={{fontSize:11,background:"var(--surface-3)",border:"1px solid var(--border-inner2)",color:"var(--text-faint)",padding:"2px 8px",borderRadius:20}}>{item}</span>)}</div></div>
+                  <div style={{display:"flex",gap:5,flexShrink:0}}>{[4,3,2,1,"N/A"].map(val=><ScoreBtn key={val} val={val} selected={score} onSelect={s=>setBonusScores(p=>({...p,[section.id]:s}))} compact/>)}</div>
+                </div>
+                {score&&score!=="N/A"&&<div style={{marginTop:10}}><textarea rows={1} placeholder="Notes…" value={bonusNotes[section.id]||""} onChange={e=>setBonusNotes(p=>({...p,[section.id]:e.target.value}))}/></div>}
+              </div>
+            );})}
+          </div>
+
+          {/* ── CALL TRANSCRIPT ── */}
+          <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:10,marginBottom:24,overflow:"hidden"}}>
+            <button onClick={()=>setShowTranscript(p=>!p)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"14px 20px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:12}}>
+              <div style={{display:"flex",alignItems:"center",gap:10}}>
+                <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600}}>Call Notes / Transcript</div>
+                {transcriptProcessed && <span style={{fontSize:10,background:"rgba(34,155,85,0.15)",color:"var(--s4-text)",border:"1px solid rgba(34,155,85,0.3)",padding:"2px 8px",borderRadius:20}}>Processed</span>}
+              </div>
+              <div style={{display:"flex",alignItems:"center",gap:8,fontSize:11,color:"var(--text-muted)"}}><span>Paste AI notes to auto-fill section notes</span><Chevron open={showTranscript}/></div>
+            </button>
+            {showTranscript && (
+              <div style={{padding:"0 20px 20px"}}>
+                <textarea rows={10} placeholder="Paste your call transcript, AI note-taker output, or raw notes here…" value={transcript} onChange={e=>{setTranscript(e.target.value);setTranscriptProcessed(false);}} style={{marginBottom:12}}/>
+                <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
+                  <button onClick={processTranscript} disabled={!transcript.trim()||isProcessingTranscript||!hasApiKey} className="cta" style={{fontSize:11,padding:"8px 18px",borderRadius:7,fontWeight:600,cursor:(!transcript.trim()||isProcessingTranscript||!hasApiKey)?"default":"pointer",background:isProcessingTranscript?"var(--surface-2)":"rgba(57,88,167,0.2)",border:"1px solid rgba(57,88,167,0.5)",color:isProcessingTranscript?"var(--text-muted)":"var(--blue-tint)",opacity:(!transcript.trim()||!hasApiKey)?0.5:1}}>
+                    {isProcessingTranscript?"Processing…":"Process with AI → Fill Section Notes"}
+                  </button>
+                  {!hasApiKey && <span style={{fontSize:11,color:"var(--text-muted)"}}>Requires OpenAI API key (Admin ⚙)</span>}
+                  {transcriptProcessed && <span style={{fontSize:11,color:"var(--s4-text)"}}>✓ Notes filled from transcript</span>}
+                  {transcriptError && <span style={{fontSize:11,color:"var(--s1-text)"}}>Error: {transcriptError}</span>}
+                </div>
               </div>
             )}
+          </div>
 
-            {/* ── EVALUATOR CHECKLIST ── */}
-            <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, padding: "18px 20px", marginBottom: 20 }}>
-              <div style={{ fontSize: 10, color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, marginBottom: 14 }}>Before you score</div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 24px" }}>
-                {checkItems.map((q, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
-                    <span style={{ color: "var(--text-dim)", marginTop: 1, flexShrink: 0, fontSize: 16, lineHeight: 1 }}>·</span>
-                    <span style={{ fontSize: 12, color: "var(--text-dim)", lineHeight: 1.6 }}>{q}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* ── SECTION LABEL ── */}
-            <div style={{ fontSize: 10, color: "var(--text-dimmer)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, marginBottom: 12 }}>
-              Core Sections — 90% of recommendation weight
-            </div>
-
-            {/* ── CORE SECTIONS ── */}
-            {CORE_SECTIONS.map(section => {
-              const score = coreScores[section.id];
-              const meta = score ? SCORE_META[score] : null;
-              return (
-                <div key={section.id} style={{
-                  background: "var(--surface)", borderRadius: 10,
-                  border: "1px solid var(--border)",
-                  borderLeft: `3px solid ${score && score !== "N/A" ? meta.dot : "var(--score-empty-border)"}`,
-                  marginBottom: 16, overflow: "hidden", transition: "border-color 0.2s",
-                }}>
-                  <div style={{ padding: "18px 20px" }}>
-
-                    {/* Header */}
-                    <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 4 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-                        <span style={{ fontSize: 10, color: "var(--text-dimmer)", fontWeight: 600 }}>Q{section.number}</span>
-                        <span style={{ fontSize: 10, background: "var(--tag-bg)", color: "var(--tag-text)", padding: "2px 8px", borderRadius: 20, border: "1px solid var(--tag-border)" }}>{section.weight}%</span>
-                        {section.disqualifying && (
-                          <span style={{ fontSize: 10, background: "rgba(218,80,119,0.1)", color: "#DA5077", padding: "2px 8px", borderRadius: 20, border: "1px solid rgba(218,80,119,0.3)" }}>
-                            Disqualifying if 1
-                          </span>
-                        )}
-                      </div>
-                      {score && (
-                        <span style={{ fontSize: 11, fontWeight: 600, color: meta.dot, background: `rgba(${score===4?"34,155,85":score===3?"74,107,201":score===2?"184,124,40":score===1?"218,80,119":"255,255,255"},0.12)`, padding: "3px 10px", borderRadius: 6, flexShrink: 0 }}>
-                          {score === "N/A" ? "N/A" : `${score} · ${meta.label}`}
-                        </span>
-                      )}
-                    </div>
-
-                    <h3 className="heading" style={{ fontSize: 16, fontWeight: 700, color: "var(--text)", marginBottom: 14 }}>
-                      {section.title}
-                    </h3>
-
-                    {/* Opening question */}
-                    <div style={{ background: "var(--surface-3)", border: "1px solid var(--border-inner)", borderRadius: 8, padding: "12px 14px", marginBottom: 16 }}>
-                      <div style={{ fontSize: 9, color: "var(--text-dimmer)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, marginBottom: 6 }}>Opening Question</div>
-                      <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6, fontStyle: "italic" }}>"{section.question}"</p>
-                    </div>
-
-                    {/* Score buttons */}
-                    <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-                      {[4, 3, 2, 1, "N/A"].map(val => (
-                        <ScoreBtn key={val} val={val} selected={score}
-                          onSelect={s => setCoreScores(p => ({ ...p, [section.id]: s }))} />
-                      ))}
-                    </div>
-
-                    {/* Score guide */}
-                    {score && score !== "N/A" && (
-                      <div style={{
-                        borderRadius: 8, padding: "10px 14px", marginBottom: 12, fontSize: 12, lineHeight: 1.6,
-                        background: `rgba(${score===4?"34,155,85":score===3?"74,107,201":score===2?"184,124,40":"218,80,119"},0.12)`,
-                        color: meta.dot, border: `1px solid ${meta.dot}22`,
-                      }}>
-                        {section.scoreGuide[score]}
-                      </div>
-                    )}
-
-                    {/* Disqualifying warning */}
-                    {section.disqualifying && score === 1 && (
-                      <div style={{
-                        background: "rgba(218,80,119,0.1)", border: "1px solid rgba(218,80,119,0.4)",
-                        borderRadius: 8, padding: "10px 14px", marginBottom: 12,
-                        fontSize: 12, color: "#F07A99", fontWeight: 600, lineHeight: 1.5,
-                      }}>
-                        ⚠ {section.disqualifyNote}
-                      </div>
-                    )}
-
-                    {/* ── Calibration examples toggle ── */}
-                    <button className="toggle-btn" onClick={() => toggle(setShowVignettes, section.id)} style={{ marginBottom: 4 }}>
-                      <Chevron open={showVignettes[section.id]} />
-                      Calibration examples
-                    </button>
-                    {showVignettes[section.id] && (
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 12, marginTop: 8 }}>
-                        {[4, 3, 2, 1].map(v => (
-                          <VignetteCard key={v} score={v} text={section.vignettes[v]} active={score === v} />
-                        ))}
-                      </div>
-                    )}
-
-                    {/* ── Signal reference toggle ── */}
-                    <button className="toggle-btn" onClick={() => toggle(setShowSignals, section.id)} style={{ marginBottom: 4 }}>
-                      <Chevron open={showSignals[section.id]} />
-                      Signal reference
-                    </button>
-                    {showSignals[section.id] && (
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, background: "var(--surface-3)", borderRadius: 8, padding: "14px 16px", marginBottom: 12, marginTop: 8 }}>
-                        <div>
-                          <div style={{ fontSize: 10, fontWeight: 600, color: "var(--blue)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>✓ Strong signals</div>
-                          {section.strongSignals.map(s => (
-                            <div key={s} style={{ display: "flex", gap: 8, marginBottom: 7, alignItems: "flex-start" }}>
-                              <span style={{ color: "var(--blue)", marginTop: 2, flexShrink: 0 }}>·</span>
-                              <span style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.5 }}>{s}</span>
-                            </div>
-                          ))}
-                        </div>
-                        <div>
-                          <div style={{ fontSize: 10, fontWeight: 600, color: "var(--rose)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>✗ Weak signals</div>
-                          {section.weakSignals.map(s => (
-                            <div key={s} style={{ display: "flex", gap: 8, marginBottom: 7, alignItems: "flex-start" }}>
-                              <span style={{ color: "var(--rose)", marginTop: 2, flexShrink: 0 }}>·</span>
-                              <span style={{ fontSize: 12, color: "var(--text-dim)", lineHeight: 1.5 }}>{s}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* ── Probe questions toggle ── */}
-                    <button className="toggle-btn" onClick={() => toggle(setShowProbes, section.id)} style={{ marginBottom: 4 }}>
-                      <Chevron open={showProbes[section.id]} />
-                      Probe questions
-                    </button>
-                    {showProbes[section.id] && (
-                      <div style={{ marginBottom: 12, marginTop: 8, display: "flex", flexDirection: "column", gap: 6 }}>
-                        {section.probeQuestions.map(p => (
-                          <div key={p} style={{
-                            background: "var(--surface-3)", border: "1px solid var(--border-inner)",
-                            borderRadius: 6, padding: "10px 14px",
-                            fontSize: 12, color: "var(--text-dim)", fontStyle: "italic", lineHeight: 1.6,
-                          }}>"{p}"</div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* ── Section context toggle ── */}
-                    <button className="toggle-btn" onClick={() => toggle(setShowContext, section.id)} style={{ marginBottom: 8 }}>
-                      <Chevron open={showContext[section.id]} />
-                      What this section tests
-                    </button>
-                    {showContext[section.id] && (
-                      <p style={{ fontSize: 12, color: "var(--text-faint)", lineHeight: 1.65, background: "var(--surface-3)", padding: "10px 14px", borderRadius: 6, marginBottom: 12 }}>
-                        {section.context}
-                      </p>
-                    )}
-
-                    {/* Notes */}
-                    <textarea rows={2} placeholder="Notes"
-                      value={coreNotes[section.id] || ""}
-                      onChange={e => setCoreNotes(p => ({ ...p, [section.id]: e.target.value }))} />
-                  </div>
+          {/* ── OVERALL RECOMMENDATION ── */}
+          <div style={{background:"var(--surface)",border:"1px solid var(--border)",borderRadius:10,padding:"20px 24px",marginBottom:24}}>
+            <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600,marginBottom:18}}>Overall Recommendation</div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(4, 1fr)",gap:10,marginBottom:20}}>
+              {CORE_SECTIONS.map(section=>{const sc=coreScores[section.id];const m=sc?SCORE_META[sc]:null;return(
+                <div key={section.id} style={{background:sc&&sc!=="N/A"?`rgba(${m.rgb},0.1)`:"var(--score-empty-bg)",border:`1.5px solid ${sc&&sc!=="N/A"?m.dot:"var(--score-empty-border)"}`,borderRadius:8,padding:"12px 8px",textAlign:"center"}}>
+                  <div style={{fontSize:10,color:"var(--text-dim)",lineHeight:1.3,marginBottom:6}}>{section.title.split(" ")[0]}</div>
+                  <div style={{fontSize:26,fontWeight:700,lineHeight:1,color:sc&&sc!=="N/A"?m.dot:"var(--text-footer)",fontFamily:"'Satoshi',sans-serif"}}>{sc||"—"}</div>
+                  <div style={{fontSize:10,color:"var(--text-dimmer)",marginTop:4}}>{section.weight}%</div>
                 </div>
-              );
-            })}
-
-            {/* ── BONUS SECTION LABEL ── */}
-            <div style={{ fontSize: 10, color: "var(--text-dimmer)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, margin: "24px 0 12px" }}>
-              Bonus Sections — score only if covered in the conversation
+              );})}
             </div>
-
-            {/* ── BONUS SECTIONS ── */}
-            <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, overflow: "hidden", marginBottom: 24 }}>
-              {BONUS_SECTIONS.map((section, idx) => {
-                const score = bonusScores[section.id];
-                const meta = score ? SCORE_META[score] : null;
-                return (
-                  <div key={section.id} style={{
-                    padding: "14px 20px",
-                    borderTop: idx > 0 ? "1px solid var(--divider)" : "none",
-                  }}>
-                    <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
-                      <div style={{ flex: 1 }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                          <span style={{ fontSize: 10, color: "var(--text-dimmer)", fontWeight: 600 }}>Q{section.number}</span>
-                          <span style={{ fontSize: 13, fontWeight: 600, color: score && score !== "N/A" ? meta.dot : "var(--text-secondary)", fontFamily: "'Satoshi', sans-serif" }}>
-                            {section.title}
-                          </span>
-                        </div>
-                        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                          {section.lookFor.map(item => (
-                            <span key={item} style={{
-                              fontSize: 11, background: "var(--surface-3)", border: "1px solid var(--border-inner2)",
-                              color: "var(--text-faint)", padding: "3px 8px", borderRadius: 20,
-                            }}>{item}</span>
-                          ))}
-                        </div>
-                      </div>
-                      <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
-                        {[4, 3, 2, 1, "N/A"].map(val => (
-                          <ScoreBtn key={val} val={val} selected={score}
-                            onSelect={s => setBonusScores(p => ({ ...p, [section.id]: s }))} compact />
-                        ))}
-                      </div>
-                    </div>
-                    {score && score !== "N/A" && (
-                      <div style={{ marginTop: 10 }}>
-                        <textarea rows={1} placeholder="Notes…"
-                          value={bonusNotes[section.id] || ""}
-                          onChange={e => setBonusNotes(p => ({ ...p, [section.id]: e.target.value }))} />
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+            <div style={{display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:16}}>
+              <span style={{fontSize:12,color:"var(--text-dim)"}}>Weighted score</span>
+              <span style={{fontFamily:"'Satoshi',sans-serif",fontSize:32,fontWeight:700,color:"var(--text)",letterSpacing:"-0.04em"}}>{weightedScore?weightedScore.toFixed(2):"—"}<span style={{fontSize:14,color:"var(--text-dimmer)",fontWeight:400}}> / 4.00</span></span>
             </div>
+            {level==="senior"&&weightedScore&&weightedScore>=3.0&&weightedScore<3.5&&<div style={{background:"rgba(57,88,167,0.08)",border:"1px solid rgba(57,88,167,0.3)",borderRadius:8,padding:"12px 14px",marginBottom:16,fontSize:12,color:"var(--blue-tint)",lineHeight:1.6}}><strong>Senior calibration check:</strong> Does this candidate show area ownership and directional influence?</div>}
+            <div style={{fontSize:11,color:"var(--text-muted)",marginTop:8}}>
+              {weightedScore && weightedScore >= 2.7 && weightedScore < 3.0 && <span style={{color:"var(--s2-text)"}}>⚠ Borderline fail — 2.7–2.99 range. Needs strong justification to advance.</span>}
+              {weightedScore && weightedScore >= 3.0 && weightedScore < 3.5 && <span style={{color:"var(--s3-text)"}}>Weak pass — 3.0–3.5 range. Solid but not exceptional.</span>}
+              {weightedScore && weightedScore >= 3.5 && <span style={{color:"var(--s4-text)"}}>Strong fit — above 3.5.</span>}
+            </div>
+          </div>
 
-            {/* ── RECOMMENDATION PANEL ── */}
-            <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, padding: "20px 24px" }}>
-              <div style={{ fontSize: 10, color: "var(--text-dimmer)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, marginBottom: 18 }}>
-                Overall Recommendation
+          {/* ── ASHBY SCORECARD SUBMISSION (primary, open by default) ── */}
+          <div style={{background:"var(--surface)",border:`2px solid ${ashbyStatus==='success'?"var(--s4-border)":"var(--blue)"}`,borderRadius:12,padding:"24px 28px"}}>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:20}}>
+              <div>
+                <div style={{fontSize:10,color:"var(--blue-tint)",textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600,marginBottom:4}}>Submit Scorecard to Ashby</div>
+                <div style={{fontSize:12,color:"var(--text-dim)"}}>Review AI-generated summary, validate scores, then submit</div>
               </div>
+              {ashbyStatus==='success' && <span style={{fontSize:11,background:"rgba(34,155,85,0.15)",color:"var(--s4-text)",border:"1px solid rgba(34,155,85,0.3)",padding:"4px 12px",borderRadius:20,fontWeight:600}}>✓ Submitted</span>}
+            </div>
 
-              {/* Score breakdown */}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10, marginBottom: 20 }}>
+            {/* Interview ID reference */}
+            {ashbyInterviewId && <div style={{marginBottom:14,fontSize:11,color:"var(--text-dim)",display:"flex",alignItems:"center",gap:6}}>
+              <span style={{color:"var(--text-muted)"}}>Interview:</span> <span style={{fontFamily:"'Geist Mono',monospace",color:"var(--text-secondary)"}}>{parseAshbyId(ashbyInterviewId)}</span>
+              {ashbyInterviewData && <span style={{color:"var(--s4-text)"}}>· linked</span>}
+            </div>}
+            {!ashbyInterviewId && <div style={{marginBottom:14,padding:"10px 14px",background:"rgba(184,124,40,0.08)",border:"1px solid rgba(184,124,40,0.25)",borderRadius:8,fontSize:12,color:"var(--s2-text)"}}>⚠ No Ashby Interview ID set. Enter it at the top of the page to enable submission.</div>}
+
+            {/* Score mapping */}
+            <div style={{background:"var(--surface-3)",border:"1px solid var(--border-inner)",borderRadius:8,padding:"14px 16px",marginBottom:18}}>
+              <div className="panel-label" style={{marginBottom:12}}>Score Mapping → Ashby Ratings</div>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:8}}>
                 {CORE_SECTIONS.map(section => {
-                  const score = coreScores[section.id];
-                  const meta = score ? SCORE_META[score] : null;
+                  const sc = coreScores[section.id]; const m = sc ? SCORE_META[sc] : null;
+                  const ashbyLabel = sc===4?'Strong Yes':sc===3?'Yes':sc===2?'No':sc===1?'Strong No':null;
                   return (
-                    <div key={section.id} style={{
-                      background: score && score !== "N/A" ? `rgba(${score===4?"34,155,85":score===3?"74,107,201":score===2?"184,124,40":"218,80,119"},0.1)` : "var(--score-empty-bg)",
-                      border: `1.5px solid ${score && score !== "N/A" ? meta.dot : "var(--score-empty-border)"}`,
-                      borderRadius: 8, padding: "12px 8px", textAlign: "center",
-                      transition: "all 0.2s",
-                    }}>
-                      <div style={{ fontSize: 10, color: "var(--text-dim)", lineHeight: 1.3, marginBottom: 6 }}>
-                        {section.title.split(" ")[0]}
-                      </div>
-                      <div style={{
-                        fontSize: 26, fontWeight: 700, lineHeight: 1,
-                        color: score && score !== "N/A" ? meta.dot : "var(--text-footer)",
-                        fontFamily: "'Satoshi', sans-serif",
-                      }}>{score || "—"}</div>
-                      <div style={{ fontSize: 10, color: "var(--text-dimmer)", marginTop: 4 }}>{section.weight}%</div>
+                    <div key={section.id} style={{padding:"10px 8px",borderRadius:7,textAlign:"center",border:`1px solid ${sc&&sc!=='N/A'?`rgba(${m.rgb},0.35)`:"var(--border-inner2)"}`,background:sc&&sc!=='N/A'?`rgba(${m.rgb},0.06)`:"transparent"}}>
+                      <div style={{fontSize:10,color:"var(--text-dim)",marginBottom:6,lineHeight:1.3}}>{section.title.split(" ")[0]}</div>
+                      <div style={{fontSize:18,fontWeight:700,color:sc&&sc!=='N/A'?m.dot:"var(--text-footer)",fontFamily:"'Satoshi',sans-serif"}}>{sc||"—"}</div>
+                      {ashbyLabel && <div style={{fontSize:9,color:m.dot,marginTop:4,textTransform:"uppercase",letterSpacing:"0.06em"}}>→ {ashbyLabel}</div>}
                     </div>
                   );
                 })}
-              </div>
-
-              {/* Weighted score */}
-              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 16, padding: "0 2px" }}>
-                <span style={{ fontSize: 12, color: "var(--text-dim)" }}>Weighted score</span>
-                <span style={{ fontFamily: "'Satoshi', sans-serif", fontSize: 32, fontWeight: 700, color: "var(--text)", letterSpacing: "-0.04em" }}>
-                  {weightedScore ? weightedScore.toFixed(2) : "—"}
-                  <span style={{ fontSize: 14, color: "var(--text-dimmer)", fontWeight: 400 }}> / 4.00</span>
-                </span>
-              </div>
-
-              {/* Senior calibration check */}
-              {level === "senior" && weightedScore && weightedScore >= 2.8 && weightedScore < 3.5 && (
-                <div style={{
-                  background: "rgba(57,88,167,0.08)", border: "1px solid rgba(57,88,167,0.3)",
-                  borderRadius: 8, padding: "12px 14px", marginBottom: 16,
-                  fontSize: 12, color: "var(--blue-tint)", lineHeight: 1.6,
-                }}>
-                  <strong>Senior calibration check:</strong> Does this candidate show area ownership and directional influence? A Yes at SWE level is not sufficient for Senior.
+                <div style={{padding:"10px 8px",borderRadius:7,textAlign:"center",border:`1.5px solid ${rec.border}`,background:rec.bg}}>
+                  <div style={{fontSize:10,color:"var(--text-dim)",marginBottom:6}}>Overall</div>
+                  <div style={{fontSize:14,fontWeight:700,color:rec.dot,fontFamily:"'Satoshi',sans-serif"}}>{rec.label}</div>
+                  {weightedScore && <div style={{fontSize:10,color:"var(--text-dimmer)",marginTop:4}}>{weightedScore.toFixed(2)}</div>}
                 </div>
-              )}
-
-              {/* Overall notes */}
-              <textarea rows={4} placeholder="Overall notes, reasoning, and next steps…"
-                value={overallNotes} onChange={e => setOverallNotes(e.target.value)} />
-
-              {/* Summarise button */}
-              <button onClick={() => setShowSummary(p => !p)} className="cta" style={{
-                marginTop: 12, width: '100%',
-                background: showSummary ? 'var(--surface-2)' : 'var(--blue)',
-                color: showSummary ? 'var(--text)' : '#FFFFFF', border: `1px solid ${showSummary ? 'var(--border-light)' : 'var(--blue)'}`,
-                padding: '12px 20px', borderRadius: 8,
-                fontSize: 12, cursor: 'pointer', transition: 'all 0.15s',
-                fontWeight: 600,
-              }}>
-                {showSummary ? 'Hide Summary' : 'Summarise'}
-              </button>
-
-              {/* Summary panel */}
-              {showSummary && (
-                <div style={{ marginTop: 12 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                    <span style={{ fontSize: 10, color: 'var(--text-dimmer)', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>
-                      Screen Summary
-                    </span>
-                    <button onClick={handleCopy} className="cta" style={{
-                      fontSize: 10, padding: '5px 14px', borderRadius: 5,
-                      background: copied ? 'rgba(34,153,85,0.2)' : 'var(--surface-2)',
-                      border: `1px solid ${copied ? '#229955' : 'var(--border-light)'}`,
-                      color: copied ? '#5CC98A' : 'var(--text-dimmer)',
-                      cursor: 'pointer', transition: 'all 0.2s', fontWeight: 600,
-                    }}>
-                      {copied ? '✓  Copied' : 'Copy'}
-                    </button>
-                  </div>
-                  <pre style={{
-                    background: 'var(--surface-deep)', border: '1px solid var(--border-inner)',
-                    borderRadius: 8, padding: '18px 20px',
-                    fontSize: 12, color: 'var(--text-secondary)',
-                    lineHeight: 1.75, fontFamily: "'Geist Mono', monospace",
-                    whiteSpace: 'pre-wrap', wordBreak: 'break-word',
-                    maxHeight: 480, overflowY: 'auto',
-                  }}>{buildSummary()}</pre>
-                </div>
-              )}
-
-              {/* Footer */}
-              <div style={{ fontSize: 10, color: "var(--text-footer)", textAlign: "center", marginTop: 20, paddingTop: 16, borderTop: "1px solid var(--border)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                Ankar · {level === "swe" ? "Software Engineer" : "Senior Software Engineer"} · Score on evidence, not polish
               </div>
             </div>
 
+            {/* Recruiter summary — always at top, always editable */}
+            <div style={{marginBottom:18}}>
+              <div className="panel-label">Recruiter Summary <span style={{color:"var(--text-muted)",textTransform:"none",fontWeight:400,letterSpacing:"normal"}}>— your 1-2 sentence take on this candidate</span></div>
+              <textarea rows={2} placeholder="e.g. Strong product thinker with clear ownership examples. Weaker on feedback/ego — needs prompting to reflect. Recommend advancing with note to probe ego further in next round." value={recruiterSummary} onChange={e=>setRecruiterSummary(e.target.value)} style={{marginBottom:0}}/>
+            </div>
+
+            {/* Score + evidence summary */}
+            <div style={{marginBottom:18}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
+                <div style={{display:"flex",alignItems:"center",gap:10}}>
+                  <div className="panel-label" style={{marginBottom:0}}>Score Summary & Evidence</div>
+                  {aiNarrative && <span style={{fontSize:10,background:"rgba(57,88,167,0.15)",color:"var(--blue-tint)",border:"1px solid rgba(57,88,167,0.4)",padding:"2px 8px",borderRadius:20}}>AI from scorecard</span>}
+                  {!aiNarrative && templateNarrative && <span style={{fontSize:10,color:"var(--text-muted)"}}>auto-generated from scores</span>}
+                </div>
+                <div style={{display:"flex",alignItems:"center",gap:8}}>
+                  {aiNarrative && <button onClick={()=>setAiNarrative(null)} className="cta" style={{fontSize:10,padding:"5px 12px",borderRadius:6,background:"transparent",border:"1px solid var(--border)",color:"var(--text-muted)",cursor:"pointer"}}>Reset</button>}
+                  {hasApiKey && <button onClick={generateAI} disabled={isGenerating||!hasAnyScores} className="cta" style={{fontSize:10,padding:"5px 14px",borderRadius:6,background:isGenerating?"var(--surface-2)":"rgba(57,88,167,0.2)",border:"1px solid rgba(57,88,167,0.5)",color:isGenerating?"var(--text-muted)":"var(--blue-tint)",cursor:(isGenerating||!hasAnyScores)?"default":"pointer",fontWeight:600,opacity:!hasAnyScores?0.5:1}}>{isGenerating?"Generating…":"Generate with AI"}</button>}
+                </div>
+              </div>
+
+              {aiError && <div style={{marginBottom:10,padding:"10px 14px",background:"rgba(218,80,119,0.1)",border:"1px solid rgba(218,80,119,0.3)",borderRadius:8,fontSize:12,color:"#F07A99"}}>Error: {aiError}</div>}
+
+              {!hasAnyScores && <div style={{marginBottom:10,fontSize:11,color:"var(--text-muted)"}}>Score at least one section to generate a summary.</div>}
+
+              {scoresChangedSinceAI && aiNarrative && (
+                <div style={{marginBottom:10,padding:"10px 14px",background:"rgba(184,124,40,0.12)",border:"1px solid rgba(184,124,40,0.4)",borderRadius:8,fontSize:12,color:"var(--s2-text)",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                  <span>⚠ Scores changed since this summary was generated. Consider regenerating.</span>
+                  <button onClick={()=>{generateAI();setScoresChangedSinceAI(false);}} className="cta" style={{fontSize:10,padding:"4px 12px",borderRadius:5,background:"rgba(184,124,40,0.2)",border:"1px solid rgba(184,124,40,0.5)",color:"var(--s2-text)",cursor:"pointer",fontWeight:600,flexShrink:0,marginLeft:12}}>Regenerate</button>
+                </div>
+              )}
+
+              {/* Score table */}
+              <div style={{background:"var(--surface-deep)",border:"1px solid var(--border-inner)",borderRadius:8,padding:"14px 18px",marginBottom:10,fontFamily:"'Geist Mono',monospace",fontSize:12,color:"var(--text-secondary)",lineHeight:1.8,whiteSpace:"pre-wrap"}}>{scoreTable}</div>
+
+              {/* Editable evidence narrative */}
+              {activeNarrative ? (
+                <textarea value={activeNarrative} onChange={e=>setAiNarrative(e.target.value)} style={{background:"var(--surface-3)",border:"1px solid var(--border-inner)",borderRadius:8,padding:"16px 18px",fontSize:13,color:"var(--text-secondary)",lineHeight:1.75,whiteSpace:"pre-wrap",wordBreak:"break-word",minHeight:160,width:"100%",resize:"vertical"}}/>
+              ) : hasAnyScores ? (
+                <div style={{padding:"16px 18px",background:"var(--surface-3)",borderRadius:8,border:"1px solid var(--border-inner)",color:"var(--text-dim)",fontSize:12,lineHeight:1.7}}>
+                  {scoredSections.map(s => (
+                    <div key={s.section.id} style={{marginBottom:8}}>
+                      <strong style={{color:s.meta.dot}}>{s.section.title}: {s.score}/4 ({s.meta.label})</strong>
+                      {s.notes ? <span> — {s.notes}</span> : <span style={{color:"var(--text-muted)"}}> — no notes</span>}
+                    </div>
+                  ))}
+                  <div style={{marginTop:8,fontSize:11,color:"var(--text-muted)"}}>Click "Generate with AI" to create a prose summary from these scores and notes{transcript.trim()?', including transcript evidence':''}</div>
+                </div>
+              ) : (
+                <div style={{padding:"20px",background:"var(--surface-3)",borderRadius:8,border:"1px solid var(--border-inner)",textAlign:"center",color:"var(--text-muted)",fontSize:12}}>Score sections above to build the summary.</div>
+              )}
+            </div>
+
+            {/* Action buttons */}
+            <div style={{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}}>
+              <button onClick={pushToAshby} disabled={ashbyStatus==='pushing'} className="cta" style={{fontSize:12,padding:"12px 28px",borderRadius:8,fontWeight:700,cursor:ashbyStatus==='pushing'?"default":"pointer",background:ashbyStatus==='success'?"rgba(34,155,85,0.2)":ashbyStatus==='pushing'?"var(--surface-2)":"var(--blue)",border:`1.5px solid ${ashbyStatus==='success'?"var(--s4-border)":ashbyStatus==='pushing'?"var(--border)":"var(--blue)"}`,color:ashbyStatus==='success'?"var(--s4-text)":ashbyStatus==='pushing'?"var(--text-muted)":"#fff",transition:"all 0.15s"}}>
+                {ashbyStatus==='pushing'?"Submitting…":ashbyStatus==='success'?"✓ Submitted to Ashby":"Submit to Ashby"}
+              </button>
+
+              <div style={{height:24,width:1,background:"var(--border)"}}/>
+
+              <div style={{fontSize:10,color:"var(--text-dimmer)",textTransform:"uppercase",letterSpacing:"0.08em",fontWeight:600}}>Export</div>
+              {[{label:"PDF",action:exportPDF},{label:"Markdown",action:exportMarkdown},{label:"Rich Text",action:exportRichText}].map(({label,action})=>(
+                <button key={label} onClick={action} className="cta" style={{fontSize:10,padding:"7px 16px",borderRadius:6,fontWeight:600,background:"var(--surface-2)",border:"1px solid var(--border-light)",color:"var(--text-dim)",cursor:"pointer"}}>{label}</button>
+              ))}
+              {exportMsg && <span style={{fontSize:11,color:"var(--s4-text)"}}>✓ {exportMsg}</span>}
+            </div>
+
+            {ashbyMsg && <div style={{marginTop:12,padding:"10px 14px",borderRadius:8,background:ashbyStatus==='success'?"rgba(34,155,85,0.1)":"rgba(218,80,119,0.08)",border:`1px solid ${ashbyStatus==='success'?"rgba(34,155,85,0.3)":"rgba(218,80,119,0.25)"}`,fontSize:12,color:ashbyStatus==='success'?"var(--s4-text)":"var(--s1-text)"}}>{ashbyMsg}</div>}
+
+            {!ashbyApiKey && <div style={{marginTop:12,fontSize:11,color:"var(--text-muted)"}}>Ashby API key not configured. Click ⚙ in the header to set up.</div>}
+
+            {/* Footer */}
+            <div style={{fontSize:10,color:"var(--text-footer)",textAlign:"center",marginTop:24,paddingTop:16,borderTop:"1px solid var(--border)",textTransform:"uppercase",letterSpacing:"0.1em"}}>
+              Ankar · {level==="swe"?"Software Engineer":"Senior Software Engineer"} · Score on evidence, not polish
+            </div>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 
-    function PasswordGate() {
-      const [authorized, setAuthorized] = React.useState(sessionStorage.getItem('ankar_auth') === 'true');
-      const [input, setInput] = React.useState('');
-      const [error, setError] = React.useState(false);
+  function PasswordGate() {
+    const [authorized, setAuthorized] = React.useState(sessionStorage.getItem('ankar_auth')==='true');
+    const [input, setInput] = React.useState('');
+    const [error, setError] = React.useState(false);
+    if (authorized) return <App/>;
+    const handleSubmit = e => { e.preventDefault(); if(input==='Ankar'){sessionStorage.setItem('ankar_auth','true');setAuthorized(true);}else{setError(true);setInput('');} };
+    return (
+      <div style={{display:'flex',alignItems:'center',justifyContent:'center',minHeight:'100vh',background:'var(--bg)',fontFamily:'Satoshi,sans-serif'}}>
+        <form onSubmit={handleSubmit} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'16px'}}>
+          <h1 style={{color:'var(--text)',fontSize:'20px',fontWeight:600,letterSpacing:'-0.02em'}}>Enter Password</h1>
+          <input type="password" value={input} onChange={e=>{setInput(e.target.value);setError(false);}} autoFocus placeholder="Password" style={{padding:'10px 16px',borderRadius:'8px',border:'1px solid var(--border)',background:'var(--surface)',color:'var(--text)',fontSize:'15px',outline:'none',width:'240px',fontFamily:'inherit'}}/>
+          {error && <span style={{color:'var(--rose)',fontSize:'13px'}}>Incorrect password</span>}
+          <button type="submit" style={{padding:'10px 24px',borderRadius:'8px',background:'var(--blue)',color:'#fff',fontSize:'14px',fontWeight:600,border:'none',cursor:'pointer',fontFamily:'inherit'}}>Enter</button>
+        </form>
+      </div>
+    );
+  }
 
-      if (authorized) return <App />;
-
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        if (input === 'Ankar') {
-          sessionStorage.setItem('ankar_auth', 'true');
-          setAuthorized(true);
-        } else {
-          setError(true);
-          setInput('');
-        }
-      };
-
-      return (
-        <div style={{display:'flex',alignItems:'center',justifyContent:'center',minHeight:'100vh',background:'var(--bg)',fontFamily:'Satoshi,sans-serif'}}>
-          <form onSubmit={handleSubmit} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'16px'}}>
-            <h1 style={{color:'var(--text)',fontSize:'20px',fontWeight:600,letterSpacing:'-0.02em'}}>Enter Password</h1>
-            <input
-              type="password"
-              value={input}
-              onChange={(e) => { setInput(e.target.value); setError(false); }}
-              autoFocus
-              placeholder="Password"
-              style={{padding:'10px 16px',borderRadius:'8px',border:'1px solid var(--border)',background:'var(--surface)',color:'var(--text)',fontSize:'15px',outline:'none',width:'240px',fontFamily:'inherit'}}
-            />
-            {error && <span style={{color:'var(--rose)',fontSize:'13px'}}>Incorrect password</span>}
-            <button type="submit" style={{padding:'10px 24px',borderRadius:'8px',background:'var(--blue)',color:'#fff',fontSize:'14px',fontWeight:600,border:'none',cursor:'pointer',fontFamily:'inherit'}}>Enter</button>
-          </form>
-        </div>
-      );
-    }
-
-    ReactDOM.createRoot(document.getElementById("root")).render(<PasswordGate />);
-  </script>
+  ReactDOM.createRoot(document.getElementById("root")).render(<PasswordGate/>);
+</script>
 </body>
 </html>
