@@ -1,14 +1,7 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const PORT = 3456;
+// Vercel Serverless Function — Ashby API Proxy
+// Handles POST /api/ashby?endpoint=candidate.search etc.
 
-app.use(express.json());
-app.use(express.static(path.join(__dirname)));
-
-// ─── Ashby API Proxy ───
-// Matches Vercel serverless route: /api/ashby?endpoint=candidate.search
-const allowed = [
+const ALLOWED = [
   'candidate.search',
   'candidate.info',
   'interviewSchedule.info',
@@ -17,7 +10,11 @@ const allowed = [
   'interview.list',
 ];
 
-app.post('/api/ashby', async (req, res) => {
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
   const endpoint = req.query.endpoint;
   const { apiKey, ...body } = req.body;
 
@@ -25,7 +22,7 @@ app.post('/api/ashby', async (req, res) => {
     return res.status(400).json({ error: 'Missing apiKey' });
   }
 
-  if (!endpoint || !allowed.includes(endpoint)) {
+  if (!endpoint || !ALLOWED.includes(endpoint)) {
     return res.status(403).json({ error: `Endpoint "${endpoint}" not allowed` });
   }
 
@@ -45,7 +42,6 @@ app.post('/api/ashby', async (req, res) => {
     try {
       data = JSON.parse(text);
     } catch {
-      console.error(`Ashby [${endpoint}] returned non-JSON:`, text);
       return res.status(response.status).json({ error: text || `HTTP ${response.status}` });
     }
 
@@ -58,8 +54,4 @@ app.post('/api/ashby', async (req, res) => {
     console.error(`Ashby proxy error [${endpoint}]:`, e.message);
     res.status(502).json({ error: 'Failed to reach Ashby API: ' + e.message });
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`\n  Ankar Rubric running at http://localhost:${PORT}\n`);
-});
+}

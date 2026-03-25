@@ -334,9 +334,9 @@
       setShowAdmin(false);
     };
 
-    // Ashby API call via local proxy (avoids CORS)
+    // Ashby API call via proxy (works with both local Express and Vercel serverless)
     const ashbyCall = async (endpoint, body) => {
-      const res = await fetch(`/api/ashby/${endpoint}`, {
+      const res = await fetch(`/api/ashby?endpoint=${encodeURIComponent(endpoint)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ apiKey: ashbyApiKey, ...body }),
